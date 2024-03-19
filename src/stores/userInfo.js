@@ -4,7 +4,13 @@ import { ref } from "vue";
 export const useUserInfoStore = defineStore(
     'userInfo',
     ()=>{
-        const userInfo = ref({});
+        const userInfo = ref({
+            avatar: '',
+            roleId: '',
+            token: '',
+            userId: '',
+            userName: ''
+        });
         const setUserInfo = (value)=>{
             userInfo.value = value;
         }

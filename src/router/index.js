@@ -38,7 +38,8 @@ router.beforeEach((to, from) => {
   } else if(
       // 检查用户是否填写风格测试
       !personStylePaperStore.personStylePaper &&
-      to.name !== 'personStyle'
+      to.name !== 'personStyle' &&
+      to.name !== 'login'
   ) {
     return { name: 'personStyle' }
   }

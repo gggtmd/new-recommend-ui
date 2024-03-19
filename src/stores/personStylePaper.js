@@ -4,7 +4,7 @@ import { ref } from "vue";
 export const usePersonStylePaperStore = defineStore(
     'personStylePaper',
     ()=>{
-        const personStylePaper = ref({});
+        const personStylePaper = ref();
         const setPersonStylePaper = (value)=>{
             personStylePaper.value = value;
         }

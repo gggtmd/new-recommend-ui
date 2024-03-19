@@ -4,6 +4,7 @@ import {ref, onMounted} from "vue";
 import {studyStylePaperListServer} from "@/api/studyStylePaper.js";
 import AnswerDetail from "@/components/AnswerDetail.vue";
 
+const isInit = ref(false)
 onMounted(() => {
   getStudyStylePaper()
 })
@@ -13,6 +14,7 @@ const problemList = ref([])
 async function getStudyStylePaper() {
   let res = await studyStylePaperListServer()
   problemList.value = res.data
+  isInit.value = true
 }
 
 const answerDetailRef = ref()
@@ -22,10 +24,16 @@ function handleChange(index) {
 }
 
 const scrollRef = ref()
-const radioGroupRef = ref()
+const radioGroupWrapperRef = ref()
 //点击题目详情的回调方法
 function handleSelect(index) {
-  scrollRef.value.setScrollTop(radioGroupRef.value[index].offsetTop - 76)
+  scrollRef.value.setScrollTop(radioGroupWrapperRef.value[index].offsetTop - 176)
+  setTimeout(() => {
+    radioGroupWrapperRef.value[index].style.backgroundColor = "#409EFF30"
+  },400)
+  setTimeout(() => {
+    radioGroupWrapperRef.value[index].style.backgroundColor = ""
+  },600)
 }
 
 //验证题目是否全部完成,返回第一个未完成题目相关信息
@@ -60,14 +68,14 @@ async function savePersonStylePaper() {
   <div class="title">调查问卷</div>
   <el-scrollbar ref="scrollRef" class="el-scrollbar" wrap-style="scroll-behavior: smooth;">
     <div class="problem-wrapper">
-      <div ref="radioGroupRef" class="el-radio-group-wrapper" v-for="(item,index) in problemList" :key="item.id">
+      <div ref="radioGroupWrapperRef" class="el-radio-group-wrapper" v-for="(item,index) in problemList" :key="item.id">
         <div class="radio-group-title">{{ `${index + 1}、${item.questionName}` }}</div>
         <el-radio-group class="el-radio-group" v-model=item.studentAnswer @change="handleChange(index)">
           <el-radio-button value="item.option1">{{ item.option1 }}</el-radio-button>
           <el-radio-button value="item.option2">{{ item.option2 }}</el-radio-button>
         </el-radio-group>
       </div>
-      <div class="footer">
+      <div class="footer" v-show="isInit">
         <div class="el-icon-info">
           <el-icon><InfoFilled /></el-icon>填写问卷以为您个性化推荐资源
         </div>
@@ -113,6 +121,7 @@ async function savePersonStylePaper() {
 }
 .el-radio-group-wrapper{
   margin-top: 50px;
+  transition: 0.2s;
 }
 .radio-group-title{
   margin-bottom: 20px;

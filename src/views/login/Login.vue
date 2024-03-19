@@ -127,9 +127,14 @@ const rule2 = {
 
 //登录
 import { personLoginServer } from '@/api/person.js'
+import {personStylePaperPageServer} from "@/api/personStylePaper.js";
 import { useTokenStore } from '@/stores/token.js'
+import { useUserInfoStore } from "@/stores/userInfo.js";
+import {usePersonStylePaperStore} from "@/stores/personStylePaper.js";
 import { useRouter } from "vue-router"
 const tokenStore = useTokenStore()
+const userStore = useUserInfoStore()
+const personStylePaperStore = usePersonStylePaperStore()
 const router = useRouter()
 const loginForm = ref({
   email: "",
@@ -142,6 +147,10 @@ async function userLogin() {
   let res = await personLoginServer(loginForm.value)
   if(res.code === 200) {
     tokenStore.setToken(res.data.token)
+    userStore.setUserInfo(res.data)
+    //查看用户是否填写风格问卷
+    let personStyleRes = await personStylePaperPageServer(res.data.userId)
+    personStylePaperStore.setPersonStylePaper(personStyleRes.data.records[0])
     router.push('/')
   }
 }
@@ -225,7 +234,7 @@ async function userRegister() {
   transition: 0.4s;
   height: v-bind(wrapperHeight);
   overflow: hidden;
-  backdrop-filter: blur(80px);
+  backdrop-filter: blur(35px);
   background-color: rgba(255, 255, 255, 0.3);
 }
 .el-form {

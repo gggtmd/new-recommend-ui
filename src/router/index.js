@@ -16,17 +16,48 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: () => import('@/views/home/Home.vue')
+      component: () => import('@/views/home/Home.vue'),
+      redirect: '/recommend',
+      children: [
+        {
+          path: '/recommend',
+          name: 'recommend',
+          component: () => import('@/views/recommend/Recommend.vue')
+        },
+        {
+          path: '/test',
+          name: 'test',
+          component: () => import('@/views/test/Test.vue')
+        },
+        {
+          path: '/answer',
+          name: 'answer',
+          component: () => import('@/views/answer/Answer.vue')
+        },
+        {
+          path: '/class',
+          name: 'class',
+          component: () => import('@/views/class/Class.vue')
+        },
+        {
+          path: '/my',
+          name: 'my',
+          component: () => import('@/views/my/My.vue')
+        },
+      ]
     },
   ]
 })
 
 import { useTokenStore } from '@/stores/token'
 import {usePersonStylePaperStore} from "@/stores/personStylePaper.js";
+import {usePathStore} from "@/stores/path.js";
 
 router.beforeEach((to, from) => {
   const tokenStore = useTokenStore()
   const personStylePaperStore = usePersonStylePaperStore()
+  const pathStore = usePathStore()
+  pathStore.setPath(to.path)
   if (
     // 检查用户是否已登录
     !tokenStore.token &&

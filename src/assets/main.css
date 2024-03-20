@@ -28,3 +28,15 @@ body {
   background: rgba(230, 230, 230, 0.3);
   backdrop-filter: blur(3px);
 }
+
+a {
+  text-decoration: none;
+  color: #333;
+  transition: 0.2s;
+}
+a:hover {
+  color: #409EFF;
+}
+a:active {
+  color: #333;
+}

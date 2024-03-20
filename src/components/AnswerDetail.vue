@@ -1,5 +1,5 @@
 <script setup>
-import {defineProps, ref, defineExpose, defineEmits} from "vue";
+import { ref } from "vue";
 
 defineProps({
   data: {

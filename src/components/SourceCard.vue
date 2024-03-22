@@ -60,6 +60,7 @@ watch(() => props.image, (value) => {
   overflow: hidden;
   box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.1);
   position: relative;
+  transition: 0.4s;
 }
 .source-card::before {
   content: '';
@@ -109,7 +110,14 @@ watch(() => props.image, (value) => {
   transition: 0.2s;
 }
 .source-card:hover .title,
-.source-card:hover .info{
+.source-card:hover .info, {
   color: #409EFF;
+}
+.source-card:hover {
+  box-shadow: 0 0 8px 3px rgba(0, 0, 0, 0.15);
+  transform: scale(1.01);
+}
+.source-card:active {
+  transform: scale(0.99);
 }
 </style>

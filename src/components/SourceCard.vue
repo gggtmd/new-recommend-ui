@@ -1,24 +1,54 @@
 <script setup>
-import {computed} from "vue";
+import {computed, ref, watch} from "vue";
 
 const props = defineProps(["image", "sourceType"])
+//标签样式
 const tagColor = computed(() => {
-  return props.sourceType === "视频"?"video-type":"doc-type"
+  if(props.sourceType) {
+    return props.sourceType === "视频"?"video-type":"doc-type"
+  }
 })
+//数据是否正在加载
+const isLoading = ref(true)
+
+watch(() => props.image, (value) => {
+  if(props.image) {
+    setTimeout(() => {
+      isLoading.value = false
+    }, 500)
+  }
+}, {immediate: true})
 </script>
 
 <template>
-  <div class="source-card" :class="tagColor">
-    <img class="image" :src="image" alt="">
-    <div class="text-area">
-      <div class="title">
-        <slot name="title">Python程序设计语言</slot>
+  <el-skeleton style="width: 100%" :loading="isLoading" animated>
+    <template #template>
+      <div class="source-card">
+        <el-skeleton-item class="image" variant="image"></el-skeleton-item>
+        <div class="text-area">
+          <div class="title">
+            <el-skeleton-item variant="h3" style="width: 50%"></el-skeleton-item>
+          </div>
+          <div class="info">
+            <el-skeleton-item variant="text"></el-skeleton-item>
+          </div>
+        </div>
       </div>
-      <div class="info">
-        <slot name="info">核聚变水泥厂凯撒</slot>
+    </template>
+    <template #default>
+      <div class="source-card" :class="tagColor">
+        <img class="image" :src="image" alt="">
+        <div class="text-area">
+          <div class="title">
+            <slot name="title"></slot>
+          </div>
+          <div class="info">
+            <slot name="info"></slot>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
+    </template>
+  </el-skeleton>
 </template>
 
 <style scoped>

@@ -3,8 +3,8 @@ import {ref,onMounted} from "vue";
 import {personStylePaperResourceRecommendServer} from "@/api/personStylePaper.js";
 import SourceCard from "@/components/SourceCard.vue";
 
-//推荐资源列表
-const recommendList = ref([])
+//推荐资源列表,初始化8个提供骨架占位
+const recommendList = ref(new Array(10).fill({}))
 //获取推荐资源
 async function getRecommendResource() {
   let res = await personStylePaperResourceRecommendServer()
@@ -37,6 +37,7 @@ const body = document.querySelector("body")
       <SourceCard
         v-for="item in recommendList"
         :key="item.resourceId"
+        image="@/assets/image1.jpg"
         :source-type="item.resourceType"
       >
         <template #title>{{ item.resourceName }}</template>

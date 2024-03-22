@@ -22,9 +22,18 @@ import {useUserInfoStore} from "@/stores/userInfo.js";
 const userInfoStore = useUserInfoStore()
 const userId = userInfoStore.userInfo.userId
 export const personStylePaperSaveServer = (answers) => {
-
     return request.post("/person-style-paper/save", {
         answers,
         userId
     })
+}
+
+/**
+ * 获取学习资源推荐
+ * @returns {Promise<axios.AxiosResponse<any>>}
+ */
+export const personStylePaperResourceRecommendServer = () => {
+    const params = new URLSearchParams()
+    params.append("userId",userId)
+    return request.post("/person-style-paper/resource-recommend", params)
 }

@@ -2,6 +2,7 @@
 import {ref,onMounted} from "vue";
 import {personStylePaperResourceRecommendServer} from "@/api/personStylePaper.js";
 import SourceCard from "@/components/SourceCard.vue";
+import ScaleModal from "@/components/ScaleModal.vue";
 
 //推荐资源列表,初始化8个提供骨架占位
 const recommendList = ref(new Array(10).fill({}))
@@ -22,23 +23,34 @@ async function getLessonList() {
   pageNum.value++
   lessonList.value.push(...res.data.records)
 }
-
+//挂在后获取资源
 onMounted(() => {
   getRecommendResource()
   getLessonList()
 })
+//将Body交给IntersectionObserver,监听交叉
 const body = document.querySelector("body")
+
+//Modal
+const isShow = ref(false)
+const scaleModalRef = ref()
+function showModal(event) {
+  scaleModalRef.value.init(event.currentTarget)
+  isShow.value = true
+}
 </script>
 
 <template>
+  <ScaleModal :show="isShow" @clickMask="isShow = false" ref="scaleModalRef"></ScaleModal>
   <div class="recommend">
     <div class="title">推荐资源</div>
     <div class="recommend-wrapper">
       <SourceCard
         v-for="item in recommendList"
-        :key="item.resourceId"
+        :key="item"
         image="@/assets/image1.jpg"
         :source-type="item.resourceType"
+        @click="showModal($event)"
       >
         <template #title>{{ item.resourceName }}</template>
         <template #info>{{item.resourceLink}}</template>
@@ -48,9 +60,10 @@ const body = document.querySelector("body")
     <div class="lesson-wrapper">
       <SourceCard
         v-for="item in lessonList"
-        :key="item.lessonId"
+        :key="item"
         :image="item.lessonPicture"
         source-type=""
+        @click="showModal"
       >
         <template #title>{{ item.lessonName }}</template>
         <template #info>{{item.intro}}</template>

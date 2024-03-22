@@ -83,10 +83,11 @@ defineExpose({
   backdrop-filter: blur(10px);
 }
 .modal-body {
+  overflow: hidden;
   transition: all 0.5s,width 0.5s cubic-bezier(.38,1.03,.53,1.01), height 0.5s cubic-bezier(.38,1.03,.53,1.01);
   background-color: white;
-  border-radius: 10px;
-  box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+  box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.3);
   position: absolute;
   width: v-bind(width);
   height: v-bind(height);

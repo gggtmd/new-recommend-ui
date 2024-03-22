@@ -16,6 +16,7 @@ const lessonList = ref([])
 const pageNum = ref(1)
 //获取外部课程资源
 import {lessonPageServer} from "@/api/lesson.js";
+import InfiniteScrollObserver from "@/components/InfiniteScrollObserver.vue";
 async function getLessonList() {
   let res = await lessonPageServer(pageNum.value)
   pageNum.value++
@@ -26,6 +27,7 @@ onMounted(() => {
   getRecommendResource()
   getLessonList()
 })
+const body = document.querySelector("body")
 </script>
 
 <template>
@@ -52,6 +54,7 @@ onMounted(() => {
         <template #title>{{ item.lessonName }}</template>
         <template #info>{{item.intro}}</template>
       </SourceCard>
+      <InfiniteScrollObserver :rootSelector="body" @handleIntersect="getLessonList"></InfiniteScrollObserver>
     </div>
   </div>
 </template>

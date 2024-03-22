@@ -63,7 +63,8 @@ onMounted(() => {
 .header-image {
   width: 100%;
   height: 100px;
-  background-image: url("@/assets/image1.jpg");
+  background-image: url("@/assets/head-image.png");
+  background-size: 100% 100%;
 }
 .nav-wrapper{
   font-size: 1.3rem;

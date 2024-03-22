@@ -26,7 +26,7 @@ const tagColor = computed(() => {
   width: 100%;
   height: 200px;
   background-color: white;
-  border-radius: 3px;
+  border-radius: 5px;
   overflow: hidden;
   box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.1);
   position: relative;

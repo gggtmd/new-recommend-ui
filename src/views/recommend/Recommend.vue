@@ -77,7 +77,7 @@ const body = document.querySelector("body")
 .lesson-wrapper{
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 20px;
+  gap: 30px;
   margin-bottom: 40px;
 }
 </style>

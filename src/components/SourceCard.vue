@@ -1,6 +1,10 @@
 <script setup>
 import {computed, ref, watch} from "vue";
 
+defineOptions({
+  inheritAttrs: false
+})
+
 const props = defineProps(["image", "sourceType"])
 //标签样式
 const tagColor = computed(() => {
@@ -36,7 +40,7 @@ watch(() => props.image, (value) => {
       </div>
     </template>
     <template #default>
-      <div class="source-card" :class="tagColor">
+      <div class="source-card" :class="tagColor" v-bind="$attrs">
         <img class="image" :src="image" alt="">
         <div class="text-area">
           <div class="title">

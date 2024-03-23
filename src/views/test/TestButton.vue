@@ -1,6 +1,10 @@
 <script setup>
-import {onMounted, ref} from "vue";
+import {inject, onMounted, ref} from "vue";
 import {questionBankListServer} from "@/api/question-bank.js";
+
+onMounted(() => {
+  initQuestionBankList()
+})
 
 const buttons = ref([])
 //获取buttons
@@ -17,10 +21,11 @@ async function initQuestionBankList() {
   }))
   initActive()
 }
-//路由获取激活路径，确认激活按钮
+//路由获取激活路径，确认激活按钮，触发updateQuestionList事件
 import {useRouter} from "vue-router";
 const router = useRouter()
 const activeBankIndex = ref("")
+const $bus = inject("$bus")
 function initActive() {
   //根据路径，确认激活按钮的index
   let activeBankId = Number(router.currentRoute.value.path.substring(router.currentRoute.value.path.lastIndexOf("/") + 1))
@@ -31,12 +36,10 @@ function initActive() {
     buttons.value[activeBankIndex.value].type = ""
   }
   activeBankIndex.value = String(index)
+  $bus.emit("updateQuestionList")
 }
-onMounted(() => {
-  initQuestionBankList()
-})
 
-//按钮点击
+//按钮点击,路由跳转，按钮切换
 async function handleClick(index) {
   let newActiveId = buttons.value[index].bankId
   await router.push({
@@ -50,14 +53,16 @@ async function handleClick(index) {
 </script>
 
 <template>
-  <el-button
-      v-for="(button, index) in buttons"
-      :key="button.bankId"
-      :type="button.type"
-      round
-      @click="handleClick(index)"
-  >{{ button.bankName }}
-  </el-button>
+  <div>
+    <el-button
+        v-for="(button, index) in buttons"
+        :key="button.bankId"
+        :type="button.type"
+        round
+        @click="handleClick(index)"
+    >{{ button.bankName }}
+    </el-button>
+  </div>
 </template>
 
 <style scoped>

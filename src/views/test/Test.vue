@@ -15,12 +15,13 @@ import TestButton from "@/views/test/TestButton.vue";
 <style scoped>
 .container {
   width: 100vw;
-  height: 500px;
   box-sizing: border-box;
   padding: 0 135px;
 }
 .btn-wrapper {
   box-sizing: border-box;
-  padding: 15px 0;
+  padding: 20px 0;
+  position: sticky;
+  top: calc(1.3rem + 30px);
 }
 </style>

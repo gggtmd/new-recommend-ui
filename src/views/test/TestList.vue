@@ -39,10 +39,8 @@ async function getQuestionList() {
 </script>
 
 <template>
-  <div>
-    <div v-for="item in questionList">{{item}}</div>
-    <InfiniteScrollObserver :root-selector="body" @handleIntersect="getQuestionList"></InfiniteScrollObserver>
-  </div>
+  <div v-for="item in questionList">{{item}}</div>
+  <InfiniteScrollObserver :root-selector="body" @handleIntersect="getQuestionList"></InfiniteScrollObserver>
 </template>
 
 <style scoped>

@@ -53,16 +53,14 @@ async function handleClick(index) {
 </script>
 
 <template>
-  <div>
-    <el-button
-        v-for="(button, index) in buttons"
-        :key="button.bankId"
-        :type="button.type"
-        round
-        @click="handleClick(index)"
-    >{{ button.bankName }}
-    </el-button>
-  </div>
+  <el-button
+      v-for="(button, index) in buttons"
+      :key="button.bankId"
+      :type="button.type"
+      round
+      @click="handleClick(index)"
+  >{{ button.bankName }}
+  </el-button>
 </template>
 
 <style scoped>

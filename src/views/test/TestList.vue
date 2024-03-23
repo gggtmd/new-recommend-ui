@@ -28,6 +28,7 @@ function updateQuestionList() {
 
 //获取数据
 import {questionsPageServer} from "@/api/questions.js";
+import ScaleModal from "@/components/ScaleModal.vue";
 async function getQuestionList() {
   //InfiniteScrollObserver组件中，handleIntersect事件在updateQuestionList触发bankId更新前执行，导致进行一次bankId为""的加载请求
   if(bankId.value !== "") {
@@ -36,13 +37,68 @@ async function getQuestionList() {
     questionList.value.push(...res.data.records)
   }
 }
+//表格行颜色
+const tableRowClassName = ({row, rowIndex}) => {
+  if(row.difficultyLevel === "中等") {
+    return "warning-row"
+  } else if(row.difficultyLevel === "困难"){
+    return "error-row"
+  }
+  return ""
+}
+//表格行点击事件
+const isShow = ref(false)
+const scaleModalRef = ref()
+const handleClick = (row, column, event) => {
+  console.log(row)
+  scaleModalRef.value.init(event.currentTarget)
+  isShow.value = true
+  router.push({
+    name: "question",
+    params: {
+      questionId: row.questionId
+    }
+  })
+}
+//展开遮罩点击事件
+const handleClickMask = () => {
+  isShow.value = false
+  router.go(-1)
+}
 </script>
 
 <template>
-  <div v-for="item in questionList">{{item}}</div>
-  <InfiniteScrollObserver :root-selector="body" @handleIntersect="getQuestionList"></InfiniteScrollObserver>
+  <ScaleModal :show="isShow" ref="scaleModalRef" @clickMask="handleClickMask"></ScaleModal>
+  <div class="container">
+    <el-table
+      :data="questionList"
+      style="width: 100%"
+      :row-class-name="tableRowClassName"
+      :row-style="{height: '60px'}"
+      @row-click="handleClick"
+    >
+      <el-table-column align="center" prop="questionId" label="题号" width="100"/>
+      <el-table-column prop="questionStatement" label="问题"/>
+      <el-table-column align="center" prop="assessNumber" label="评价数" width="100"/>
+      <el-table-column align="center" prop="assess" label="评分" width="100"/>
+      <el-table-column align="center" prop="difficultyLevel" label="难度" width="100"/>
+    </el-table>
+  </div>
+  <InfiniteScrollObserver :root-selector="body" root-margin="0px 0px 500px 0px" @handleIntersect="getQuestionList"></InfiniteScrollObserver>
 </template>
 
 <style scoped>
-
+.container {
+  box-sizing: border-box;
+  padding: 10px 0;
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.el-table:deep(.warning-row) {
+  --el-table-tr-bg-color: var(--el-color-warning-light-9);
+}
+.el-table:deep(.error-row) {
+  --el-table-tr-bg-color: var(--el-color-error-light-9);
+}
 </style>

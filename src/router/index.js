@@ -40,7 +40,14 @@ const router = createRouter({
             {
               path: '/test/:bankId',
               name: 'testList',
-              component: () => import('@/views/test/TestList.vue')
+              component: () => import('@/views/test/TestList.vue'),
+              children: [
+                {
+                  path: '/test/:bankId/:questionId',
+                  name: 'question',
+                  component: () => import('@/views/test/Question.vue')
+                },
+              ]
             },
           ]
         },

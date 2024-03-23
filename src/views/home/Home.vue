@@ -76,7 +76,7 @@ onMounted(() => {
   left: 0;
   width: 100%;
   box-sizing: border-box;
-  padding: 15px 155px;
+  padding: 15px 150px;
   box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.1);
   background-color: white;
 }

@@ -34,7 +34,15 @@ const router = createRouter({
         {
           path: '/test',
           name: 'test',
-          component: () => import('@/views/test/Test.vue')
+          component: () => import('@/views/test/Test.vue'),
+          redirect: '/test/0',
+          children: [
+            {
+              path: '/test/:bankId',
+              name: 'testList',
+              component: () => import('@/views/test/TestList.vue')
+            },
+          ]
         },
         {
           path: '/answer',

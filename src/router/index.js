@@ -22,7 +22,14 @@ const router = createRouter({
         {
           path: '/recommend',
           name: 'recommend',
-          component: () => import('@/views/recommend/Recommend.vue')
+          component: () => import('@/views/recommend/Recommend.vue'),
+          children: [
+            {
+              path: '/recommend/:resourceId',
+              name: 'recommendDetail',
+              component: () => import('@/views/recommend/RecommendDetail.vue')
+            },
+          ]
         },
         {
           path: '/test',

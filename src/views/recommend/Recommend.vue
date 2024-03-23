@@ -34,14 +34,35 @@ const body = document.querySelector("body")
 //Modal
 const isShow = ref(false)
 const scaleModalRef = ref()
-function showModal(event) {
-  scaleModalRef.value.init(event.currentTarget)
-  isShow.value = true
+//点击展开模态框
+import {useRouter} from "vue-router";
+const router = useRouter()
+function showModal(event, source) {
+  if (source.resourceId) {
+    scaleModalRef.value.init(event.currentTarget)
+    isShow.value = true
+    router.push({
+      name: "recommendDetail",
+      params: {
+        resourceId: source.resourceId
+      }
+    })
+  } else {
+    window.open(source.lessonLink, '_blank');
+  }
+}
+function hideModal() {
+  isShow.value = false
+  router.push({
+    name: "recommend"
+  })
 }
 </script>
 
 <template>
-  <ScaleModal :show="isShow" @clickMask="isShow = false" ref="scaleModalRef"></ScaleModal>
+  <ScaleModal :show="isShow" @clickMask="hideModal" ref="scaleModalRef">
+    <router-view></router-view>
+  </ScaleModal>
   <div class="recommend">
     <div class="title">推荐资源</div>
     <div class="recommend-wrapper">
@@ -50,7 +71,7 @@ function showModal(event) {
         :key="item"
         image="@/assets/image1.jpg"
         :source-type="item.resourceType"
-        @click="showModal($event)"
+        @click="showModal($event, item)"
       >
         <template #title>{{ item.resourceName }}</template>
         <template #info>{{item.resourceLink}}</template>
@@ -63,7 +84,7 @@ function showModal(event) {
         :key="item"
         :image="item.lessonPicture"
         source-type=""
-        @click="showModal"
+        @click="showModal($event, item)"
       >
         <template #title>{{ item.lessonName }}</template>
         <template #info>{{item.intro}}</template>

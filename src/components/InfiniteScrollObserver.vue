@@ -1,9 +1,13 @@
 <script setup>
 import {onBeforeUnmount, onMounted, ref} from "vue";
 //传入交叉元素DOM
-const {rootSelector} = defineProps({
+const {rootSelector,rootMargin} = defineProps({
   rootSelector: {
     required: true
+  },
+  rootMargin: {
+    type: String,
+    default: "0px 0px 200px 0px"
   }
 })
 //交叉处理方法
@@ -15,7 +19,7 @@ let observer = null
 onMounted(() => {
   const options = {
     root: rootSelector,
-    rootMargin: "0px 0px 200px 0px"
+    rootMargin: rootMargin
   }
   observer = new IntersectionObserver(([entry]) => {
     if(entry && entry.isIntersecting) {

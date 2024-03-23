@@ -1,7 +1,11 @@
 <script setup>
 import {onBeforeUnmount, onMounted, ref} from "vue";
 //传入交叉元素DOM
-const {rootSelector} = defineProps()
+const {rootSelector} = defineProps({
+  rootSelector: {
+    required: true
+  }
+})
 //交叉处理方法
 const emit = defineEmits(["handleIntersect"])
 const targetRef = ref()

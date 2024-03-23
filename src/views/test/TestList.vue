@@ -50,7 +50,6 @@ const tableRowClassName = ({row, rowIndex}) => {
 const isShow = ref(false)
 const scaleModalRef = ref()
 const handleClick = (row, column, event) => {
-  console.log(row)
   scaleModalRef.value.init(event.currentTarget)
   isShow.value = true
   router.push({

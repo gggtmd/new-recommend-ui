@@ -38,7 +38,11 @@ export const questionsPageServer = (bankId, pageNum, pageSize = 24, questionStat
     })
 }
 
-
+/**
+ * 根据id查询单个试题选项
+ * @param questionId
+ * @returns {Promise<axios.AxiosResponse<any>>}
+ */
 export const questionsFindQuestionOptionsServer = (questionId) => {
     return request.post("/questions/findQuestionOptions", 414)
 }

@@ -37,3 +37,8 @@ export const questionsPageServer = (bankId, pageNum, pageSize = 24, questionStat
         type
     })
 }
+
+
+export const questionsFindQuestionOptionsServer = (questionId) => {
+    return request.post("/questions/findQuestionOptions", 414)
+}

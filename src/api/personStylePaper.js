@@ -1,5 +1,8 @@
 import request from "@/utils/request.js";
 
+import {useUserInfoStore} from "@/stores/userInfo.js";
+const userInfoStore = useUserInfoStore()
+const userId = userInfoStore.userInfo.userId
 /**
  * 用户风格测试数据存储信息查询
  * @param userId 用户ID
@@ -18,9 +21,6 @@ export const personStylePaperPageServer = (userId) => {
  * @param answers 用户问题答案
  * @returns {Promise<axios.AxiosResponse<any>>}
  */
-import {useUserInfoStore} from "@/stores/userInfo.js";
-const userInfoStore = useUserInfoStore()
-const userId = userInfoStore.userInfo.userId
 export const personStylePaperSaveServer = (answers) => {
     return request.post("/person-style-paper/save", {
         answers,
@@ -36,4 +36,14 @@ export const personStylePaperResourceRecommendServer = () => {
     const params = new URLSearchParams()
     params.append("userId",userId)
     return request.post("/person-style-paper/resource-recommend", params)
+}
+
+/**
+ * 获取试题资源推荐
+ * @returns {Promise<axios.AxiosResponse<any>>}
+ */
+export const personStylePaperQuestionRecommendServer = () => {
+    const params = new URLSearchParams()
+    params.append("userId",userId)
+    return request.post("/person-style-paper/question-recommend", params)
 }

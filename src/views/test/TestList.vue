@@ -1,5 +1,6 @@
 <script setup>
 import InfiniteScrollObserver from "@/components/InfiniteScrollObserver.vue";
+import ScaleModal from "@/components/ScaleModal.vue";
 import {inject, onBeforeUnmount, onMounted, ref} from "vue";
 import {useRouter} from "vue-router";
 const router = useRouter()
@@ -28,13 +29,21 @@ function updateQuestionList() {
 
 //获取数据
 import {questionsPageServer} from "@/api/questions.js";
-import ScaleModal from "@/components/ScaleModal.vue";
+import {personStylePaperQuestionRecommendServer} from "@/api/personStylePaper.js";
+
 async function getQuestionList() {
   //InfiniteScrollObserver组件中，handleIntersect事件在updateQuestionList触发bankId更新前执行，导致进行一次bankId为""的加载请求
-  if(bankId.value !== "") {
+  if(bankId.value === "") {
+    return
+  }
+  if(bankId.value !== "0") {
     pageNum.value++
     let res = await questionsPageServer(bankId.value, pageNum.value)
     questionList.value.push(...res.data.records)
+  } else {
+    pageNum.value++
+    let res = await personStylePaperQuestionRecommendServer()
+    questionList.value.push(...res.data)
   }
 }
 //表格行颜色
@@ -59,7 +68,7 @@ const handleClick = (row, column, event) => {
     }
   })
 }
-//展开遮罩点击事件
+//遮罩点击事件
 const handleClickMask = () => {
   isShow.value = false
   router.go(-1)
@@ -67,7 +76,9 @@ const handleClickMask = () => {
 </script>
 
 <template>
-  <ScaleModal :show="isShow" ref="scaleModalRef" @clickMask="handleClickMask"></ScaleModal>
+  <ScaleModal :show="isShow" ref="scaleModalRef" @clickMask="handleClickMask">
+    <router-view></router-view>
+  </ScaleModal>
   <div class="container">
     <el-table
       :data="questionList"

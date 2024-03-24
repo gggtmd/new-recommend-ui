@@ -15,7 +15,7 @@ import {usePathStore} from "@/stores/path.js";
 const pathStore = usePathStore()
 const navWrapperRef = ref()
 onMounted(() => {
-  const path = pathStore.path
+  const path = pathStore.path.substring(0, pathStore.path.indexOf("/",1))
   switch (path) {
     case "/recommend":
       navWrapperRef.value.children[0].children[0].style.color = "#409EFF"

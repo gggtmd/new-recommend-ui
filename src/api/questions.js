@@ -44,5 +44,7 @@ export const questionsPageServer = (bankId, pageNum, pageSize = 24, questionStat
  * @returns {Promise<axios.AxiosResponse<any>>}
  */
 export const questionsFindQuestionOptionsServer = (questionId) => {
-    return request.post("/questions/findQuestionOptions", 414)
+    let params = new URLSearchParams()
+    params.append("questionId", questionId)
+    return request.post("/questions/findQuestionOptions", params)
 }

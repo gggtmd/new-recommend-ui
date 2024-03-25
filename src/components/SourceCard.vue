@@ -114,7 +114,7 @@ watch(() => props.image, (value) => {
   transition: 0.2s;
 }
 .source-card:hover .title,
-.source-card:hover .info, {
+.source-card:hover .info{
   color: #409EFF;
 }
 .source-card:hover {

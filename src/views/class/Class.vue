@@ -1,18 +1,23 @@
 <script setup>
 import ClassCard from "@/views/class/classCard.vue";
-import {ref} from "vue";
+import {onMounted, ref} from "vue";
 
-const classData = ref({
-  classId: 1,
-  className: "gggcskanckanvkalnvknac;asm",
-  description: "lllfdlkvnvajbvlavklavklavklakvlnaklvlnaksvnlkanviksdvlisnvslllfdlkvnvajbvlavklavklavklakvlnaklvlnaksvnlkanviksdvlisnvslllfdlkvnvajbvlavklavklavklakvlnaklvlnaksvnlkanviksdvlisnvsl",
-  classPicture: "https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg"
+onMounted(() => {
+  getClassList()
 })
+
+const classList = ref([])
+//获取学生或教师加入的课堂
+import {personClassServer} from "@/api/person.js";
+async function getClassList() {
+  const res = await personClassServer()
+  classList.value.push(...res.data)
+}
 </script>
 
 <template>
   <div class="class-wrapper">
-    <class-card :class-data="classData"></class-card>
+    <class-card v-for="item in classList" :class-data="item"></class-card>
   </div>
 </template>
 

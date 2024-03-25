@@ -3,7 +3,7 @@ import {ref} from "vue";
 
 const props = defineProps({
   classData: {
-    type: String,
+    type: Object,
     required: true
   }
 })
@@ -86,12 +86,12 @@ function handleLeave() {
   bottom: 0;
   z-index: 2;
   backdrop-filter: blur(20px);
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 0.5);
   overflow: hidden;
 }
 .infoHover{
   height: 50%;
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(255, 255, 255, 0.8);
 }
 .title{
   width: 100%;

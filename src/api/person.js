@@ -1,4 +1,7 @@
 import request from "@/utils/request";
+import {useUserInfoStore} from "@/stores/userInfo.js";
+
+const userInfoStore = useUserInfoStore()
 
 /**
  * 用户登录
@@ -22,4 +25,19 @@ export const personRegisterServer = (userRegisterDTO) => {
  */
 export const personRegisterCodeServer = (email) => {
   return request.post('/person/registerCode', {email})
+}
+
+/**
+ * 根据用户ID查找学生或教师其加入的课堂信息
+ * @returns {Promise<axios.AxiosResponse<any>>}
+ */
+export const personClassServer = () => {
+  let {userId, roleId} = userInfoStore.userInfo
+  if(roleId === 1) {
+    return request.get('/person/view/' + userId)
+  } else if(roleId === 2) {
+    const params = new URLSearchParams()
+    params.append("createUserId", userId)
+    return request.post("/classes/getByCreateUserId", params)
+  }
 }

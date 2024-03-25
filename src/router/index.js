@@ -71,7 +71,15 @@ const router = createRouter({
     {
       path: '/classinfo/:classId',
       name: 'classInfo',
-      component: () => import('@/views/class/classInfo.vue')
+      component: () => import('@/views/classInfo/classInfo.vue'),
+      redirect: '/classinfo/:classId/classDescription',
+      children: [
+        {
+          path: '/classinfo/:classId/classDescription',
+          name: 'classDescription',
+          component: () => import('@/views/classInfo/classDescription.vue')
+        },
+      ]
     },
   ]
 })

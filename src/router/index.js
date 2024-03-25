@@ -68,6 +68,11 @@ const router = createRouter({
         },
       ]
     },
+    {
+      path: '/classinfo/:classId',
+      name: 'classInfo',
+      component: () => import('@/views/class/classInfo.vue')
+    },
   ]
 })
 

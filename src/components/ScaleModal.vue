@@ -59,7 +59,7 @@ defineExpose({
       name="modal"
       @before-enter="onBeforeEnter"
       @enter="onEnter"
-      @before-leave="onBeforeEnter"
+      @before-leave="onLeave"
     >
       <div v-if="show" class="modal-mask" @click="handleMaskClick">
         <div class="modal-body" @click.stop>
@@ -78,15 +78,14 @@ defineExpose({
   top: 0;
   bottom: 0;
   z-index: 999;
-  transition: all 0.5s,width 0.5s cubic-bezier(.38,1.03,.53,1.01), height 0.5s cubic-bezier(.38,1.03,.53,1.01);
-  background: rgba(200, 200, 200, 0.3);
-  backdrop-filter: blur(10px);
+  transition: all 0.5s,width 0.5s cubic-bezier(.38,1.03,.53,1.02), height 0.5s cubic-bezier(.38,1.03,.53,1.02);
+  background: rgba(190, 190, 190, 0.3);
 }
 .modal-body {
   overflow: hidden;
-  transition: all 0.5s,width 0.5s cubic-bezier(.38,1.03,.53,1.01), height 0.5s cubic-bezier(.38,1.03,.53,1.01);
+  transition: all 0.5s cubic-bezier(.38,1.03,.53,1.02);
   background-color: white;
-  border-radius: 20px;
+  border-radius: 15px;
   box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.3);
   position: absolute;
   width: v-bind(width);
@@ -97,6 +96,5 @@ defineExpose({
 .modal-enter-from,
 .modal-leave-to{
   background: rgba(240, 240, 240, 0);
-  backdrop-filter: blur(0px);
 }
 </style>

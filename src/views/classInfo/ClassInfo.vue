@@ -25,6 +25,7 @@ import ClassAsideNav from "@/views/classInfo/ClassAsideNav.vue";
   left: 0;
   top: 0;
   z-index: 999;
+  min-width: 200px;
 }
 .container {
   width: 100vw;
@@ -38,5 +39,10 @@ import ClassAsideNav from "@/views/classInfo/ClassAsideNav.vue";
 .main {
   box-sizing: border-box;
   padding: 20px 20px 20px 60px;
+}
+@media screen and (max-width: 1200px){
+  .container {
+    padding: 0 40px 0 200px;
+  }
 }
 </style>

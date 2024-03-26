@@ -43,7 +43,7 @@ async function getClassInfo() {
         <div class="sub-info">{{new Date(classData.createdTime).toLocaleDateString()}}</div>
       </div>
       <div class="info-item">
-        <div class="sub-title">教师:</div>
+        <div class="sub-title">课堂教师:</div>
         <div class="sub-info">{{creator.name}}</div>
       </div>
     </div>
@@ -53,7 +53,7 @@ async function getClassInfo() {
 
 <style scoped>
 .class-description {
-  height: 150vh;
+  width: 100%;
 }
 .title {
   font-size: 1.3rem;
@@ -73,6 +73,7 @@ async function getClassInfo() {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   margin-bottom: 30px;
+  gap: 10px;
 }
 .info-item {
   width: 100%;

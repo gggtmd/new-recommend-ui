@@ -26,10 +26,12 @@ async function getStage() {
 </script>
 
 <template>
-  <div class="class-notice" v-loading="isLoading">
-    <div class="mask" v-if="!isLoading">暂无数据</div>
-    <ul class="notice-wrapper">
-      <li class="notice-item" v-for="(item, index) in noticeList">
+  <div class="class-notice">
+    <div class="title">公告</div>
+    <el-divider></el-divider>
+    <ul class="notice-wrapper" v-loading="isLoading">
+      <li class="mask" v-if="!noticeList.length&&!isLoading">暂无数据</li>
+      <li class="notice-item" v-for="item in noticeList" v-show="!isLoading">
         第{{item.stage}}阶段
         <div
           class="icon"
@@ -44,12 +46,12 @@ async function getStage() {
 
 <style scoped>
 .class-notice {
-  background-color: white;
-  box-sizing: border-box;
-  border-radius: 10px;
-  overflow: hidden;
-  margin-top: calc(40px + 1.5rem);
-  min-height: calc(40px + 1.2rem);
+  width: 100%;
+}
+.title {
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin-bottom: 20px;
 }
 .mask {
   text-align: center;
@@ -64,6 +66,11 @@ async function getStage() {
   list-style: none;
   padding: 0;
   margin: 0;
+  min-height: calc(40px + 1.2rem);
+  background-color: white;
+  box-sizing: border-box;
+  border-radius: 10px;
+  overflow: hidden;
 }
 .notice-item {
   box-sizing: border-box;

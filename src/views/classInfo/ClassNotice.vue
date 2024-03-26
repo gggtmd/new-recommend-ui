@@ -1,11 +1,96 @@
 <script setup>
+import {classKnowledgeQueryClassStageServer} from "@/api/classKnowledge.js";
+import {onMounted, ref} from "vue";
 
+onMounted(() => {
+  getStage()
+})
+
+const noticeList = ref([])
+
+//获取课堂所有阶段
+import {useRoute} from "vue-router";
+const route = useRoute()
+const isLoading = ref(true)
+async function getStage() {
+  let res = await classKnowledgeQueryClassStageServer(route.params.classId)
+  noticeList.value.push(...res.data[0].filter((item) => {
+    if(item.statue === "1") {
+      return true
+    }
+  }))
+  setTimeout(() => {
+    isLoading.value = false
+  }, 500)
+}
 </script>
 
 <template>
-  Notice
+  <div class="class-notice" v-loading="isLoading">
+    <div class="mask" v-if="!isLoading">暂无数据</div>
+    <ul class="notice-wrapper">
+      <li class="notice-item" v-for="(item, index) in noticeList">
+        第{{item.stage}}阶段
+        <div
+          class="icon"
+          :class="{ableIcon:item.statue}"
+        >
+          {{item.statue === "0"?"未开始":"已开始"}}
+        </div>
+      </li>
+    </ul>
+  </div>
 </template>
 
 <style scoped>
-
+.class-notice {
+  background-color: white;
+  box-sizing: border-box;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: calc(40px + 1.5rem);
+  min-height: calc(40px + 1.2rem);
+}
+.mask {
+  text-align: center;
+  padding: 20px;
+  font-size: 1.2rem;
+  line-height: 1.2rem;
+  font-weight: bold;
+  color: #555;
+  letter-spacing: 3px;
+}
+.notice-wrapper {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.notice-item {
+  box-sizing: border-box;
+  padding: 20px 0;
+  border-bottom: var(--el-border);
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #555;
+  transition: 0.15s;
+  text-indent: 15px;
+  position: relative;
+}
+.notice-item:last-child {
+  border: none;
+}
+.notice-item:hover {
+  background-color: #409EFF1B;
+}
+.icon {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #5555;
+}
+.ableIcon {
+  cursor: pointer;
+  color: #55be21;
+}
 </style>

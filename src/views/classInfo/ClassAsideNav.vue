@@ -50,7 +50,6 @@ const activeDom = ref()
 const navItemRef = ref()
 const router = useRouter()
 function handleClick(eventTarget, name) {
-  console.log(name)
   router.push({
     name
   })
@@ -88,7 +87,7 @@ function handleClick(eventTarget, name) {
 }
 .title {
   width: 100%;
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: bold;
   text-align: center;
   box-sizing: border-box;

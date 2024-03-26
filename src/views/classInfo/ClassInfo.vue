@@ -8,7 +8,9 @@ import ClassAsideNav from "@/views/classInfo/ClassAsideNav.vue";
       <class-aside-nav></class-aside-nav>
     </el-scrollbar>
     <el-scrollbar class="container">
-      <router-view></router-view>
+      <div class="main">
+        <router-view></router-view>
+      </div>
     </el-scrollbar>
 </template>
 
@@ -32,5 +34,8 @@ import ClassAsideNav from "@/views/classInfo/ClassAsideNav.vue";
   top: 0;
   box-sizing: border-box;
   padding: 0 15%;
+}
+.main {
+  margin: 20px;
 }
 </style>

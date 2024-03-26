@@ -7,6 +7,7 @@ onMounted(() => {
 
 const classData = ref({})
 const creator = ref({})
+const isLoading = ref(true)
 
 //获取课堂详细信息
 import {classesGetByIdServer} from "@/api/classes.js";
@@ -18,37 +19,40 @@ async function getClassInfo() {
   let classCreatorInfo = await personGetByIdServer(classInfo.data.createUserId)
   classData.value = classInfo.data
   creator.value = classCreatorInfo.data
+  isLoading.value = false
 }
 </script>
 
 <template>
-  <div class="class-description">
-    <div class="title">{{classData.className}}</div>
-    <el-divider></el-divider>
-    <div class="info">
-      <div class="info-item">
-        <div class="sub-title">课堂ID:</div>
-        <div class="sub-info">{{classData.classId}}</div>
+  <Transition name="fade">
+    <div class="class-description" v-if="!isLoading">
+      <div class="title">{{classData.className}}</div>
+      <el-divider></el-divider>
+      <div class="info">
+        <div class="info-item">
+          <div class="sub-title">课堂ID:</div>
+          <div class="sub-info">{{classData.classId}}</div>
+        </div>
+        <div class="info-item">
+          <div class="sub-title">课堂学分:</div>
+          <div class="sub-info">{{classData.classCredit}}</div>
+        </div>
+        <div class="info-item">
+          <div class="sub-title">课堂学时:</div>
+          <div class="sub-info">{{classData.classHours}}</div>
+        </div>
+        <div class="info-item">
+          <div class="sub-title">创建时间:</div>
+          <div class="sub-info">{{new Date(classData.createdTime).toLocaleDateString()}}</div>
+        </div>
+        <div class="info-item">
+          <div class="sub-title">课堂教师:</div>
+          <div class="sub-info">{{creator.name}}</div>
+        </div>
       </div>
-      <div class="info-item">
-        <div class="sub-title">课堂学分:</div>
-        <div class="sub-info">{{classData.classCredit}}</div>
-      </div>
-      <div class="info-item">
-        <div class="sub-title">课堂学时:</div>
-        <div class="sub-info">{{classData.classHours}}</div>
-      </div>
-      <div class="info-item">
-        <div class="sub-title">创建时间:</div>
-        <div class="sub-info">{{new Date(classData.createdTime).toLocaleDateString()}}</div>
-      </div>
-      <div class="info-item">
-        <div class="sub-title">课堂教师:</div>
-        <div class="sub-info">{{creator.name}}</div>
-      </div>
+      <div class="description">{{classData.description}}</div>
     </div>
-    <div class="description">{{classData.description}}</div>
-  </div>
+  </Transition>
 </template>
 
 <style scoped>

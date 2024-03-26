@@ -19,6 +19,20 @@ body {
   opacity: 0;
 }
 
+/* fade */
+.fade-leave-active,
+.fade-enter-active {
+  transition: all 0.5s;
+}
+
+.fade-enter-from {
+  opacity: 0;
+}
+
+.fade-leave-to {
+  opacity: 0;
+}
+
 /*el-dialog样式修改*/
 .el-dialog {
   border-radius: 12px;

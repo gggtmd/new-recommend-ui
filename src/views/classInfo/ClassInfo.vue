@@ -36,6 +36,7 @@ import ClassAsideNav from "@/views/classInfo/ClassAsideNav.vue";
   padding: 0 15%;
 }
 .main {
-  margin: 20px;
+  box-sizing: border-box;
+  padding: 20px 20px 20px 60px;
 }
 </style>

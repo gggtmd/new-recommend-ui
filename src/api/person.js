@@ -41,3 +41,16 @@ export const personClassServer = () => {
     return request.post("/classes/getByCreateUserId", params)
   }
 }
+
+/**
+ * 根据用户ID查找用户信息
+ * @param userId
+ * @returns {Promise<axios.AxiosResponse<any>>}
+ */
+export const personGetByIdServer = (userId) => {
+  return request.get("/person/getById", {
+    params: {
+      userId
+    }
+  })
+}

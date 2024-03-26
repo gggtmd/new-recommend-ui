@@ -72,7 +72,7 @@ const router = createRouter({
       path: '/classinfo/:classId',
       name: 'classInfo',
       component: () => import('@/views/classInfo/ClassInfo.vue'),
-      redirect: '/classinfo/:classId/classDescription',
+      redirect: {name: "classDescription"},
       children: [
         {
           path: '/classinfo/:classId/classDescription',

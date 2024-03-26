@@ -71,13 +71,43 @@ const router = createRouter({
     {
       path: '/classinfo/:classId',
       name: 'classInfo',
-      component: () => import('@/views/classInfo/classInfo.vue'),
+      component: () => import('@/views/classInfo/ClassInfo.vue'),
       redirect: '/classinfo/:classId/classDescription',
       children: [
         {
           path: '/classinfo/:classId/classDescription',
           name: 'classDescription',
-          component: () => import('@/views/classInfo/classDescription.vue')
+          component: () => import('@/views/classInfo/ClassDescription.vue')
+        },
+        {
+          path: '/classinfo/:classId/classNotice',
+          name: 'classNotice',
+          component: () => import('@/views/classInfo/ClassNotice.vue')
+        },
+        {
+          path: '/classinfo/:classId/classStage',
+          name: 'classStage',
+          component: () => import('@/views/classInfo/ClassStage.vue')
+        },
+        {
+          path: '/classinfo/:classId/classExam',
+          name: 'classExam',
+          component: () => import('@/views/classInfo/ClassExam.vue')
+        },
+        {
+          path: '/classinfo/:classId/classPaper',
+          name: 'classPaper',
+          component: () => import('@/views/classInfo/ClassPaper.vue')
+        },
+        {
+          path: '/classinfo/:classId/classStudent',
+          name: 'classStudent',
+          component: () => import('@/views/classInfo/ClassStudent.vue')
+        },
+        {
+          path: '/classinfo/:classId/classGraph',
+          name: 'classGraph',
+          component: () => import('@/views/classInfo/ClassGraph.vue')
         },
       ]
     },

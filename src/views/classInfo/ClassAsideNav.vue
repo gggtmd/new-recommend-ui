@@ -1,44 +1,59 @@
 <script setup>
 import {onMounted, ref} from "vue";
+import {useRoute, useRouter} from "vue-router";
 
+//初始定位激活导航
+const route = useRoute()
 onMounted(() => {
-  handleClick(navItemRef.value[0])
+  const activeName = route.matched[1].name
+  navList.value.find((item, index) => {
+    if(item.name === activeName) {
+      return handleClick(navItemRef.value[index], activeName)
+    }
+  })
 })
 
 const navList = ref([
   {
     label: "简介",
-    url: "a"
+    name: "classDescription"
   },
   {
     label: "公告",
-    url: "b"
+    name: "classNotice"
+  },
+  {
+    label: "阶段",
+    name: "classStage"
   },
   {
     label: "考试",
-    url: "c"
+    name: "classExam"
   },
   {
     label: "试卷",
-    url: "d"
+    name: "classPaper"
   },
   {
     label: "学员",
-    url: "e"
+    name: "classStudent"
   },
   {
     label: "图谱",
-    url: "f"
-  },
-  {
-    label: "统计",
-    url: "g"
+    name: "classGraph"
   },
 ])
+
+//导航点击事件
 const top = ref("0px")
 const activeDom = ref()
 const navItemRef = ref()
-function handleClick(eventTarget) {
+const router = useRouter()
+function handleClick(eventTarget, name) {
+  console.log(name)
+  router.push({
+    name
+  })
   top.value = eventTarget.offsetTop + "px"
   eventTarget.classList.toggle("nav-item-toggle")
   if(activeDom.value) {
@@ -50,13 +65,14 @@ function handleClick(eventTarget) {
 
 <template>
   <div class="class-aside-nav">
-    <h1>课堂名称</h1>
+    <div class="title">课堂名称</div>
+    <el-divider></el-divider>
     <div class="nav-wrapper">
       <div
           class="nav-item"
           ref="navItemRef"
           v-for="item in navList"
-          @click="handleClick($event.target)"
+          @click="handleClick($event.target, item.name)"
       >
         {{item.label}}
       </div>
@@ -67,7 +83,20 @@ function handleClick(eventTarget) {
 <style scoped>
 .class-aside-nav {
   width: 100%;
-  height: 150vh;
+  height: 100vh;
+  background-color: white;
+}
+.title {
+  width: 100%;
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  box-sizing: border-box;
+  padding: 20px 0;
+}
+.el-divider {
+  margin: 0 auto 20px;
+  width: 90%;
 }
 .nav-wrapper {
   box-sizing: border-box;
@@ -93,9 +122,9 @@ function handleClick(eventTarget) {
   font-size: 1.2rem;
   color: #666;
   letter-spacing: 2px;
-  margin: 10px 0;
+  margin-bottom: 10px;
   box-sizing: border-box;
-  padding: 0 10px;
+  padding: 0 20px;
   transition: 0.2s;
 }
 .nav-item-toggle {

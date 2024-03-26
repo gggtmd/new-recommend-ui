@@ -1,5 +1,5 @@
 <script setup>
-import ClassAsideNav from "@/views/class/classAsideNav.vue";
+import ClassAsideNav from "@/views/classInfo/ClassAsideNav.vue";
 
 </script>
 

@@ -31,13 +31,31 @@ const formResourceDetail =  computed(() => {
 //资源评分
 const rate = ref(0)
 const isRate = ref(false)
-function sendRate() {
-
+import {resourcesAssessResourcesServer} from "@/api/resource.js";
+import {ElMessageBox} from "element-plus";
+async function sendRate() {
+  try {
+    await ElMessageBox.confirm('提交评分?', null, {
+      confirmButtonText: '确定',
+      cancelButtonText: '取消',
+    })
+    let res = await resourcesAssessResourcesServer(route.params.resourceId, rate.value)
+    if(res.code === 200) {
+      isRate.value = true
+    }
+  } catch (error) {
+    console.log("操作取消")
+  }
 }
 
 //资源跳转
+import {useRouter} from "vue-router";
+const router = useRouter()
 function routerGo() {
-
+  const routerURl =  router.resolve({
+    path: resource.value.resourceLink
+  })
+  window.open(routerURl.href, "_blank")
 }
 </script>
 
@@ -56,7 +74,7 @@ function routerGo() {
           </div>
           <div class="rate">
             <el-rate v-model="rate" :disabled="isRate"></el-rate>
-            <el-button class="sub-btn" round type="primary" @click="sendRate">提交</el-button>
+            <el-button class="sub-btn" round type="primary" :disabled="isRate" @click="sendRate">提交</el-button>
           </div>
         </div>
       </el-scrollbar>

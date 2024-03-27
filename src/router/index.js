@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import RecommendDetail from "@/views/recommend/RecommendDetail.vue";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -27,7 +28,7 @@ const router = createRouter({
             {
               path: '/recommend/:resourceId',
               name: 'recommendDetail',
-              component: () => import('@/views/recommend/RecommendDetail.vue')
+              component: RecommendDetail  //立即导入，防止初次加载卡顿
             },
           ]
         },

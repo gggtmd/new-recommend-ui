@@ -7,11 +7,12 @@ const request = axios.create({
   baseURL: '/api',  //表示http://localhost:8080/api/user/login
   timeout: 60000
 })
-const tokenStore = useTokenStore();
 
 //请求拦截器，请求头加入token
 request.interceptors.request.use(
   config => {
+    //在use内部使用，因为在立即导入RecommendDetail组件时会发送请求，Pinia还没有实例化
+    const tokenStore = useTokenStore();
     if (tokenStore.token) {
       config.headers.Authorization = tokenStore.token;
     }

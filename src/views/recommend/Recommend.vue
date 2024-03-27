@@ -1,7 +1,7 @@
 <script setup>
 import {ref,onMounted} from "vue";
 import {personStylePaperResourceRecommendServer} from "@/api/personStylePaper.js";
-import SourceCard from "@/components/SourceCard.vue";
+import SourceCard from "@/views/recommend/SourceCard.vue";
 import ScaleModal from "@/components/ScaleModal.vue";
 
 //推荐资源列表,初始化8个提供骨架占位

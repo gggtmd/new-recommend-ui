@@ -41,6 +41,9 @@ function initActive() {
 
 //按钮点击,路由跳转，按钮切换
 async function handleClick(index) {
+  if(String(index) === activeBankIndex.value) {
+    return
+  }
   let newActiveId = buttons.value[index].bankId
   await router.push({
     name: "testList",

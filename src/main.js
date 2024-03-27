@@ -8,6 +8,7 @@ import { createPersistedState } from 'pinia-persistedstate-plugin'
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 import EventBus from "@/lib/EventBus.js";
+import directive from "@/directive/index.js";
 
 
 const app = createApp(App)
@@ -20,5 +21,6 @@ app.use(router)
 app.use(pinia)
 app.use(ElementPlus)
 app.provide("$bus", $bus)
+app.use(directive)
 
 app.mount('#app')

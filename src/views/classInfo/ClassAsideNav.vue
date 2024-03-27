@@ -16,31 +16,38 @@ onMounted(() => {
 const navList = ref([
   {
     label: "简介",
-    name: "classDescription"
+    name: "classDescription",
+    role: 1
   },
   {
     label: "公告",
-    name: "classNotice"
+    name: "classNotice",
+    role: 1
   },
   {
     label: "阶段",
-    name: "classStage"
+    name: "classStage",
+    role: 2
   },
   {
     label: "考试",
-    name: "classExam"
+    name: "classExam",
+    role: 1
   },
   {
     label: "试卷",
-    name: "classPaper"
+    name: "classPaper",
+    role: 2
   },
   {
     label: "学员",
-    name: "classStudent"
+    name: "classStudent",
+    role: 1
   },
   {
     label: "图谱",
-    name: "classGraph"
+    name: "classGraph",
+    role: 1
   },
 ])
 
@@ -72,6 +79,7 @@ function handleClick(eventTarget, name) {
           ref="navItemRef"
           v-for="item in navList"
           @click="handleClick($event.target, item.name)"
+          v-roleJudge="item.role"
       >
         {{item.label}}
       </div>

@@ -6,14 +6,10 @@ body {
 /* fade-slide */
 .fade-slide-leave-active,
 .fade-slide-enter-active {
-  transition: all 0.3s;
+  transition: all 0.3s cubic-bezier(.76,.44,.26,1.24);
 }
 
-.fade-slide-enter-from {
-  transform: translateX(-30px);
-  opacity: 0;
-}
-
+.fade-slide-enter-from,
 .fade-slide-leave-to {
   transform: translateX(30px);
   opacity: 0;

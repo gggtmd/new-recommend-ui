@@ -24,5 +24,6 @@ import TestButton from "@/views/test/TestButton.vue";
   position: sticky;
   top: calc(1.3rem + 30px);
   z-index: 999;
+  min-height: 72px;
 }
 </style>

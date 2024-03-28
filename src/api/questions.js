@@ -48,3 +48,14 @@ export const questionsFindQuestionOptionsServer = (questionId) => {
     params.append("questionId", questionId)
     return request.post("/questions/findQuestionOptions", params)
 }
+
+/**
+ * 根据试题id查询单个试题
+ * @param questionId
+ * @returns {Promise<axios.AxiosResponse<any>>}
+ */
+export const questionsFindQuestionServer = (questionId) => {
+    let params = new URLSearchParams()
+    params.append("questionId", questionId)
+    return request.post("/questions/findQuestion", params)
+}

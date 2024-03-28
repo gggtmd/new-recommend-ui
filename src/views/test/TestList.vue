@@ -21,8 +21,10 @@ onBeforeUnmount(() => {
 })
 
 //更新数据类型，清空数据，重新获取数据
+import {useRoute} from "vue-router";
+const route = useRoute()
 function updateQuestionList() {
-  bankId.value = router.currentRoute.value.path.substring(router.currentRoute.value.path.lastIndexOf("/") + 1)
+  bankId.value = route.params.bankId
   questionList.value = []
   pageNum.value = 0
   isLoading.value = true

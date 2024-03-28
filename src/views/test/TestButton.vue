@@ -22,14 +22,14 @@ async function initQuestionBankList() {
   initActive()
 }
 //路由获取激活路径，确认激活按钮，触发updateQuestionList事件
-import {useRouter} from "vue-router";
+import {useRouter, useRoute} from "vue-router";
 const router = useRouter()
+const route =useRoute()
 const activeBankIndex = ref("")
 const $bus = inject("$bus")
 function initActive() {
   //根据路径，确认激活按钮的index
-  let activeBankId = Number(router.currentRoute.value.path.substring(router.currentRoute.value.path.lastIndexOf("/") + 1))
-  let index = buttons.value.findIndex(item => item.bankId === activeBankId)
+  const index = route.params.bankId
   //激活新按钮，重置旧按钮
   buttons.value[index].type = "primary"
   if(activeBankIndex.value) {

@@ -36,3 +36,12 @@ export const classKnowledgeClassStageStatusServer = (classId, stage, statue) => 
     params.append("statue", statue)
     return request.post("/class-knowledge/class-stage-status", params)
 }
+
+/**
+ * 课堂知识点关联的新增/修改
+ * @param classKnowledgeList
+ * @returns {Promise<axios.AxiosResponse<any>>}
+ */
+export const classKnowledgeSaveServer = (classKnowledgeList) => {
+    return request.post("/class-knowledge/save", classKnowledgeList)
+}

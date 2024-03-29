@@ -112,6 +112,11 @@ const router = createRouter({
         },
       ]
     },
+    {
+      path: '/classKnowledge',
+      name: 'classKnowledge',
+      component: () => import('@/views/class/ClassKnowledge.vue')
+    },
   ]
 })
 

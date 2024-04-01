@@ -15,3 +15,14 @@ export const examsPageServer = (classId, pageNum, examTitle) => {
         pageSize: 20
     })
 }
+
+
+export const examsSaveServer = (classId, examTitle, startTime, endTime, stage) => {
+    return request.post("/exams/save", {
+        classId,
+        examTitle,
+        startTime,
+        endTime,
+        stage
+    })
+}

@@ -1,5 +1,6 @@
 <script setup>
 import {onMounted, ref} from "vue";
+  import ClassExamAdd from "@/views/classInfo/ClassExamAdd.vue";
 
 onMounted(() => {
   getExam()
@@ -29,6 +30,8 @@ async function getExam() {
   }
 }
 
+
+const classExamAddRef = ref(null)
 //单击详情
 function handleDetail() {
 
@@ -38,11 +41,19 @@ function handleDetail() {
 function handleEdit() {
 
 }
+
+//新增考试
+function handleAdd() {
+  classExamAddRef.value.dialogVisible()
+}
 </script>
 
 <template>
   <div class="class-notice">
-    <div class="title">考试</div>
+    <div class="header">
+      <div class="title">考试</div>
+      <el-button class="add-btn" type="primary" @click="handleAdd">新增</el-button>
+    </div>
     <el-divider></el-divider>
     <div class="mask" v-loading="isLoading" v-if="isLoading"></div>
     <div class="mask" v-if="!examList.length&&!isLoading">暂无数据</div>
@@ -79,6 +90,7 @@ function handleEdit() {
         </li>
       </ul>
     </Transition>
+    <ClassExamAdd ref="classExamAddRef"></ClassExamAdd>
   </div>
 </template>
 
@@ -86,10 +98,17 @@ function handleEdit() {
 .class-notice {
   width: 100%;
 }
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 .title {
   font-size: 1.3rem;
   font-weight: bold;
-  margin-bottom: 20px;
+}
+.add-btn {
+  letter-spacing: 5px;
 }
 .mask {
   text-align: center;

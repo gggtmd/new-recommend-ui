@@ -10,6 +10,7 @@ import 'element-plus/dist/index.css'
 import EventBus from "@/lib/EventBus.js";
 import directive from "@/directive/index.js";
 import VirtualScroll from "@/plugin/index.js";
+import i18n from "@/language/index.js";
 
 
 const app = createApp(App)
@@ -24,5 +25,6 @@ app.use(ElementPlus)
 app.provide("$bus", $bus)
 app.use(directive)
 app.use(VirtualScroll)
+app.use(i18n)
 
 app.mount('#app')

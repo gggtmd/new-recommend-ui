@@ -35,8 +35,16 @@ async function getExam() {
 const classExamAddRef = ref(null)
 const classExamEditRef = ref(null)
 //单击详情
-function handleDetail() {
-
+import {useRouter} from "vue-router";
+const router = useRouter()
+function handleDetail(item, index) {
+  const routerURL = router.resolve({
+    name: "examInfo",
+    params: {
+      examId: item.examId
+    }
+  })
+  window.open(routerURL.href, "_blank")
 }
 
 //单击编辑
@@ -83,7 +91,7 @@ function handleAdd() {
                 class="operate"
                 @click="handleDetail(item, index)"
             >
-              详情
+              预览
             </div>
             <div
                 class="operate"

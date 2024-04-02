@@ -12,3 +12,12 @@ export const papersGetByClassId = (classId) => {
       }
   })
 }
+
+/**
+ * 根据试卷ID查找其包含的试题信息
+ * @param paperId
+ * @returns {Promise<axios.AxiosResponse<any>>}
+ */
+export const papersViewPaperIdServer = (paperId) => {
+    return request.get(`/papers/view/${paperId}`)
+}

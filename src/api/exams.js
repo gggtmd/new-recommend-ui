@@ -58,3 +58,12 @@ export const examsUpdateServer = (classId, examId, paperId, examTitle, startTime
         stage
     })
 }
+
+
+export const examsGetByIdServer = (examId) => {
+    return request.get("/exams/getById", {
+        params: {
+            examId
+        }
+    })
+}

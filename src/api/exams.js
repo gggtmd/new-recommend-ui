@@ -59,7 +59,11 @@ export const examsUpdateServer = (classId, examId, paperId, examTitle, startTime
     })
 }
 
-
+/**
+ * 根据考试ID查找考试信息
+ * @param examId
+ * @returns {Promise<axios.AxiosResponse<any>>}
+ */
 export const examsGetByIdServer = (examId) => {
     return request.get("/exams/getById", {
         params: {

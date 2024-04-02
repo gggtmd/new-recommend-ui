@@ -66,6 +66,11 @@ defineExpose({
   grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
   gap: 10px;
 }
+.el-checkbox-group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .el-radio-group {
   place-self: center;
 }

@@ -17,9 +17,41 @@ export const examsPageServer = (classId, pageNum, examTitle) => {
 }
 
 
+/**
+ * 新增考试
+ * @param classId
+ * @param examTitle
+ * @param startTime
+ * @param endTime
+ * @param stage
+ * @returns {Promise<axios.AxiosResponse<any>>}
+ */
 export const examsSaveServer = (classId, examTitle, startTime, endTime, stage) => {
     return request.post("/exams/save", {
         classId,
+        examTitle,
+        startTime,
+        endTime,
+        stage
+    })
+}
+
+/**
+ * 更新考试
+ * @param classId
+ * @param examId
+ * @param paperId
+ * @param examTitle
+ * @param startTime
+ * @param endTime
+ * @param stage
+ * @returns {Promise<axios.AxiosResponse<any>>}
+ */
+export const examsUpdateServer = (classId, examId, paperId, examTitle, startTime, endTime, stage) => {
+    return request.post("/exams/save", {
+        classId,
+        examId,
+        paperId,
         examTitle,
         startTime,
         endTime,

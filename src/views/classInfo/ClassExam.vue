@@ -1,6 +1,7 @@
 <script setup>
 import {onMounted, ref} from "vue";
-  import ClassExamAdd from "@/views/classInfo/ClassExamAdd.vue";
+import ClassExamAdd from "@/views/classInfo/ClassExamAdd.vue";
+import ClassExamEdit from "@/views/classInfo/ClassExamEdit.vue";
 
 onMounted(() => {
   getExam()
@@ -32,14 +33,18 @@ async function getExam() {
 
 
 const classExamAddRef = ref(null)
+const classExamEditRef = ref(null)
 //单击详情
 function handleDetail() {
 
 }
 
 //单击编辑
-function handleEdit() {
-
+let editFormData = ref({})
+function handleEdit(item, index) {
+  item.timeRange = [item.startTime, item.endTime]
+  editFormData.value = JSON.parse(JSON.stringify(item))
+  classExamEditRef.value.dialogVisible()
 }
 
 //新增考试
@@ -91,6 +96,7 @@ function handleAdd() {
       </ul>
     </Transition>
     <ClassExamAdd ref="classExamAddRef"></ClassExamAdd>
+    <ClassExamEdit ref="classExamEditRef" :examInfo="editFormData"></ClassExamEdit>
   </div>
 </template>
 

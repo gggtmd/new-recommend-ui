@@ -21,3 +21,13 @@ export const papersGetByClassId = (classId) => {
 export const papersViewPaperIdServer = (paperId) => {
     return request.get(`/papers/view/${paperId}`)
 }
+
+
+export const papersPageServer = (classId, pageNum, pageSize = 20, paperTitle = "") => {
+    return request.post("/papers/page", {
+        classId,
+        pageNum,
+        pageSize,
+        paperTitle
+    })
+}

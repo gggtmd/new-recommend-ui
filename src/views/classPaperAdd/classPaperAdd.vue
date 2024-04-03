@@ -100,6 +100,25 @@ async function handleGenerate() {
 
   }
 }
+
+// 提交保存试卷
+import {papersHandPaperServer} from "@/api/papers.js";
+async function submitPaper() {
+  try {
+    await ElMessageBox.confirm("请确认提交数据", "提交试卷")
+    isLoading.value = true
+    const questionIds = paperQuestionList.value.map(item => item.questionId)
+    let res = await papersHandPaperServer(route.params.paperId, questionIds)
+    isLoading.value = false
+    if (res.code === 200) {
+      window.location.reload()
+    } else {
+      ElMessage.error("提交失败")
+    }
+  } catch (err) {
+
+  }
+}
 </script>
 
 <template>
@@ -107,7 +126,17 @@ async function handleGenerate() {
     <ColumnSplit class="split">
       <template #left>
         <div class="left-column">
-          <div class="title">预览</div>
+          <div class="title">
+            预览
+            <el-button
+                type="success"
+                class="generate-btn"
+                @click="submitPaper"
+                :loading="isLoading"
+            >
+              确定
+            </el-button>
+          </div>
           <div class="problem-wrapper">
             <TransitionGroup name="fade">
               <div
@@ -210,10 +239,13 @@ async function handleGenerate() {
   top: 50%;
   right: 30px;
   transform: translateY(-50%);
-  letter-spacing: 2px;
-  text-indent: 2px;
+  letter-spacing: 3px;
+  text-indent: 3px;
   padding: 4px 8px;
   border-radius: 99px;
+}
+.left-column .generate-btn {
+  padding: 4px 12px;
 }
 .left-column .title {
   color: #4293fd;

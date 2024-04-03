@@ -57,3 +57,16 @@ export const papersAutoTakePaperServer = (bankId, paperId, typeChoice = 20, type
         typeGap
     })
 }
+
+/**
+ * 手动编写试卷
+ * @param paperId
+ * @param handleQuestionIds 提交题目ID数组
+ * @returns {Promise<axios.AxiosResponse<any>>}
+ */
+export const papersHandPaperServer = (paperId, handleQuestionIds = []) => {
+    return request.post("/papers/handPaper", {
+        paperId,
+        handleQuestionIds
+    })
+}

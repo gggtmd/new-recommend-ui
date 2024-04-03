@@ -1,5 +1,5 @@
 <script setup>
-import {computed, getCurrentInstance, onMounted, ref, useSlots} from "vue";
+import {computed, onMounted, ref} from "vue";
 
 const props = defineProps({
   //列表数据
@@ -14,7 +14,7 @@ const props = defineProps({
   },
   //item高度包括margin、border和padding
   itemHeight: {
-    type: Number,
+    type: Number||String,
     required: true,
   },
   cacheLength: {

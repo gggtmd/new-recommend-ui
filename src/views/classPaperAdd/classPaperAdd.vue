@@ -26,16 +26,18 @@ async function getPaperQuestion() {
   // paperQuestionList.value.push(...question.data)
   // 将在试卷中试题添加至可选择试题列表，以便完成取消操作
   newQuestionList.value.unshift(...question.data)
-  await nextTick(() => {
-    let i = 0
-    const interval = setInterval(() =>{
-      newQuestionRef.value[i].children[0].click()
-      i++
-      if(i >= question.data.length) {
-        clearInterval(interval)
-      }
-    }, 100)
-  })
+  if(question.data.length) {
+    await nextTick(() => {
+      let i = 0
+      const interval = setInterval(() =>{
+        newQuestionRef.value[i].children[0].click()
+        i++
+        if(i >= question.data.length) {
+          clearInterval(interval)
+        }
+      }, 100)
+    })
+  }
 }
 
 // 获取课堂信息

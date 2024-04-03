@@ -1,7 +1,9 @@
 import roleJudge  from '@/directive/roleJudge.js'
+import split from "@/directive/split.js";
 
 const directives = {
-    roleJudge
+    roleJudge,
+    split
 }
 
 export default {

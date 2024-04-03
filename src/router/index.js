@@ -123,7 +123,7 @@ const router = createRouter({
       component: () => import('@/views/examInfo/ExamInfo.vue')
     },
     {
-      path: '/classPaperAdd/:classId',
+      path: '/classPaperAdd/:classId/:paperId',
       name: 'classPaperAdd',
       component: () => import('@/views/classPaperAdd/classPaperAdd.vue')
     },

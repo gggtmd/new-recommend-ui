@@ -37,7 +37,8 @@ function handleClick(item, index) {
   const routerURL = router.resolve({
     name: "classPaperAdd",
     params: {
-      classId: route.params.classId
+      classId: route.params.classId,
+      paperId: item.paperId
     }
   })
   window.open(routerURL.href, "_blank")

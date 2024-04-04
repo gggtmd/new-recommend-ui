@@ -1,4 +1,5 @@
 import request from "@/utils/request.js";
+import {useUserInfoStore} from "@/stores/userInfo.js";
 
 /**
  * 课堂学生Id查询
@@ -23,5 +24,18 @@ export const classUserClassStudentDelServer = (classId, ...studentIds) => {
         params: {
             classId
         }
+    })
+}
+
+/**
+ * 课堂用户关联的新增/修改
+ * @param classId
+ * @returns {Promise<axios.AxiosResponse<any>>}
+ */
+export const classUserSaveServer = (classId) => {
+    const userInfoStore = useUserInfoStore()
+    return request.post("/class-user/save", {
+        classId,
+        userId: userInfoStore.userInfo.userId
     })
 }

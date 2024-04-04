@@ -1,6 +1,7 @@
 <script setup>
-import ClassCard from "@/views/class/classCard.vue";
+import ClassCard from "@/views/class/classCard.vue"
 import AddClass from "@/views/class/AddClass.vue"
+import JoinClass from "@/views/class/JoinClass.vue";
 import {onMounted, ref} from "vue";
 
 onMounted(() => {
@@ -20,15 +21,28 @@ const addClassRef = ref()
 function handleClick() {
   addClassRef.value.dialogVisible()
 }
+
+// 加入课堂
+const joinClassRef = ref(null)
+function handleJoin() {
+  joinClassRef.value.dialogVisible()
+}
 </script>
 
 <template>
   <AddClass ref="addClassRef"></AddClass>
+  <JoinClass ref="joinClassRef"></JoinClass>
   <div class="class-wrapper">
     <class-card v-for="item in classList" :class-data="item"></class-card>
-    <div class="add-card">
-      <div class="title">需要加入新的课堂？</div>
-      <el-button class="btn" type="primary" @click="handleClick">加入</el-button>
+    <div class="left-aside">
+      <div class="add-card" v-roleJudge="2">
+        <div class="title">需要创建新的课堂？</div>
+        <el-button class="btn" type="primary" @click="handleClick">创建</el-button>
+      </div>
+      <div class="add-card">
+        <div class="title">需要加入新的课堂？</div>
+        <el-button class="btn" type="primary" @click="handleJoin">加入</el-button>
+      </div>
     </div>
   </div>
 </template>
@@ -37,17 +51,21 @@ function handleClick() {
 .class-wrapper {
   width: 100%;
   box-sizing: border-box;
-  padding: 20px 15%;
+  padding: 20px 17%;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 10px;
   position: relative;
 }
-.add-card {
+.left-aside {
   position: absolute;
-  top: 20px;
-  left: 1%;
-  width: 13%;
+  top: 0;
+  left: 0;
+  width: 17%;
+  box-sizing: border-box;
+  padding: 20px;
+}
+.add-card {
   border-radius: 8px;
   box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.1);
   background-color: white;
@@ -58,6 +76,7 @@ function handleClick() {
   font-size: 1.1rem;
   font-weight: bold;
   color: #555;
+  margin-bottom: 20px;
 }
 .add-card:hover {
   box-shadow: 0 0 8px 4px rgba(0, 0, 0, 0.1);
@@ -65,5 +84,7 @@ function handleClick() {
 .btn {
   width: 100%;
   margin-top: 20px;
+  letter-spacing: 3px;
+  text-indent: 3px;
 }
 </style>

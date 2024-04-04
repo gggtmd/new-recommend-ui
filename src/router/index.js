@@ -127,6 +127,11 @@ const router = createRouter({
       name: 'classPaperAdd',
       component: () => import('@/views/classPaperAdd/classPaperAdd.vue')
     },
+    {
+      path: '/startExam/:classId/:examId/:paperId',
+      name: 'startExam',
+      component: () => import('@/views/startExam/StartExam.vue')
+    },
   ]
 })
 

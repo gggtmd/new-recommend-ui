@@ -59,6 +59,19 @@ function handleEdit(item, index) {
 function handleAdd() {
   classExamAddRef.value.dialogVisible()
 }
+
+// 开始考试
+function handleStart(item, index) {
+  const routerURL = router.resolve({
+    name: "startExam",
+    params: {
+      classId: item.classId,
+      examId: item.examId,
+      paperId: item.paperId
+    }
+  })
+  window.open(routerURL.href, "_blank")
+}
 </script>
 
 <template>
@@ -88,14 +101,21 @@ function handleAdd() {
           </div>
           <div class="operate-area">
             <div
-                class="operate"
-                @click="handleDetail(item, index)"
+              class="operate"
+              @click="handleStart(item, index)"
+            >
+              开始
+            </div>
+            <div
+              class="operate"
+              @click="handleDetail(item, index)"
+              v-roleJudge="2"
             >
               预览
             </div>
             <div
-                class="operate"
-                @click="handleEdit(item, index)"
+              class="operate"
+              @click="handleEdit(item, index)"
             >
               编辑
             </div>

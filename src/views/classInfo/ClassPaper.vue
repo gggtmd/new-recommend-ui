@@ -6,7 +6,7 @@ onMounted(() => {
 })
 
 //获取课堂所有试卷
-import {papersPageServer} from "@/api/papers.js";
+import {papersHandPaperServer, papersPageServer} from "@/api/papers.js";
 import {useRoute} from "vue-router";
 const route = useRoute()
 const paperList = ref([])
@@ -35,7 +35,7 @@ function addPaper() {
 import {useRouter} from "vue-router";
 import ClassPaperAddDialog from "@/views/classInfo/ClassPaperAddDialog.vue";
 const router = useRouter()
-function handleClick(item, index) {
+function handleEdit(item, index) {
   const routerURL = router.resolve({
     name: "classPaperAdd",
     params: {
@@ -44,6 +44,23 @@ function handleClick(item, index) {
     }
   })
   window.open(routerURL.href, "_blank")
+}
+
+// 删除试卷
+import {papersDelBatchServer} from "@/api/papers.js";
+import {ElMessage, ElMessageBox} from "element-plus";
+async function handleDelete(item, index) {
+  try {
+    await ElMessageBox.confirm("删除后不可更改", "删除试卷")
+    let res = await papersDelBatchServer(item.paperId)
+    if (res.code === 200) {
+      window.location.reload()
+    } else {
+      ElMessage.error("删除失败")
+    }
+  } catch (err) {
+
+  }
 }
 </script>
 
@@ -62,11 +79,10 @@ function handleClick(item, index) {
         <li class="paper-item" v-for="(item, index) in paperList">
           <div class="paper-title">{{ item.paperTitle }}</div>
           <div
-            class="operate"
-            :class="{unableIcon:item.statue === '1'}"
-            @click="handleClick(item, index)"
+            class="operate-area"
           >
-            编辑
+            <div class="operate-edit" @click="handleEdit(item, index)">编辑</div>
+            <div class="operate-delete" @click="handleDelete(item, index)">删除</div>
           </div>
         </li>
       </ul>
@@ -132,7 +148,7 @@ function handleClick(item, index) {
 }
 
 .paper-item:hover {
-  background-color: #409EFF1B;
+  background-color: #409EFF16;
   z-index: 999;
 }
 
@@ -142,7 +158,7 @@ function handleClick(item, index) {
   white-space: nowrap;
   display: inline-block;
 }
-.operate {
+.operate-area {
   position: absolute;
   right: 0;
   top: 0;
@@ -151,14 +167,22 @@ function handleClick(item, index) {
   padding: 0 20px 0 5px;
   display: flex;
   align-items: center;
-  color: #4293fd;
-  cursor: pointer;
   letter-spacing: 5px;
   text-indent: 5px;
 }
-
-.unableIcon {
-  color: #5555;
-  cursor: default;
+.operate-edit {
+  color: #4293fd;
+  margin-right: 20px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.operate-delete {
+  color: #ef5050;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.operate-edit:hover,
+.operate-delete:hover{
+  opacity: 0.5;
 }
 </style>

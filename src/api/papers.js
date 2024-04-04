@@ -71,10 +71,20 @@ export const papersHandPaperServer = (paperId, handleQuestionIds = []) => {
     })
 }
 
-
+/**
+ * 试卷数据保存或更新
+ * @param classId
+ * @param paperTitle
+ * @returns {Promise<axios.AxiosResponse<any>>}
+ */
 export const papersSaveServer = (classId, paperTitle) => {
     return request.post("/papers/save", {
         classId,
         paperTitle
     })
+}
+
+
+export const papersDelBatchServer = (...ids) => {
+    return request.post("/papers/delBatch", ids)
 }

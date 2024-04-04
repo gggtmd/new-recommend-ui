@@ -54,3 +54,12 @@ export const personGetByIdServer = (userId) => {
     }
   })
 }
+
+/**
+ * 用户ID数组查询用户信息
+ * @param ids
+ * @returns {Promise<axios.AxiosResponse<any>>}
+ */
+export const personUserListServer = (...ids) => {
+  return request.post("/person/UserList", ids)
+}

@@ -70,3 +70,11 @@ export const papersHandPaperServer = (paperId, handleQuestionIds = []) => {
         handleQuestionIds
     })
 }
+
+
+export const papersSaveServer = (classId, paperTitle) => {
+    return request.post("/papers/save", {
+        classId,
+        paperTitle
+    })
+}

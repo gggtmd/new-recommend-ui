@@ -26,12 +26,14 @@ async function getPaper() {
 }
 
 // 新增试卷
+const classPaperAddDialogRef = ref(null)
 function addPaper() {
-
+  classPaperAddDialogRef.value.dialogVisible()
 }
 
 // 编辑试卷
 import {useRouter} from "vue-router";
+import ClassPaperAddDialog from "@/views/classInfo/ClassPaperAddDialog.vue";
 const router = useRouter()
 function handleClick(item, index) {
   const routerURL = router.resolve({
@@ -50,6 +52,7 @@ function handleClick(item, index) {
     <div class="header">
       <div class="title">试卷</div>
       <el-button class="add-btn" type="primary" @click="addPaper">新增</el-button>
+      <ClassPaperAddDialog ref="classPaperAddDialogRef" @afterAddPaper="window.location.reload()"></ClassPaperAddDialog>
     </div>
     <el-divider></el-divider>
     <div class="mask" v-loading="isLoading" v-if="isLoading"></div>

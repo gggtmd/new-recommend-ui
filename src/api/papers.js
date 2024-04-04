@@ -84,7 +84,11 @@ export const papersSaveServer = (classId, paperTitle) => {
     })
 }
 
-
+/**
+ * 删除试卷
+ * @param ids
+ * @returns {Promise<axios.AxiosResponse<any>>}
+ */
 export const papersDelBatchServer = (...ids) => {
     return request.post("/papers/delBatch", ids)
 }

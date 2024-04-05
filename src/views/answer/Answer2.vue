@@ -1,5 +1,5 @@
 <script setup>
-import {ref} from "vue";
+import {inject, ref} from "vue";
 import { intelligenceSendQuestionServer } from '@/api/intelligence.js'
 import {Position, CloseBold} from '@element-plus/icons-vue'
 
@@ -22,13 +22,14 @@ async function getAnswer() {
 const closeIconRef = ref(null)
 const emit = defineEmits(["close", "open"])
 const visible = ref(false)
+const $bus = inject("$bus")
 function handleVisible() {
   if(visible.value) {
     closeIconRef.value.$el.classList.add("close-icon-end")
-    emit("close")
+    $bus.emit("closeAnswer")
   } else {
     closeIconRef.value.$el.classList.remove("close-icon-end")
-    emit("open")
+    $bus.emit("openAnswer")
   }
   visible.value = !visible.value
 }

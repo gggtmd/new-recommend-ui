@@ -1,5 +1,5 @@
 <script setup>
-import {onMounted, ref} from "vue";
+import {inject, onBeforeMount, onMounted, ref} from "vue";
 import {CloseBold} from '@element-plus/icons-vue'
 
 //点击导航链接触发
@@ -16,6 +16,7 @@ import {usePathStore} from "@/stores/path.js";
 import Answer2 from "@/views/answer/Answer2.vue";
 const pathStore = usePathStore()
 const navWrapperRef = ref()
+const $bus = inject("$bus")
 onMounted(() => {
   const subIndex = pathStore.path.indexOf("/",1)
   let path
@@ -46,6 +47,15 @@ onMounted(() => {
       activePathDom = navWrapperRef.value.children[4].children[0]
       break
   }
+
+  // 绑定侧边answer开关事件
+  $bus.on("closeAnswer", handleClose)
+  $bus.on("openAnswer", handleOpen)
+})
+
+onBeforeMount(() => {
+  $bus.off("closeAnswer", handleClose)
+  $bus.off("openAnswer", handleOpen)
 })
 
 // 关闭answer触发
@@ -91,7 +101,7 @@ function handleToggle() {
       </Transition>
     </el-scrollbar>
     <div class="answer-container" ref="answerContainerRef">
-      <Answer2 ref="answerRef" @close="handleClose" @open="handleOpen"></Answer2>
+      <Answer2 ref="answerRef"></Answer2>
     </div>
   </div>
 </template>

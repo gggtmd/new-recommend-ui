@@ -2,11 +2,28 @@
 import ClassCard from "@/views/class/classCard.vue"
 import AddClass from "@/views/class/AddClass.vue"
 import JoinClass from "@/views/class/JoinClass.vue";
-import {onMounted, ref} from "vue";
+import {inject, onMounted, ref} from "vue";
 
+const $bus = inject("$bus")
 onMounted(() => {
   getClassList()
+  $bus.on("closeAnswer", closeAnswer)
+  $bus.on("openAnswer", openAnswer)
 })
+
+const classWrapperRef = ref(null)
+const leftAsideRef = ref(null)
+// Answer关闭触发
+function closeAnswer() {
+  classWrapperRef.value.classList.remove("class-wrapper-answer")
+  leftAsideRef.value.classList.remove("left-aside-answer")
+}
+
+// Answer开启触发
+function openAnswer() {
+  classWrapperRef.value.classList.add("class-wrapper-answer")
+  leftAsideRef.value.classList.add("left-aside-answer")
+}
 
 const classList = ref([])
 //获取学生或教师加入的课堂
@@ -32,16 +49,18 @@ function handleJoin() {
 <template>
   <AddClass ref="addClassRef"></AddClass>
   <JoinClass ref="joinClassRef"></JoinClass>
-  <div class="class-wrapper">
-    <class-card v-for="item in classList" :class-data="item"></class-card>
-    <div class="left-aside">
-      <div class="add-card" v-roleJudge="2">
-        <div class="title">需要创建新的课堂？</div>
-        <el-button class="btn" type="primary" @click="handleClick">创建</el-button>
-      </div>
-      <div class="add-card">
-        <div class="title">需要加入新的课堂？</div>
-        <el-button class="btn" type="primary" @click="handleJoin">加入</el-button>
+  <div ref="classWrapperRef" class="class-wrapper">
+    <class-card v-for="item in classList" :class-data="item" style="display: flex;justify-content: center;align-items: center"></class-card>
+    <div ref="leftAsideRef" class="left-aside">
+      <div class="left-aside-wrapper">
+        <div class="add-card" v-roleJudge="2">
+          <div class="title">需要创建新的课堂？</div>
+          <el-button class="btn" type="primary" @click="handleClick">创建</el-button>
+        </div>
+        <div class="add-card">
+          <div class="title">需要加入新的课堂？</div>
+          <el-button class="btn" type="primary" @click="handleJoin">加入</el-button>
+        </div>
       </div>
     </div>
   </div>
@@ -57,6 +76,9 @@ function handleJoin() {
   gap: 10px;
   position: relative;
 }
+.class-wrapper-answer {
+  padding: 20px 20px 20px 22% ;
+}
 .left-aside {
   position: absolute;
   top: 0;
@@ -64,6 +86,14 @@ function handleJoin() {
   width: 17%;
   box-sizing: border-box;
   padding: 20px;
+  height: 100%;
+}
+.left-aside-answer {
+  width: 22%;
+}
+.left-aside-wrapper {
+  position: sticky;
+  top: 80px;
 }
 .add-card {
   border-radius: 8px;
@@ -86,5 +116,21 @@ function handleJoin() {
   margin-top: 20px;
   letter-spacing: 3px;
   text-indent: 3px;
+}
+
+@media screen and (max-width: 1350px){
+  .class-wrapper {
+    padding: 20px 60px 20px 22%;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+  .class-wrapper-answer {
+    padding: 20px 20px 20px 28% ;
+  }
+  .left-aside {
+    width: 22%;
+  }
+  .left-aside-answer {
+    width: 28%;
+  }
 }
 </style>

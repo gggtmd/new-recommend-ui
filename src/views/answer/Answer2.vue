@@ -90,7 +90,7 @@ defineExpose({
   color: #555;
   letter-spacing: 3px;
   background-color: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(20px);
   transform: translateZ(0);
   border-bottom: var(--el-border);
   display: flex;
@@ -137,7 +137,7 @@ defineExpose({
   justify-content: center;
   align-items: center;
   background-color: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(7px);
+  backdrop-filter: blur(20px);
   transform: translateZ(0);
   border-top: 1px solid var(--el-border-color);
 }

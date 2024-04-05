@@ -11,11 +11,12 @@ const title = ref("")
 //获取答案
 async function getAnswer() {
   isLoading.value = true
-  let res = await intelligenceSendQuestionServer(input.value)
-  isLoading.value = false
-  title.value = input.value
-  answer.value = res.data
+  let temInput = input.value
   input.value = ""
+  let res = await intelligenceSendQuestionServer(temInput)
+  isLoading.value = false
+  title.value = temInput
+  answer.value = res.data
 }
 
 //close按钮点击事件
@@ -61,7 +62,7 @@ defineExpose({
     </Transition>
     </el-scrollbar>
     <div class="search-wrapper">
-      <el-input v-model="input" placeholder="请输入问题"></el-input>
+      <el-input v-model="input" placeholder="请输入问题" @keydown.enter="getAnswer"></el-input>
       <button class="operate" @click="getAnswer" :disabled="isLoading">
         <el-icon class="send-icon" v-if="input"><Position /></el-icon>
         <span v-else>搜索</span>
@@ -158,7 +159,8 @@ defineExpose({
   text-indent: 10px;
   font-size: 0.9rem;
   font-weight: bold;
-  color: #333;
+  letter-spacing: 1px;
+  color: #222;
 }
 .operate{
   border: none;

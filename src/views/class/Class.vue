@@ -2,13 +2,18 @@
 import ClassCard from "@/views/class/classCard.vue"
 import AddClass from "@/views/class/AddClass.vue"
 import JoinClass from "@/views/class/JoinClass.vue";
-import {inject, onMounted, ref} from "vue";
+import {inject, onBeforeMount, onBeforeUnmount, onMounted, ref} from "vue";
 
 const $bus = inject("$bus")
 onMounted(() => {
   getClassList()
   $bus.on("closeAnswer", closeAnswer)
   $bus.on("openAnswer", openAnswer)
+})
+
+onBeforeUnmount(() => {
+  $bus.off("closeAnswer", closeAnswer)
+  $bus.off("openAnswer", openAnswer)
 })
 
 const classWrapperRef = ref(null)

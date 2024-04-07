@@ -19,7 +19,7 @@ export default class EventBus {
     emit(evenName, ...args) {
         if(this.events[evenName]) {
             this.events[evenName].forEach((fn) => {
-                fn(args)
+                fn(...args)
             })
         }
     }

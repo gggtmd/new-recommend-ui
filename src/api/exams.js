@@ -71,3 +71,12 @@ export const examsGetByIdServer = (examId) => {
         }
     })
 }
+
+/**
+ * 数据根据id批量删除考试
+ * @param examIds
+ * @returns {Promise<axios.AxiosResponse<any>>}
+ */
+export const examsDelBatchServer = (...examIds) => {
+    return request.post("/exams/delBatch", examIds)
+}

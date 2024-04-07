@@ -72,6 +72,25 @@ function handleStart(item, index) {
   })
   window.open(routerURL.href, "_blank")
 }
+
+// 删除考试
+import {examsDelBatchServer} from "@/api/exams.js";
+import {ElMessage, ElMessageBox} from "element-plus";
+import {papersDelBatchServer} from "@/api/papers.js";
+async function handleDelete(item, index) {
+  try {
+    await ElMessageBox.confirm("删除后不可更改", "取消考试")
+    let res = await examsDelBatchServer(item.examId)
+    if(res.code === 200) {
+      window.location.reload()
+    } else {
+      ElMessage.error("删除失败")
+    }
+  } catch (err) {
+
+  }
+
+}
 </script>
 
 <template>
@@ -118,6 +137,12 @@ function handleStart(item, index) {
               @click="handleEdit(item, index)"
             >
               编辑
+            </div>
+            <div
+                class="operate"
+                @click="handleDelete(item, index)"
+            >
+              删除
             </div>
           </div>
         </li>
@@ -210,7 +235,10 @@ function handleStart(item, index) {
   cursor: pointer;
   padding: 0 20px 0 0;
 }
-.operate:last-child {
+.operate:nth-child(3) {
   color: #4293fd;
+}
+.operate:nth-child(4) {
+  color: #ff4343;
 }
 </style>

@@ -132,6 +132,33 @@ const router = createRouter({
       name: 'startExam',
       component: () => import('@/views/startExam/StartExam.vue')
     },
+    {
+      path: '/dataPlatform/:classId',
+      name: 'dataPlatform',
+      component: () => import('@/views/dataPlatform/mainPlatform.vue'),
+      children:[
+        {
+          path: '/dataPlatform/:classId/studentChartDetail/:studentId/:studentName',
+          name:'studentChartDetail',
+          component: () => import('@/views/dataPlatform/studentDetail/studentChartDetail.vue'),
+        },
+        {
+          path: '/dataPlatform/:classId/styleScoreDetail/:time/:sliderData',
+          name:'styleScoreDetail',
+          component: () => import('@/views/dataPlatform/styleScore/styleScoreDetail.vue'),
+        },
+        {
+          path: '/dataPlatform/:classId/studentEvaluationDetail/:stage/:score',
+          name:'studentEvaluationDetail',
+          component: () => import('@/views/dataPlatform/studentEvaluation/studentEvaluationDetail.vue'),
+        },
+        {
+          path: '/dataPlatform/:classId/knowledgeStageStyleDetail/:stage',
+          name:'knowledgeStageStyleDetail',
+          component: () => import('@/views/dataPlatform/knowledgeStageStyle/knowledgeStageStyleDetail.vue'),
+        },
+      ]
+    },
   ]
 })
 

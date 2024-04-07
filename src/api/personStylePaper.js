@@ -47,3 +47,10 @@ export const personStylePaperQuestionRecommendServer = () => {
     params.append("userId",userId)
     return request.post("/person-style-paper/question-recommend", params)
 }
+
+
+export const personStylePaperPersonResourceStyleServer = (...userIds) => {
+    const params = new URLSearchParams()
+    params.append("userIds",userIds)
+    return request.post("/person-style-paper/person-resource-style", params)
+}

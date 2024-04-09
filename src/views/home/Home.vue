@@ -89,7 +89,7 @@ function handleToggle() {
       <div class="nav-wrapper" ref="navWrapperRef">
         <div class="nav-item-left" @click="handleRoute($event)"><router-link to="/recommend">推荐</router-link></div>
         <div class="nav-item-left" @click="handleRoute($event)"><router-link to="/test">测验</router-link></div>
-<!--        <div class="nav-item-left" @click="handleRoute($event)"><router-link to="/answer">问答助手</router-link></div>-->
+        <div class="nav-item-left" @click="handleRoute($event)"><router-link to="/answer" style="display: none">问答助手</router-link></div>
         <div class="nav-item-left" @click="handleRoute($event)"><router-link to="/class">课堂</router-link></div>
         <div class="nav-item-left" @click="handleRoute($event)"><router-link to="/my">我的</router-link></div>
       </div>

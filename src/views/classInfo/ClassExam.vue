@@ -134,12 +134,14 @@ async function handleDelete(item, index) {
             </div>
             <div
               class="operate"
+              v-roleJudge="2"
               @click="handleEdit(item, index)"
             >
               编辑
             </div>
             <div
                 class="operate"
+                v-roleJudge="2"
                 @click="handleDelete(item, index)"
             >
               删除

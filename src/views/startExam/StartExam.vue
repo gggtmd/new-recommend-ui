@@ -1,5 +1,5 @@
 <script setup>
-import {ref, onMounted} from "vue";
+import {ref, onMounted, computed} from "vue";
 import AnswerDetail from "@/components/AnswerDetail.vue";
 
 const isInit = ref(false)
@@ -87,6 +87,7 @@ async function submitAnswer() {
     let res = await studentPaperSaveServer(route.params.examId, JSON.stringify(questionList.value))
     if (res.code === 200) {
       isSubmit.value = true
+      window.location.reload()
     } else {
       ElMessage.error("提交失败")
     }
@@ -95,6 +96,10 @@ async function submitAnswer() {
   }
   isLoading.value = false
 }
+
+const submitBtnText = computed(() => {
+  return isSubmit ? "已提交" : "提交试卷"
+})
 </script>
 
 <template>
@@ -102,9 +107,10 @@ async function submitAnswer() {
   <div class="title">{{exam.examTitle}}</div>
   <el-scrollbar ref="scrollRef" class="el-scrollbar" wrap-style="scroll-behavior: smooth;">
     <div class="problem-wrapper">
+      <div class="disabledMask" v-if="isSubmit"></div>
       <div ref="radioGroupWrapperRef" class="el-radio-group-wrapper" v-for="(item,index) in questionList" :key="item.questionId">
         <div class="radio-group-title">{{ `${index + 1}、${item.questionStatement}` }}</div>
-        <el-radio-group :disabled="isSubmit" class="el-radio-group" v-model=item.studentAnswer @change="handleChange(index)">
+        <el-radio-group class="el-radio-group" v-model=item.studentAnswer @change="handleChange(index)">
           <el-radio-button v-for="option in (item.options)" :key="option.optionId" :value="option.optionLabel">{{ option.optionValue }}</el-radio-button>
         </el-radio-group>
       </div>
@@ -122,7 +128,7 @@ async function submitAnswer() {
       :loading="isLoading"
       :disabled="isSubmit"
     >
-      提交
+      {{submitBtnText}}
     </el-button>
   </div>
 </template>
@@ -161,6 +167,13 @@ async function submitAnswer() {
   max-width: 60%;
   min-width: 600px;
   padding-bottom: 300px;
+  position: relative;
+}
+.disabledMask {
+  position: absolute;
+  z-index: 999;
+  width: 100%;
+  height: 100%;
 }
 .el-radio-group-wrapper{
   margin-top: 50px;
@@ -178,12 +191,12 @@ async function submitAnswer() {
   top: 80px;
   right: 1%;
   width: 15%;
-  border-radius: 12px;
+  border-radius: 8px;
   box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.1);
   background-color: white;
   transition: 0.5s;
   box-sizing: border-box;
-  padding: 20px 10px 10px;
+  padding: 15px 10px 8px;
   font-size: 1rem;
   font-weight: bold;
   line-height: 1.4rem;
@@ -206,6 +219,6 @@ async function submitAnswer() {
   text-indent: 3px;
   font-size: 1.1rem;
   font-weight: bold;
-  border-radius: 8px;
+  border-radius: 5px;
 }
 </style>

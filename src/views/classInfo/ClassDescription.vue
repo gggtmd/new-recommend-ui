@@ -21,12 +21,28 @@ async function getClassInfo() {
   creator.value = classCreatorInfo.data
   isLoading.value = false
 }
+
+// 跳转至中控平台
+import {useRouter} from "vue-router";
+const router = useRouter()
+function routeToDataPlatform() {
+  const routerURL = router.resolve({
+    name: "dataPlatform",
+    params: {
+      classId: route.params.classId
+    }
+  })
+  window.open(routerURL.href, '_blank')
+}
 </script>
 
 <template>
   <Transition name="fade">
     <div class="class-description" v-if="!isLoading">
-      <div class="title">{{classData.className}}</div>
+      <div class="header">
+        <div class="title">{{classData.className}}</div>
+        <el-button type="primary" @click="routeToDataPlatform">课堂分析</el-button>
+      </div>
       <el-divider></el-divider>
       <div class="info">
         <div class="info-item">
@@ -59,10 +75,19 @@ async function getClassInfo() {
 .class-description {
   width: 100%;
 }
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  height: 27px;
+}
+.el-button {
+  padding: 0 8px;
+}
 .title {
   font-size: 1.3rem;
   font-weight: bold;
-  margin-bottom: 20px;
 }
 .description {
   font-size: 1.1rem;

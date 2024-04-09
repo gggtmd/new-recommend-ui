@@ -129,7 +129,7 @@ async function handleDelete(index, row) {
             <el-input class="header-input" size="small" v-model="search"  placeholder="输入关键词搜索" />
           </template>
           <template #default="scope" v-roleJudge="2">
-            <el-button size="small" type="danger" @click.stop="handleDelete(scope.$index, scope.row)">删 除</el-button>
+            <el-button size="small" type="danger" @click.stop="handleDelete(scope.$index, scope.row)" v-roleJudge="2">删 除</el-button>
           </template>
         </el-table-column>
       </el-table>

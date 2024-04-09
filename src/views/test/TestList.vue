@@ -62,6 +62,12 @@ const tableRowClassName = ({row, rowIndex}) => {
   return ""
 }
 //表格行点击事件
+const location = {
+  left: "35%",
+  top: "20%",
+  width: "30%",
+  height: "60%"
+}
 const isShow = ref(false)
 const scaleModalRef = ref()
 const handleClick = (row, column, event) => {
@@ -82,7 +88,7 @@ const handleClickMask = () => {
 </script>
 
 <template>
-  <ScaleModal :show="isShow" ref="scaleModalRef" @clickMask="handleClickMask">
+  <ScaleModal :show="isShow" ref="scaleModalRef" @clickMask="handleClickMask" :location="location">
     <router-view></router-view>
   </ScaleModal>
   <div class="mask" v-loading="isLoading" v-if="isLoading"></div>

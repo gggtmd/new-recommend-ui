@@ -5,6 +5,14 @@ const props = defineProps({
   show: {
     type: Boolean,
     default: false
+  },
+  location: {
+    default: {
+      left: '15%',
+      top: '10%',
+      width: '70%',
+      height: '80%'
+    }
   }
 })
 //点击mask遮罩方法
@@ -34,10 +42,10 @@ function onBeforeEnter() {
 // 用这个来开始进入动画
 function onEnter() {
   setTimeout(() => {
-    top.value = "10%"
-    left.value = "15%"
-    width.value = "70%"
-    height.value = "80%"
+    top.value = props.location.top
+    left.value = props.location.left
+    width.value = props.location.width
+    height.value = props.location.height
   },0)
 }
 function onLeave() {
@@ -79,7 +87,7 @@ defineExpose({
   bottom: 0;
   z-index: 999;
   transition: all 0.5s,width 0.5s cubic-bezier(.38,1.03,.53,1.02), height 0.5s cubic-bezier(.38,1.03,.53,1.02);
-  background: rgba(190, 190, 190, 0.3);
+  background: rgba(150, 150, 150, 0.5);
 }
 .modal-body {
   overflow: hidden;

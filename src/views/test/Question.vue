@@ -78,7 +78,9 @@ async function submitAnswer() {
 
 <style scoped>
 .question {
+  box-sizing: border-box;
   padding: 30px;
+  height: 100%;
 }
 .title {
   font-size: 1.3rem;

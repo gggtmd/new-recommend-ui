@@ -212,11 +212,11 @@ export default{
   margin-bottom: 12px;
   font-size: 15px;
   color: #434343EF;
+  font-weight: bold;
 }
 .info-content{
   font-size: 36px;
   line-height: 40px;
-  font-weight: bold;
   text-decoration-line: underline;
   color: #81B337;
   margin-bottom: 6px;

@@ -289,6 +289,7 @@ export default {
     },
     pushStudentStyleData(studentInfo,studentStyle){
       if(studentInfo.length && studentStyle.length){
+        console.log(studentInfo)
         for(let i = 0; i < studentInfo.length; i++){
           this.studentStyleData.push({
             userId: studentInfo[i].userId,

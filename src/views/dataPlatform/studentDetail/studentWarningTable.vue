@@ -23,7 +23,7 @@
       </el-table-column>
       <el-table-column
           prop="warning"
-          label="预警等级">
+          label="预警级别">
       </el-table-column>
       <el-table-column label="操作" width="80px">
         <template v-slot="scope">

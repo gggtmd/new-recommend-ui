@@ -151,9 +151,10 @@ export default {
   flex-direction: column;
 }
 .outline-card{
-  /* max-width: 420px;
-  max-height: 175px; */
   flex: 1;
+}
+.outline-card:hover {
+  cursor: pointer;
 }
 .outline-card:not(:last-child){
   margin-bottom: 20px;

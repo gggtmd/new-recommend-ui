@@ -6,18 +6,18 @@
     </div>
     <div class="item">
       <div class="info-number">{{ animationCompletion }}</div>
-      <div class="sub-title">试卷完成度</div>
+      <div class="sub-title">总体试卷完成度</div>
     </div>
     <div class="item">
       <div class="info-number">{{ animationAverageCD }}</div>
-      <div class="sub-title">知识点掌握度</div><!-- 认知诊断 -->
+      <div class="sub-title">总体知识点掌握度</div><!-- 认知诊断 -->
     </div>
     <div class="item">
       <div class="info-number">{{ animationStagePerformance }}</div>
       <div class="sub-title">总体表现</div>
     </div>
     <div class="item">
-      <div class="sub-title">预警等级</div>
+      <div class="sub-title">预警级别</div>
       <div class="info-number" :style="{backgroundColor: `${warningColor}`}">{{ animationWarning }}</div>
     </div>
   </div>

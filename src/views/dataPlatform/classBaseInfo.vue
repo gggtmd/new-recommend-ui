@@ -17,7 +17,7 @@
       <div class="sub-title">总体表现</div>
     </div>
     <div class="item">
-      <div class="sub-title">预警</div>
+      <div class="sub-title">预警等级</div>
       <div class="info-number" :style="{backgroundColor: `${warningColor}`}">{{ animationWarning }}</div>
     </div>
   </div>

@@ -2,7 +2,7 @@
   <div class="card" @click="linkToStyleScoreDetail">
     <div class="card-left">
       <div class="info">
-        <div class="title">阶段&nbsp;-&nbsp;知识点</div>
+        <div class="title">知识点掌握度</div>
         <div class="info-content" :style="{color: `${mainNumberColor}`}">{{ animationAverageCD }}</div>
         <div class="sub-info">总体掌握程度</div>
       </div>

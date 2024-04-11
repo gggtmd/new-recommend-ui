@@ -2,7 +2,7 @@
   <div class="card" @click="linkToStyleScoreDetail">
     <div class="card-left">
       <div class="info">
-        <div class="title">学生评分</div>
+        <div class="title">课堂评分</div>
         <div class="info-content" :style="{color: `${mainNumberColor}`}">{{ animationAverageScore }}</div>
         <div class="sub-info">平均得分</div> 
       </div>

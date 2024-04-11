@@ -63,7 +63,7 @@ export default {
     initChart() {
       let option = {
         title: {
-          text: '各阶段知识点不同风格掌握情况'
+          text: '各阶段知识点整体掌握情况'
         },
         tooltip: {
           trigger: 'axis',
@@ -84,6 +84,7 @@ export default {
         ],
         yAxis: [
           {
+            name: '知识点掌握程度',
             type: 'value'
           }
         ],
@@ -184,6 +185,7 @@ export default {
         ],
         yAxis: [
           {
+            name: '知识点掌握程度',
             type: 'value',
           }
         ],

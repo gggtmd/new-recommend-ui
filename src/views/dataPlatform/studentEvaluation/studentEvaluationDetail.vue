@@ -196,6 +196,7 @@ export default {
   border-radius: 10px;
   overflow-y: auto;
   box-shadow: inset 0 0 2px 0 rgba(0, 0, 0, 0.15);
+  padding: 0;
 }
 .evaluation-item{
   margin: 0 auto;
@@ -211,7 +212,7 @@ export default {
   color: #434343EF;
 }
 .evaluation-item-rate{
-  color: rgb(227, 201, 28);
+  color: rgb(238, 186, 22);
 }
 .evaluation-item-comment{
   color: #434343EF;
@@ -219,7 +220,8 @@ export default {
 .evaluation-item-line{
   width: 97.5%;
   float: right;
-  border: 1px solid #B0B0B0;
+  //border: 1px solid #B0B0B0;
+  border-bottom: 1px solid var(--el-border-color-darker);
 }
 .evaluation-li:last-child .evaluation-item-line{
   border: none;

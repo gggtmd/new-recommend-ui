@@ -96,11 +96,13 @@ export default {
           }
         },
         xAxis: {
+          name: '考试成绩',
           type: 'category',
           axisTick: { show: false },
           data: this.chartData.xData,
         },
         yAxis: {
+          name: '人数',
           type: 'value',
           min: 0,
           max: 3,
@@ -381,18 +383,18 @@ export default {
   padding-left: 20px;
 }
 /* el-table背景透明 */
-::v-deep .el-table,
-::v-deep .el-table__expanded-cell {
+::v-deep(.el-table),
+::v-deep(.el-table__expanded-cell) {
   background-color: transparent;
 }
 /* 表格内背景颜色 */
-::v-deep .el-table th,
-::v-deep .el-table tr { 
+::v-deep(.el-table th),
+::v-deep(.el-table tr) {
   background-color: transparent;
 }
 /* 表格内背景颜色 */
-::v-deep .el-table--enable-row-transition .el-table__body td,
-::v-deep .el-table .cell {
+::v-deep(.el-table--enable-row-transition .el-table__body td),
+::v-deep(.el-table .cell) {
   background-color: transparent;
 }
 </style>

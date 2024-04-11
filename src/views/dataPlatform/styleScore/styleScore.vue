@@ -304,7 +304,7 @@ const subInfo = computed(() => {
   <div class="card" @click="linkToStyleScoreDetail">
     <div class="card-left">
       <div class="info">
-        <div class="title">成绩&nbsp;-&nbsp;分布</div>
+        <div class="title">学生考试成绩</div>
         <div class="info-content" :style="{color: `${mainNumberColor}`}">{{ animationAverageScore }}</div>
         <div class="sub-info" v-if="isInit">{{ subInfo }}</div>
       </div>

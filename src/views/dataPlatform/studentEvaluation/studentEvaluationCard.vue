@@ -179,7 +179,7 @@ export default{
 .card{
   background-color: #ffffff;
   box-sizing: border-box;
-  padding: 17px 14px;
+  padding: 10px 12px 14px;
   border-radius: 8px;
   display: flex;
   box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.2);
@@ -200,7 +200,9 @@ export default{
 .title{
   margin-bottom: 12px;
   font-size: 15px;
-  color: #7a7a7c;
+  color: #434343EF;
+  letter-spacing: 1px;
+  font-weight: bold;
 }
 .info-content{
   font-size: 36px;
@@ -212,7 +214,7 @@ export default{
 }
 .sub-info{
   font-size: 14px;
-  color: #a6a6a8;
+  color: #666668;
   font-weight: normal;
 }
 .info-label{

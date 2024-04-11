@@ -322,7 +322,7 @@ const subInfo = computed(() => {
 .card{
   background-color: #ffffff;
   box-sizing: border-box;
-  padding: 17px 14px;
+  padding: 10px 12px 14px;
   border-radius: 8px;
   display: flex;
   box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
@@ -343,7 +343,9 @@ const subInfo = computed(() => {
 .title{
   margin-bottom: 12px;
   font-size: 15px;
-  color: #7a7a7c;
+  color: #434343EF;
+  letter-spacing: 1px;
+  font-weight: bold;
 }
 .info-content{
   font-size: 36px;
@@ -355,7 +357,7 @@ const subInfo = computed(() => {
 }
 .sub-info{
   font-size: 14px;
-  color: #a6a6a8;
+  color: #666668;
   font-weight: normal;
 }
 .info-label{

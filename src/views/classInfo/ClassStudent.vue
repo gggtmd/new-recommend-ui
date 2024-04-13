@@ -1,65 +1,3 @@
-<!--<script>-->
-<!--import { getClassStudentId,deleteClassStudent } from '@/api/classApis'-->
-<!--import {getUserArrayInfo} from '@/api/userApis.js'-->
-<!--export default {-->
-<!--  data() {-->
-<!--    return {-->
-<!--      classId: 0,-->
-<!--      studentList: [], //学生表格数据-->
-<!--      search: '', //搜索框-->
-<!--    }-->
-<!--  },-->
-<!--  methods: {-->
-<!--    //删除按钮-->
-<!--    handleDelete(index, row) {-->
-<!--      this.deleteLine(index, row);-->
-<!--    },-->
-<!--    //获取表格数据-->
-<!--    getData() {-->
-<!--      getClassStudentId(this.classId,1)-->
-<!--        .then((res1) => {-->
-<!--          let userId = [];-->
-<!--          res1.forEach((item) => {-->
-<!--            userId.push(item.userId)-->
-<!--          });-->
-<!--          if(userId.length > 0){-->
-<!--            getUserArrayInfo(userId)-->
-<!--            .then((res2) => {-->
-<!--              res2.data.forEach((item) => {-->
-<!--                this.studentList.push(item)-->
-<!--              });-->
-<!--            })-->
-<!--          }-->
-<!--        });-->
-<!--    },-->
-<!--    //删除当前行数据-->
-<!--    deleteLine(index, row) {-->
-<!--      this.$confirm("此操作将永久删除, 是否继续?", "提示", {-->
-<!--        confirmButtonText: "确定",-->
-<!--        cancelButtonText: "取消",-->
-<!--        type: "warning"-->
-<!--      })-->
-<!--      .then(() => {-->
-<!--        let deleteId = [];-->
-<!--        deleteId.push(row.userId)-->
-<!--        deleteClassStudent(this.classId,deleteId)-->
-<!--        .then((res) => {-->
-<!--          if (res.code === 200) {-->
-<!--            this.$delete(this.studentList,index);-->
-<!--            this.$message.success("删除成功！");-->
-<!--          } else {-->
-<!--            this.$message.error("删除失败！");-->
-<!--          }-->
-<!--        });-->
-<!--      })-->
-<!--    }-->
-<!--  },-->
-<!--  mounted() {-->
-<!--    this.getData();-->
-<!--  }-->
-<!--}-->
-<!--</script>-->
-
 <script setup>
 import {onMounted, ref} from "vue";
 
@@ -72,18 +10,36 @@ onMounted(() => {
 })
 
 // 获取学生数据
-import {classUserClassUsersQueryServer} from "@/api/classUser.js";
-import {personUserListServer} from "@/api/person.js";
+import { learningClassAllStudentLearningServer } from '@/api/learning.js'
 import {useRoute} from "vue-router";
 const route = useRoute()
+
+const formPerformance = {
+  '1': 'A',
+  '2': 'B',
+  '3': 'C',
+  '4': 'D',
+  '5': 'E'
+}
+
+const formWarning = {
+  '1': '最佳',
+  '2': '正常',
+  '3': '轻度',
+  '4': '中度',
+  '5': '重度'
+}
 async function getStudentData() {
   isLoading.value = true
-  let idRes = await classUserClassUsersQueryServer(route.params.classId)
-  const ids = idRes.map(item => item.userId)
-  let studentData = await personUserListServer(...ids)
-  if(studentData.code === 200) {
-    studentList.value.push(...studentData.data)
-  }
+  let res = await learningClassAllStudentLearningServer(route.params.classId)
+  studentList.value.push(...res.data.map(item => {
+    return {
+      userId: item.userId,
+      userName: item.userName,
+      stagePerformance: formPerformance[item.stagePerformance],
+      warning: formWarning[item.warning]
+    }
+  }))
   setTimeout(() => {
     isLoading.value = false
   }, 300)
@@ -92,7 +48,6 @@ async function getStudentData() {
 // 删除学生
 import {classUserClassStudentDelServer} from "@/api/classUser.js";
 import {ElMessage, ElMessageBox} from "element-plus";
-import {papersHandPaperServer} from "@/api/papers.js";
 async function handleDelete(index, row) {
   try {
     await ElMessageBox.confirm("删除后不可修改", "删除学生")
@@ -106,6 +61,11 @@ async function handleDelete(index, row) {
 
   }
 }
+
+// 查看学生
+const handleCheck = (index, row) => {
+
+}
 </script>
 
 <template>
@@ -118,18 +78,21 @@ async function handleDelete(index, row) {
       <el-table
         :data="studentList.filter(data => !search || data.userId.toString().includes(search) || data.userName.toLowerCase().includes(search.toLowerCase()))"
         :row-style="{height: '60px'}"
+        :header-cell-style="{ 'text-align': 'center' }"
+        :cell-style="{ 'text-align': 'center', 'color': '#000' }"
         v-show="!isLoading&&studentList.length"
       >
-        <el-table-column prop="userId" label="学生id">
-        </el-table-column>
-        <el-table-column prop="userName" label="用户名">
-        </el-table-column>
+        <el-table-column prop="userId" label="学生id"/>
+        <el-table-column prop="userName" label="用户名"/>
+        <el-table-column prop="stagePerformance" label="当前表现"/>
+        <el-table-column prop="warning" label="预警级别"/>
         <el-table-column>
           <template #header>
-            <el-input class="header-input" size="small" v-model="search"  placeholder="输入关键词搜索" />
+            <el-input class="header-input" size="small" v-model="search"  placeholder="输入学号/用户名" />
           </template>
           <template #default="scope" v-roleJudge="2">
-            <el-button size="small" type="danger" @click.stop="handleDelete(scope.$index, scope.row)" v-roleJudge="2">删 除</el-button>
+            <el-button link type="danger" @click.stop="handleDelete(scope.$index, scope.row)" v-roleJudge="2">删 除</el-button>
+            <el-button link type="primary" @click.stop="handleCheck(scope.$index, scope.row)" v-roleJudge="2">查 看</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -165,7 +128,7 @@ async function handleDelete(index, row) {
   margin-left: 0;
   width: 100%;
   height: 100%;
-  font-size: 1.1rem;
+  font-size: 1rem;
   border-radius: 8px;
 }
 .el-table:deep(.el-table__header-wrapper),
@@ -173,11 +136,14 @@ async function handleDelete(index, row) {
   height: 60px;
 }
 .header-input{
-  width: 60%;
-  height: 38px;
+  width: 80%;
+  height: 35px;
 }
 .header-input:deep(.el-input__wrapper) {
-  border-radius: 10px;
-  font-size: 1.05rem;
+  border-radius: 7px;
+  font-size: 0.9rem;
+}
+.el-table .el-button {
+  font-weight: bold;
 }
 </style>

@@ -62,12 +62,19 @@ defineExpose({
       </div>
     </Transition>
     </el-scrollbar>
-    <div class="search-wrapper">
-      <el-input v-model="input" placeholder="请输入问题" @keydown.enter="getAnswer"></el-input>
-      <button class="operate" @click="getAnswer" :disabled="isLoading">
-        <el-icon class="send-icon" v-if="input"><Position /></el-icon>
-        <span v-else>搜索</span>
-      </button>
+    <div class="foo">
+      <div class="search-select">
+        <div class="search-select-item"><el-button>和羹之美，在于合异</el-button></div>
+        <div class="search-select-item"><el-button>塞翁失马，焉知非福</el-button></div>
+        <div class="search-select-item"><el-button>咬定青山不放松</el-button></div>
+      </div>
+      <div class="search-wrapper">
+        <el-input v-model="input" placeholder="请输入问题" @keydown.enter="getAnswer"></el-input>
+        <button class="operate" @click="getAnswer" :disabled="isLoading">
+          <el-icon class="send-icon" v-if="input"><Position /></el-icon>
+          <span v-else>搜索</span>
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -127,19 +134,55 @@ defineExpose({
   font-family: "Microsoft YaHei UI",serif;
   white-space: break-spaces;
 }
-.search-wrapper{
+.foo {
   position: absolute;
   bottom: 0;
   z-index: 999;
   width: 100%;
-  padding: 25px 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: rgba(255, 255, 255, 0.4);
+  height: 95px;
+  background-color: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(10px);
   transform: translateZ(0);
   border-top: 1px solid var(--el-border-color);
+  transition: 0.4s;
+}
+.foo:focus-within {
+  height: 160px;
+}
+.search-select {
+  width: 100%;
+  height: 65px;
+  position: absolute;
+  bottom: 95px;
+  box-sizing: border-box;
+  padding: 25px 330px 0;
+  opacity: 0;
+  transition: transform 0.3s, opacity 0.2s;
+  transform: translateY(40px);
+  display: flex;
+  justify-content: start;
+}
+.foo:focus-within .search-select {
+  opacity: 1;
+  transform: translateY(0);
+}
+.search-select-item {
+  height: 40px;
+  margin-right: 20px;
+}
+.search-select-item .el-button {
+  border-radius: 8px;
+}
+.search-wrapper{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+  box-sizing: border-box;
+  padding: 25px 300px;
+  width: 100%;
+  height: 95px;
 }
 .el-input{
   height: 45px;

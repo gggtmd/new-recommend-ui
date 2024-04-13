@@ -1,5 +1,6 @@
 <script setup>
 import {ref} from "vue";
+import {ArrowLeft} from "@element-plus/icons-vue";
 
 const props = defineProps({
   show: {
@@ -69,7 +70,10 @@ defineExpose({
       @enter="onEnter"
       @before-leave="onLeave"
     >
-      <div v-if="show" class="modal-mask" @click="handleMaskClick">
+      <div v-if="show" class="modal-mask">
+        <div class="operate" @click="handleMaskClick">
+          <el-icon><ArrowLeft /></el-icon>
+        </div>
         <div class="modal-body" @click.stop>
           <slot></slot>
         </div>
@@ -87,19 +91,34 @@ defineExpose({
   bottom: 0;
   z-index: 999;
   transition: all 0.5s,width 0.5s cubic-bezier(.38,1.03,.53,1.02), height 0.5s cubic-bezier(.38,1.03,.53,1.02);
-  background: rgba(150, 150, 150, 0.5);
+  background: rgba(0, 0, 0, 0.4);
 }
 .modal-body {
   overflow: hidden;
   transition: all 0.5s cubic-bezier(.38,1.03,.53,1.02);
   background-color: white;
   border-radius: 15px;
-  box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.2);
   position: absolute;
   width: v-bind(width);
   height: v-bind(height);
   left: v-bind(left);
   top: v-bind(top);
+}
+.operate {
+  position: absolute;
+  z-index: 1;
+  top: 40px;
+  left: 40px;
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(20px);
+  border-radius: 99px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .modal-enter-from,
 .modal-leave-to{

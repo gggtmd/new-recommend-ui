@@ -100,6 +100,8 @@ const handleClickMask = () => {
         style="width: 100%"
         :row-class-name="tableRowClassName"
         :row-style="{height: '60px'}"
+        :header-cell-style="{ 'color': '#000' }"
+        :cell-style="{ 'color': '#000' }"
         @row-click="handleClick"
       >
         <el-table-column align="center" prop="questionId" label="题号" width="100"/>
@@ -122,10 +124,10 @@ const handleClickMask = () => {
   overflow: hidden;
 }
 .el-table:deep(.warning-row) {
-  --el-table-tr-bg-color: var(--el-color-warning-light-9);
+  --el-table-tr-bg-color: var(--el-color-warning-light-8);
 }
 .el-table:deep(.error-row) {
-  --el-table-tr-bg-color: var(--el-color-error-light-9);
+  --el-table-tr-bg-color: var(--el-color-error-light-8);
 }
 .mask {
   text-align: center;

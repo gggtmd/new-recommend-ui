@@ -1,4 +1,6 @@
 import request from "@/utils/request.js";
+import {useUserInfoStore} from '@/stores/userInfo.js'
+const userInfoStore = useUserInfoStore()
 
 /**
  * 课堂整体的平均学习情况查询
@@ -99,4 +101,25 @@ export const learningQueryStageKnowledgeComprehensionServer = (classId, stage) =
     params.append("classId", classId)
     params.append("stage", stage)
     return request.post("/learning/query-stage-knowledge-comprehension", params)
+}
+
+/**
+ * 提交阶段评分评价
+ * @param classId
+ * @param stage
+ * @param stageRating
+ * @param stageComment
+ * @returns {Promise<axios.AxiosResponse<any>>}
+ */
+export const learningStageSummaryServer = (classId, stage, stageRating, stageComment) => {
+    return request.post("/learning/stage-summary", {
+        classId,
+        stage,
+        userId: userInfoStore.userInfo.userId
+    }, {
+        params: {
+            stageRating,
+            stageComment
+        }
+    })
 }

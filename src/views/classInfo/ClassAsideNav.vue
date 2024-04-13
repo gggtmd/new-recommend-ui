@@ -1,6 +1,7 @@
 <script setup>
 import {onMounted, ref} from "vue";
 import {useRoute, useRouter} from "vue-router";
+import {Bell,House,Finished,Document,Memo,User,Share,Tickets,Histogram,Aim} from "@element-plus/icons-vue";
 
 //初始定位激活导航
 const route = useRoute()
@@ -15,39 +16,64 @@ onMounted(() => {
 
 const navList = ref([
   {
-    label: "简介",
+    label: "课堂简介",
     name: "classDescription",
-    role: 1
+    role: 1,
+    icon: House
   },
   {
-    label: "公告",
+    label: "通知公告",
     name: "classNotice",
-    role: 1
+    role: 1,
+    icon: Bell
   },
   {
-    label: "阶段",
+    label: "教学阶段",
     name: "classStage",
-    role: 2
+    role: 2,
+    icon: Finished
   },
   {
-    label: "考试",
+    label: "在线考试",
     name: "classExam",
-    role: 1
+    role: 1,
+    icon: Document
   },
   {
-    label: "试卷",
+    label: "试卷管理",
     name: "classPaper",
-    role: 2
+    role: 2,
+    icon: Memo
   },
   {
-    label: "学员",
+    label: "学生信息",
     name: "classStudent",
-    role: 1
+    role: 1,
+    icon: User
   },
   {
-    label: "图谱",
+    label: "知识图谱",
     name: "classGraph",
-    role: 1
+    role: 1,
+    icon: Share
+  },
+  {
+    label: "问卷调查",
+    name: "investigation",
+    role: 1,
+    icon: Tickets
+  },
+  {
+    label: "认知诊断",
+    name: "classDiagnosis",
+    role: 1,
+    icon: Histogram
+  },
+  {
+    label: "学情预警",
+    name: "dataPlatform",
+    role: 1,
+    icon: Aim
   },
 ])
 
@@ -57,6 +83,16 @@ const activeDom = ref()
 const navItemRef = ref()
 const router = useRouter()
 function handleClick(eventTarget, name) {
+  if(name === 'dataPlatform') {
+    const routerURL = router.resolve({
+      name: "dataPlatform",
+      params: {
+        classId: route.params.classId
+      }
+    })
+    window.open(routerURL.href, '_blank')
+    return
+  }
   router.push({
     name
   })
@@ -81,6 +117,7 @@ function handleClick(eventTarget, name) {
           @click="handleClick($event.target, item.name)"
           v-roleJudge="item.role"
       >
+        <el-icon><component :is="item.icon"></component></el-icon>
         {{item.label}}
       </div>
     </div>
@@ -119,20 +156,24 @@ function handleClick(eventTarget, name) {
   left: 10px;
   top: v-bind(top);
   border-radius: 6px;
-  background-color: #3333;
+  background-color: #409EFF30;
   transition: 0.4s cubic-bezier(.38,1.03,.53,1.02);
 }
 .nav-item {
   width: 100%;
   height: 40px;
   line-height: 40px;
-  font-size: 1.2rem;
-  color: #666;
+  font-size: 1.1rem;
+  color: #333;
+  text-indent: 5px;
   letter-spacing: 2px;
   margin-bottom: 10px;
   box-sizing: border-box;
   padding: 0 20px;
   transition: 0.2s;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
 }
 .nav-item-toggle {
   color: #409EFF;

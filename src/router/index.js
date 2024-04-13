@@ -115,6 +115,16 @@ const router = createRouter({
           name: 'classGraph',
           component: () => import('@/views/classInfo/ClassGraph.vue')
         },
+        {
+          path: '/classinfo/:classId/classInvestigation',
+          name: 'investigation',
+          component: () => import('@/views/classInfo/ClassInvestigation.vue')
+        },
+        {
+          path: '/classinfo/:classId/classDiagnosis',
+          name: 'classDiagnosis',
+          component: () => import('@/views/classInfo/ClassDiagnosis.vue')
+        },
       ]
     },
     {

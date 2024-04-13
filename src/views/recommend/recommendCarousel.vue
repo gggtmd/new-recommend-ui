@@ -40,6 +40,13 @@ const titleList = ref([
     info: [' 国际事务', '国际合作', '合作交流']
   },
 ])
+
+const imageList = ref([
+    'https://pic1.zhimg.com/v2-463f671095a7591e30b727d295fe701b_1440w.jpg?source=172ae18b',
+    'https://img.tukuppt.com/bg_grid/00/16/03/pVVp5i8OsK.jpg!/fh/350',
+    'https://img.zcool.cn/community/01c498568c742832f8754c80d7423b.jpg@2o.jpg',
+    'https://tse2-mm.cn.bing.net/th/id/OIP-C.H-lFnACJO0M5ztUKyj3q0gHaE7?pid=ImgDet&w=474&h=315&rs=1'
+])
 </script>
 
 <template>
@@ -60,8 +67,8 @@ const titleList = ref([
       </template>
     </div>
     <el-carousel height="350px" arrow="never">
-      <el-carousel-item v-for="item in 4" :key="item">
-        <img class="image" src="https://pic2.zhimg.com/v2-ff065f6ef207adb682d0ddad6020c28d_1440w.jpg?source=172ae18b" alt="">
+      <el-carousel-item v-for="item in imageList" :key="item">
+        <img class="image" :src="item" alt="">
       </el-carousel-item>
     </el-carousel>
   </div>

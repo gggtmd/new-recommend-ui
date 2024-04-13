@@ -62,7 +62,7 @@ function routerGo() {
 <template>
   <Transition name="fade">
     <div class="recommend-detail" v-show="!isLoading">
-      <img class="image" src="@/assets/image1.jpg" alt="">
+      <img class="image" :src="resource.resourcePicture" alt="">
       <el-scrollbar>
         <div class="title">{{resource.resourceName}}</div>
         <div class="info">{{formResourceDetail}}</div>
@@ -74,7 +74,7 @@ function routerGo() {
           </div>
           <div class="rate">
             <el-rate v-model="rate" :disabled="isRate"></el-rate>
-            <el-button class="sub-btn" round type="primary" :disabled="isRate" @click="sendRate">提交</el-button>
+            <el-button class="sub-btn" round type="primary" :disabled="isRate" @click="sendRate">评分</el-button>
           </div>
         </div>
       </el-scrollbar>
@@ -107,7 +107,7 @@ function routerGo() {
   font-weight: bold;
   text-indent: 0.4rem;
   margin-bottom: 20px;
-  white-space: nowrap;
+  //white-space: nowrap;
 }
 .info {
   width: 100%;

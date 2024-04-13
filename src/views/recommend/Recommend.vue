@@ -69,7 +69,7 @@ function hideModal() {
       <SourceCard
         v-for="item in recommendList"
         :key="item"
-        image="@/assets/image1.jpg"
+        :image="item.resourcePicture"
         :source-type="item.resourceType"
         @click="showModal($event, item)"
       >

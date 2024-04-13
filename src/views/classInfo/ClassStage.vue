@@ -123,7 +123,7 @@ async function handleClick(item, index) {
   border-bottom: var(--el-border);
   font-size: 1.2rem;
   font-weight: bold;
-  color: #555;
+  color: #333;
   transition: 0.15s;
   position: relative;
 }
@@ -151,7 +151,7 @@ async function handleClick(item, index) {
   vertical-align: bottom;
   font-size: 1rem;
   font-weight: normal;
-  color: #3338;
+  color: #555;
 }
 .icon {
   position: absolute;
@@ -167,6 +167,6 @@ async function handleClick(item, index) {
   }
 .unableIcon {
   color: #5555;
-  cursor: default;
+  cursor: not-allowed;
 }
 </style>

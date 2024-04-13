@@ -44,17 +44,18 @@ defineExpose({
   <div class="wrapper">
     <div class="header">
       <div>知识问答</div>
-      <el-icon ref="closeIconRef" class="close-icon" @click="handleVisible"><CloseBold /></el-icon>
     </div>
     <el-scrollbar>
     <Transition name="fade">
       <div class="answer-area" v-show="!isLoading&&answer">
         <h1 class="title">{{title}}</h1>
-        <img class="source" src="https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg" alt=""></img>
-        <video controls class="source">
-          <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm" type="video/webm" />
-          <a href="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm">WEBM</a>
-        </video>
+        <div class="source-wrapper">
+          <img class="source" src="https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg" alt=""></img>
+          <video controls class="source">
+            <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm" type="video/webm" />
+            <a href="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm">WEBM</a>
+          </video>
+        </div>
         <div class="answer">
           {{answer}}
         </div>
@@ -74,7 +75,7 @@ defineExpose({
 <style scoped>
 .wrapper{
   width: 100%;
-  height: 100%;
+  height: calc(100vh - 60px);
   overflow: hidden;
   position: relative;
 }
@@ -93,31 +94,30 @@ defineExpose({
   backdrop-filter: blur(20px);
   transform: translateZ(0);
   border-bottom: var(--el-border);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  text-align: center;
   box-sizing: border-box;
   padding: 0 15px;
 }
-.close-icon {
-  cursor: pointer;
-  transition: 0.4s;
-}
-.close-icon-end {
-  transform-origin: center;
-  transform: rotate(-135deg);
-}
 .answer-area {
   box-sizing: border-box;
-  padding: 60px 25px 250px;
+  padding: 60px 250px 250px;
   height: 100%;
 }
 .title{
   font-size: 2rem;
   margin: 15px 0;
 }
-.source{
+.source-wrapper {
   width: 100%;
+  height: 350px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.source{
+  width: 50%;
+  height: 100%;
+  object-fit: cover;
   border-radius: 8px;
   margin-bottom: 10px;
 }
@@ -136,8 +136,8 @@ defineExpose({
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(20px);
+  background-color: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(10px);
   transform: translateZ(0);
   border-top: 1px solid var(--el-border-color);
 }

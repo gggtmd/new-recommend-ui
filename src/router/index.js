@@ -16,17 +16,17 @@ const router = createRouter({
     },
     {
       path: '/',
-      name: 'home',
+      name: 'index',
       component: () => import('@/views/home/Home.vue'),
-      redirect: '/recommend',
+      redirect: '/home',
       children: [
         {
-          path: '/recommend',
-          name: 'recommend',
+          path: '/home',
+          name: 'home',
           component: () => import('@/views/recommend/Recommend.vue'),
           children: [
             {
-              path: '/recommend/:resourceId',
+              path: '/home/:resourceId',
               name: 'recommendDetail',
               component: RecommendDetail  //立即导入，防止初次加载卡顿
             },
@@ -55,12 +55,17 @@ const router = createRouter({
         {
           path: '/answer',
           name: 'answer',
-          component: () => import('@/views/answer/Answer.vue')
+          component: () => import('@/views/answer/Answer2.vue')
         },
         {
           path: '/class',
           name: 'class',
           component: () => import('@/views/class/Class.vue')
+        },
+        {
+          path: '/graph',
+          name: 'graph',
+          component: () => import('@/views/graph/Graph.vue')
         },
         {
           path: '/my',

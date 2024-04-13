@@ -36,6 +36,7 @@ const isShow = ref(false)
 const scaleModalRef = ref()
 //点击展开模态框
 import {useRouter} from "vue-router";
+import RecommendCarousel from "@/views/recommend/recommendCarousel.vue";
 const router = useRouter()
 function showModal(event, source) {
   if (source.resourceId) {
@@ -64,6 +65,7 @@ function hideModal() {
     <router-view></router-view>
   </ScaleModal>
   <div class="recommend">
+    <recommend-carousel class="carousel"></recommend-carousel>
     <div class="title">推荐资源</div>
     <div class="recommend-wrapper">
       <SourceCard
@@ -98,6 +100,9 @@ function hideModal() {
 .recommend {
   box-sizing: border-box;
   padding: 20px 150px;
+}
+.carousel {
+  margin-bottom: 30px;
 }
 .title{
   font-size: 1.5rem;

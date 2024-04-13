@@ -17,9 +17,7 @@ const isLoading = ref(true)
 
 watch(() => props.image, (value) => {
   if(props.image) {
-    setTimeout(() => {
-      isLoading.value = false
-    }, 500)
+    isLoading.value = false
   }
 }, {immediate: true})
 </script>

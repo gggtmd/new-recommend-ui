@@ -55,7 +55,7 @@ function showModal(event, source) {
 function hideModal() {
   isShow.value = false
   router.push({
-    name: "recommend"
+    name: "home"
   })
 }
 </script>
@@ -111,7 +111,9 @@ function hideModal() {
   letter-spacing: 5px;
   box-sizing: border-box;
   padding-left: 5px;
-  margin-bottom: 20px;
+  padding-bottom: 5px;
+  margin-bottom: 30px;
+  border-bottom: 1px solid #4293fd;
 }
 .recommend-wrapper,
 .lesson-wrapper{

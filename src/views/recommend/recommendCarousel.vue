@@ -46,13 +46,17 @@ const titleList = ref([
   <div class="recommend-carousel">
     <div class="nav-wrapper" @mouseleave="handleOut">
       <div class="carousel-nav">
-        <div class="carousel-nav-item" v-for="(item, index) in 7" @mouseenter="handleEnter(item, index)">
-          语言学概论
+        <div class="carousel-nav-item" v-for="(item, index) in titleList" @mouseenter="handleEnter(item, index)">
+          {{item.title}}
           <el-icon><ArrowRight /></el-icon>
         </div>
       </div>
-      <template v-for="(item, index) in 7">
-        <div class="carousel-nav-item-info" v-if="index === hoverIndex">{{ index }}</div>
+      <template v-for="(item, index) in titleList">
+        <div class="carousel-nav-item-info" v-if="index === hoverIndex">
+          <div class="carousel-nav-item-info-item" v-for="info in titleList[index].info">
+            {{info}}
+          </div>
+        </div>
       </template>
     </div>
     <el-carousel height="350px" arrow="never">
@@ -96,6 +100,7 @@ const titleList = ref([
   transition: 0.05s;
   height: 3rem;
   font-size: 0.9rem;
+  cursor: pointer;
 }
 .carousel-nav-item:hover {
   color: #888;
@@ -104,6 +109,23 @@ const titleList = ref([
   color: white;
   box-sizing: border-box;
   padding: 20px;
+}
+.carousel-nav-item-info-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #58585BFF;
+  box-sizing: border-box;
+  padding: 10px 25px;
+  margin: 0 20px;
+  color: white;
+  transition: 0.05s;
+  height: 3rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+.carousel-nav-item-info-item:hover {
+  color: #888;
 }
 .image {
   width: 100%;

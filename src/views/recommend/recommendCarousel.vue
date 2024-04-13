@@ -80,6 +80,7 @@ const imageList = ref([
   position: relative;
   border-radius: 8px;
   overflow: hidden;
+  box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.2);
 }
 .nav-wrapper {
   position: absolute;

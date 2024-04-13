@@ -52,7 +52,7 @@ function handleJoin() {
 </script>
 
 <template>
-  <AddClass ref="addClassRef" v-roleJudge="2"></AddClass>
+  <AddClass ref="addClassRef"></AddClass>
   <JoinClass ref="joinClassRef"></JoinClass>
   <div ref="classWrapperRef" class="class-wrapper">
     <class-card v-for="item in classList" :class-data="item" style="display: flex;justify-content: center;align-items: center"></class-card>

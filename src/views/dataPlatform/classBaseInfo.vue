@@ -14,7 +14,7 @@
     </div>
     <div class="item">
       <div class="info-number">{{ animationStagePerformance }}</div>
-      <div class="sub-title">总体表现</div>
+      <div class="sub-title">总体表现(A~F)</div>
     </div>
     <div class="item">
       <div class="sub-title">预警级别</div>

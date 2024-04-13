@@ -96,13 +96,13 @@ export default {
           }
         },
         xAxis: {
-          name: '考试成绩',
+          name: '成绩/分',
           type: 'category',
           axisTick: { show: false },
           data: this.chartData.xData,
         },
         yAxis: {
-          name: '人数',
+          name: '人数/个',
           type: 'value',
           min: 0,
           max: 3,

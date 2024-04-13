@@ -12,13 +12,13 @@
       <div class="info">
         <Transition name="info-item">
           <div class="info-item" v-show="isShow > 1">
-            <div class="info-item-lable">阶段表现</div>
+            <div class="info-item-lable">当前表现</div>
             <div class="info-item-value">{{ formedLevel }}</div>
           </div>
         </Transition>
         <Transition name="info-item">
           <div class="info-item" v-show="isShow > 2">
-            <div class="info-item-lable">预警程度</div>
+            <div class="info-item-lable">预警级别</div>
             <div 
               class="info-item-value warning-value" 
               :style="{backgroundColor: `${warningColor}`}">
@@ -28,13 +28,13 @@
         </Transition>
         <Transition name="info-item">
           <div class="info-item" v-show="isShow > 3">
-            <div class="info-item-lable">认知诊断</div>
+            <div class="info-item-lable">知识点掌握程度</div>
             <div class="info-item-value">{{ fixedCD }}</div>
           </div>
         </Transition>
         <Transition name="info-item">
           <div class="info-item" v-show="isShow > 4">
-            <div class="info-item-lable">自测数量</div>
+            <div class="info-item-lable">试题自测数量</div>
             <div class="info-item-value">{{ studentInfo.selfTestCount }}</div>
           </div>
         </Transition>
@@ -187,7 +187,7 @@ export default{
     initExamChart() {
       let option = {
         title: {
-          text: '考试成绩',
+          text: '考试成绩/分',
           left: '5'
         },
         tooltip: {
@@ -198,6 +198,7 @@ export default{
         },
         xAxis: [
           {
+            name: '考试名称',
             type: 'category',
             axisTick: { show: false },
           }
@@ -258,7 +259,7 @@ export default{
     initKnowledgeChart(){
       let option = {
         title:{
-          text: '知识点掌握度',
+          text: '知识点掌握度(0~1)',
           left: '5'
         },
         tooltip: {
@@ -269,6 +270,7 @@ export default{
         },
         xAxis: [
           {
+            name: '知识点名称',
             type: 'category',
             axisTick: { show: false },
             axisLabel:{

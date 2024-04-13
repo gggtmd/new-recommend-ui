@@ -79,6 +79,7 @@ export default {
           data: this.sliderData,
         },
         yAxis: {
+          name: '评分(0~5)',
           type: 'value',
           min: 0,
           max: 5

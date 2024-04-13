@@ -84,7 +84,7 @@ export default {
         ],
         yAxis: [
           {
-            name: '知识点掌握程度',
+            name: '知识点掌握程度(0~1)',
             type: 'value'
           }
         ],
@@ -168,6 +168,7 @@ export default {
         },
         xAxis: [
           {
+            name: '知识点名称',
             type: 'category',
             axisTick: { show: false },
             // axisLabel: { interval: 0, rotate: -30 }
@@ -185,7 +186,7 @@ export default {
         ],
         yAxis: [
           {
-            name: '知识点掌握程度',
+            name: '知识点掌握程度(0~1)',
             type: 'value',
           }
         ],

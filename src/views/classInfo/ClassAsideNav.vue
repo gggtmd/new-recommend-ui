@@ -1,5 +1,5 @@
 <script setup>
-import {onMounted, ref} from "vue";
+import {onMounted, ref, shallowRef} from "vue";
 import {useRoute, useRouter} from "vue-router";
 import {Bell,House,Finished,Document,Memo,User,Share,Tickets,Histogram,Aim} from "@element-plus/icons-vue";
 
@@ -14,7 +14,7 @@ onMounted(() => {
   })
 })
 
-const navList = ref([
+const navList = shallowRef([
   {
     label: "课堂简介",
     name: "classDescription",

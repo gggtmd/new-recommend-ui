@@ -7864,7 +7864,7 @@ export default {
       const graph = this.test;
       graph.nodes.forEach(node => {
         node.label = {
-          show: node.symbolSize > 30
+          show: node.symbolSize > 15
         };
       });
       option = {
@@ -7893,7 +7893,7 @@ export default {
             draggable: 'true',
             layout: 'force',
             force: {
-              repulsion: 500
+              repulsion: 300
             },
             data: graph.nodes,
             links: graph.links,

@@ -7865,12 +7865,12 @@ export default {
       const graph = this.test;
       graph.nodes.forEach(node => {
         node.label = {
-          show: node.symbolSize > 30
+          show: node.symbolSize > 15
         };
       });
       option = {
         title: {
-          text: '图谱',
+          text: '知识图谱',
           subtext: 'Default layout',
           top: 'bottom',
           left: 'right'
@@ -7884,6 +7884,11 @@ export default {
             top: "20px"
           }
         ],
+        dataZoom: [{
+          type: 'inside', // 或者 'slider'，根据需要选择内嵌式还是滑块式缩放控件
+          start: 0,      // 初始缩放范围起点
+          end: 100       // 初始缩放范围终点（100%）
+        }],
         animationDuration: 1500,
         animationEasingUpdate: 'quinticInOut',
         series: [
@@ -7894,7 +7899,7 @@ export default {
             draggable: 'true',
             layout: 'force',
             force: {
-              repulsion: 500
+              repulsion: 300
             },
             data: graph.nodes,
             links: graph.links,
@@ -7923,13 +7928,24 @@ export default {
           this.relationSearch(params.data.name);
         }
       })
-      // myChart.on('mouseup',(params) => {
-      //   let option = myChart.getOption();
-      //   option.series[0].data[params.dataIndex].x=params.event.offsetX;
-      //   option.series[0].data[params.dataIndex].y=params.event.offsetY;
-      //   option.series[0].data[params.dataIndex].fixed=true;
-      //   myChart.setOption(option);
-      // });
+      myChart.on('dataZoom', function (event) {
+        const dataZoomInfo = event.batch[0];
+        const currentStart = dataZoomInfo.start;
+        const currentEnd = dataZoomInfo.end;
+        const initialRange = 100; // 初始缩放范围的总百分比
+
+        // 计算当前实际显示数据的百分比范围
+        const visibleRange = currentEnd - currentStart;
+
+        // 计算放大倍数，相对于初始范围的比例
+        const zoomScale = visibleRange / initialRange;
+        graph.nodes.forEach(node => {
+          node.label = {
+            show: node.symbolSize > 30
+          };
+        });
+      });
+
       window.onresize = () => {
         myChart.showLoading()
         myChart.resize()

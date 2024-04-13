@@ -9,7 +9,7 @@ let routerList = ref([
     name: 'home'
   },
   {
-    label: '精选试题',
+    label: '精选习题',
     name: 'test'
   },
   {

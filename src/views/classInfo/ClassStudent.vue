@@ -70,7 +70,7 @@ const handleCheck = (index, row) => {
 
 <template>
   <div class="class-student">
-    <div class="title">学员</div>
+    <div class="title">学生信息</div>
     <el-divider></el-divider>
     <div class="mask" v-loading="isLoading" v-if="isLoading"></div>
     <div class="mask" v-else-if="!studentList.length">暂无数据</div>

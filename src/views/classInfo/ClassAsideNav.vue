@@ -1,7 +1,7 @@
 <script setup>
 import {onMounted, ref, shallowRef} from "vue";
 import {useRoute, useRouter} from "vue-router";
-import {Bell,House,Finished,Document,Memo,User,Share,Tickets,Histogram,Aim} from "@element-plus/icons-vue";
+import {Bell,House,Finished,Document,Memo,User,Share,Tickets,Histogram,Aim,Files} from "@element-plus/icons-vue";
 
 //初始定位激活导航
 const route = useRoute()
@@ -26,6 +26,12 @@ const navList = shallowRef([
     name: "classNotice",
     role: 1,
     icon: Bell
+  },
+  {
+    label: "教学资源",
+    name: "classNotice",
+    role: 1,
+    icon: Files
   },
   {
     label: "教学阶段",

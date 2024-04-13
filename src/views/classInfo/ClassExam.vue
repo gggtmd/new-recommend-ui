@@ -96,7 +96,7 @@ async function handleDelete(item, index) {
 <template>
   <div class="class-notice">
     <div class="header">
-      <div class="title">考试</div>
+      <div class="title">在线考试</div>
       <el-button class="add-btn" type="primary" @click="handleAdd">新增</el-button>
     </div>
     <el-divider></el-divider>

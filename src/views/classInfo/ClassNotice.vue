@@ -27,7 +27,7 @@ async function getStage() {
 
 <template>
   <div class="class-notice">
-    <div class="title">公告</div>
+    <div class="title">通知公告</div>
     <el-divider></el-divider>
     <ul class="notice-wrapper" v-loading="isLoading">
       <li class="mask" v-if="!noticeList.length&&!isLoading">暂无数据</li>

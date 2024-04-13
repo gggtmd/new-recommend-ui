@@ -67,7 +67,7 @@ async function handleDelete(item, index) {
 <template>
   <div class="class-notice">
     <div class="header">
-      <div class="title">试卷</div>
+      <div class="title">试卷管理</div>
       <el-button class="add-btn" type="primary" @click="addPaper">新增</el-button>
       <ClassPaperAddDialog ref="classPaperAddDialogRef" @afterAddPaper="window.location.reload()"></ClassPaperAddDialog>
     </div>

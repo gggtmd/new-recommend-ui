@@ -63,7 +63,7 @@ async function handleClick(item, index) {
 <template>
   <div class="class-notice">
     <Transition name="fade">
-    <div class="title">阶段</div>
+    <div class="title">教学阶段</div>
     </Transition>
     <el-divider></el-divider>
     <div class="mask" v-loading="isLoading" v-if="isLoading"></div>

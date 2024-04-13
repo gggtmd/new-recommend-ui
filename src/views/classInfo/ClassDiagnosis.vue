@@ -385,7 +385,7 @@ const nextDisable = computed(() => {
     <div class="stage-knowledge-chart" ref="stageKnowledgeChartRef"></div>
     <div class="button-wrapper">
       <transition name="btn">
-        <div class="button-area" v-show="!preDisable && !nextDisable">
+        <div class="button-area" v-show="!preDisable || !nextDisable">
           <button class="btn" :disabled="preDisable" @click="showPreKnowledge">上一页</button>
           <button class="btn" :disabled="nextDisable" @click="showNextKnowledge">下一页</button>
         </div>

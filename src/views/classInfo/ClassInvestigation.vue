@@ -35,7 +35,7 @@ async function getStage() {
   })
   let rateList = await Promise.all(ratePromise)
   rateList.forEach((commend, index) => {
-    const stageIndex = investigationList.value.findIndex(item => commend.data[0].stage === item.stage)
+    const stageIndex = investigationList.value.findIndex(item => commend.data[0] && commend.data[0].stage === item.stage)
     if(stageIndex > -1) {
       investigationList.value[stageIndex].rate = commend.data[0].stageRating
     }

@@ -312,7 +312,6 @@ async function submitPaper() {
 }
 .operate-selected {
   width: 100%;
-  background-color: #d95959;
-  color: #555;
+  background-color: #d95959b0;
 }
 </style>

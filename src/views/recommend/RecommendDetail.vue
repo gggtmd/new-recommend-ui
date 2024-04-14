@@ -49,13 +49,10 @@ async function sendRate() {
 }
 
 //资源跳转
-import {useRouter} from "vue-router";
-const router = useRouter()
+import {browseRecordsSaveServer} from "@/api/browseRecords.js";
 function routerGo() {
-  const routerURl =  router.resolve({
-    path: resource.value.resourceLink
-  })
-  window.open(routerURl.href, "_blank")
+  browseRecordsSaveServer(route.params.resourceId)
+  window.open(resource.value.resourceLink, "_blank")
 }
 </script>
 

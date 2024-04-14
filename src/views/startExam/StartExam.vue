@@ -5,7 +5,6 @@ import AnswerDetail from "@/components/AnswerDetail.vue";
 const isInit = ref(false)
 onMounted(() => {
   getExamInfo()
-  checkSubmit()
 })
 
 // 验证是否提交过试卷
@@ -28,6 +27,7 @@ const exam = ref({})
 async function getExamInfo() {
   let examRes = await examsGetByIdServer(route.params.examId)
   exam.value = examRes.data
+  await checkSubmit()
 }
 
 // 获取试题数据
@@ -39,6 +39,7 @@ const questionList = ref([])
 async function getQuestionList() {
   // 题干数据
   let res = await papersViewPaperIdServer(exam.value.paperId)
+  console.log(res)
   questionList.value = res.data
   // 选项数据
   let optionRequest = []
@@ -98,7 +99,7 @@ async function submitAnswer() {
 }
 
 const submitBtnText = computed(() => {
-  return isSubmit ? "已提交" : "提交试卷"
+  return isSubmit.value ? "已提交" : "提交试卷"
 })
 </script>
 

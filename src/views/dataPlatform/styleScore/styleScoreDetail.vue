@@ -105,7 +105,6 @@ export default {
           name: '人数/个',
           type: 'value',
           min: 0,
-          max: 3,
           interval: 1,
         },
         series: [
@@ -252,11 +251,11 @@ export default {
       this.percentChart.setOption(option);
     },
     initStyleGradeChartData(){
-      this.chartData.series.video = new Array(11).fill(0);
-      this.chartData.series.document = new Array(11).fill(0);
-      this.chartData.series.both = new Array(11).fill(0);
+      this.chartData.series.video = new Array(10).fill(0);
+      this.chartData.series.document = new Array(10).fill(0);
+      this.chartData.series.both = new Array(10).fill(0);
       for(let i = 0; i < this.exam.styleScore.video.length; i++){
-        this.chartData.series.video[parseInt(this.exam.styleScore.video[i]/10)]++;
+        this.chartData.series.video[parseInt(this.exam.styleScore.video[i]/10) - 1]++;
       }
       for(let i = 0; i < this.exam.styleScore.document.length; i++){
         this.chartData.series.document[parseInt(this.exam.styleScore.document[i]/10)]++;

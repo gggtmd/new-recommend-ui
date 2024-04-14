@@ -49,14 +49,14 @@ function toggleState() {
     wrapperHeight.value = cacheHeight.value
     cacheHeight.value = tempHeight
     // 重置表格
-    rules.value = (subButton === "登录"?rule1:rule2)
+    rules.value = (subButton.value === "登录"?rule1:rule2)
     setTimeout(() => {
       formRef.value.resetFields()
     },0)
   }
 }
 const toggleLabel = computed(() => {
-  return subButton.value == "登录"?"注册":"登录"
+  return subButton.value === "登录"?"注册":"登录"
 })
 
 //表单验证规则
@@ -166,8 +166,7 @@ async function getRegisterCode() {
 }
 async function userRegister() {
   let res = await personRegisterServer(loginForm.value)
-  console.log(res);
-  userLogin();
+  await userLogin();
 }
 
 </script>

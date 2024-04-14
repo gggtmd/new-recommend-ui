@@ -1,5 +1,5 @@
 <script setup>
-import {ref, onMounted, computed} from "vue";
+import {ref, onMounted, computed, nextTick} from "vue";
 import AnswerDetail from "@/components/AnswerDetail.vue";
 
 const isInit = ref(false)
@@ -9,13 +9,20 @@ onMounted(() => {
 
 // 验证是否提交过试卷
 import {studentPaperPageServer} from "@/api/studentPaper.js";
-
+const elRadioGroupRef = ref(null)
 const isSubmit = ref(false)
 async function checkSubmit() {
   let res = await studentPaperPageServer(route.params.examId)
   if (res.data.records.length) {
     isSubmit.value = true
-    questionList.value.push(...JSON.parse(res.data.records[0].paper))
+    const list = JSON.parse(res.data.records[0].paper)
+    questionList.value.push(...list)
+    list.forEach((question, questionIndex) => {
+      nextTick(() => {
+        elRadioGroupRef.value[questionIndex].$el.children[question.studentAnswer.charCodeAt(0) - 65].children[1].style.backgroundColor = '#ec3333'
+        elRadioGroupRef.value[questionIndex].$el.children[question.answer.charCodeAt(0) - 65].children[1].style.backgroundColor = '#48c406'
+      })
+    })
   } else {
     await getQuestionList()
   }
@@ -111,7 +118,7 @@ const submitBtnText = computed(() => {
       <div class="disabledMask" v-if="isSubmit"></div>
       <div ref="radioGroupWrapperRef" class="el-radio-group-wrapper" v-for="(item,index) in questionList" :key="item.questionId">
         <div class="radio-group-title">{{ `${index + 1}、${item.questionStatement}` }}</div>
-        <el-radio-group class="el-radio-group" v-model=item.studentAnswer @change="handleChange(index)">
+        <el-radio-group ref="elRadioGroupRef" class="el-radio-group" v-model=item.studentAnswer @change="handleChange(index)">
           <el-radio-button v-for="option in (item.options)" :key="option.optionId" :value="option.optionLabel">{{ option.optionValue }}</el-radio-button>
         </el-radio-group>
       </div>
@@ -186,6 +193,9 @@ const submitBtnText = computed(() => {
 }
 .el-radio-group {
   margin-left: 1.2rem;
+}
+.el-radio-button {
+  margin-bottom: 20px;
 }
 .info-card {
   position: absolute;

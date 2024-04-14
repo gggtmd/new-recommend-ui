@@ -220,7 +220,8 @@ async function userRegister() {
 .bg-content {
   width: 100vw;
   height: 100vh;
-  background-image: url("@/assets/image1.jpg");
+  background-image: url("https://img.zcool.cn/community/0163b55fa51ebf11013ee04de42e0a.jpg@1280w_1l_2o_100sh.jpg");
+  background-size: cover;
 }
 .wrapper {
   position: absolute;
@@ -228,7 +229,6 @@ async function userRegister() {
   top: 50%;
   transform: translate(-50%, -60%);
   padding: 30px;
-  padding-bottom: 30px;
   border-radius: 8px;
   box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.1);
   transition: 0.4s;

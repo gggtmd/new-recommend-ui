@@ -63,3 +63,8 @@ export const personGetByIdServer = (userId) => {
 export const personUserListServer = (...ids) => {
   return request.post("/person/UserList", ids)
 }
+
+
+export const personSaveServer = (person) => {
+  return request.post("/person/save", person)
+}

@@ -97,7 +97,6 @@ async function getStage() {
   color: #5555;
 }
 .ableIcon {
-  cursor: pointer;
-  color: #55be21;
+  cursor: default;
 }
 </style>

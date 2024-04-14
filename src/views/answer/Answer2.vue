@@ -20,8 +20,24 @@ async function getAnswer() {
 }
 
 const selectList = ref(['和羹之美，在于合异', '塞翁失马，焉知非福', '咬定青山不放松'])
+const sourceList = ref([
+  {
+    imageURL: 'https://big-event-kanwo.oss-cn-beijing.aliyuncs.com/%E5%92%8C%E7%BE%B9%E4%B9%8B%E7%BE%8E.png',
+    videoURL: 'https://big-event-kanwo.oss-cn-beijing.aliyuncs.com/%5B%E5%B9%B3%E2%80%9C%E8%AF%AD%E2%80%9D%E8%BF%91%E4%BA%BA%5D%E5%92%8C%E7%BE%B9%E4%B9%8B%E7%BE%8E%20%E5%9C%A8%E4%BA%8E%E5%90%88%E5%BC%82.mp4',
+  },
+  {
+    imageURL: 'https://big-event-kanwo.oss-cn-beijing.aliyuncs.com/%E5%A1%9E%E7%BF%81.png',
+    videoURL: 'https://big-event-kanwo.oss-cn-beijing.aliyuncs.com/%E7%BB%8F%E5%85%B8%E6%88%90%E8%AF%AD%E6%95%85%E4%BA%8B%EF%BC%9A%E5%A1%9E%E7%BF%81%E5%A4%B1%E9%A9%AC%E7%84%89%E7%9F%A5%E9%9D%9E%E7%A6%8F%EF%BC%8C%E8%BF%99%E4%B8%AA%E6%95%85%E4%BA%8B%E8%AF%B4%EF%BC%8C%E4%B8%8D%E8%83%BD%E5%BE%97%E6%84%8F%E5%A4%AA%E6%97%A9%2C%E4%BA%B2%E5%AD%90%2C%E6%97%A9%E6%95%99%2C%E5%A5%BD%E7%9C%8B%E8%A7%86%E9%A2%91.mp4'
+  },
+  {
+    imageURL: 'https://big-event-kanwo.oss-cn-beijing.aliyuncs.com/%E5%92%AC%E5%AE%9A%E9%9D%92%E5%B1%B1.png',
+    videoURL: 'https://big-event-kanwo.oss-cn-beijing.aliyuncs.com/%E5%92%AC%E5%AE%9A%E9%9D%92%E5%B1%B1%E4%B8%8D%E6%94%BE%E6%9D%BE%EF%BC%88%E9%83%91%E7%87%AE%E8%AF%8D%20%20%20%E5%88%98%E8%BF%9B%E6%88%90%E6%9B%B2%20%E9%99%88%E8%8B%8F%E5%A8%81%E6%BC%94%E5%94%B1%EF%BC%89.mp4'
+  }
+])
+const sourceIndex = ref(0)
 const selectAnswer = (item, index) => {
   input.value = item
+  sourceIndex.value = index
   getAnswer()
 }
 </script>
@@ -43,7 +59,7 @@ const selectAnswer = (item, index) => {
       </div>
     </Transition>
     <Transition name="fade">
-      <div class="answer-area pre-answer" v-if="!answer&&isLoading">
+      <div class="answer-area pre-answer" v-if="isLoading">
         <div class="loading-statue"><el-icon><Loading /></el-icon></div>
       </div>
     </Transition>
@@ -55,10 +71,9 @@ const selectAnswer = (item, index) => {
         <div class="answer-area" v-show="!isLoading&&answer">
           <h1 class="title">{{title}}</h1>
           <div class="source-wrapper">
-            <img class="source" src="https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg" alt=""></img>
+            <img class="source" :src="sourceList[sourceIndex].imageURL" alt=""></img>
             <video controls class="source">
-              <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm" type="video/webm" />
-              <a href="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm">WEBM</a>
+              <source :src="sourceList[sourceIndex].videoURL" type="video/mp4" />
             </video>
           </div>
           <div class="answer">
@@ -118,7 +133,7 @@ const selectAnswer = (item, index) => {
 }
 .title{
   font-size: 2rem;
-  margin: 15px 0;
+  margin: 20px 0;
 }
 .source-wrapper {
   width: 100%;
@@ -126,6 +141,7 @@ const selectAnswer = (item, index) => {
   display: flex;
   align-items: center;
   gap: 20px;
+  margin-bottom: 20px;
 }
 .source{
   width: 50%;
@@ -133,6 +149,7 @@ const selectAnswer = (item, index) => {
   object-fit: cover;
   border-radius: 10px;
   margin-bottom: 15px;
+  box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.1);;
 }
 .answer {
   font-size: 1rem;

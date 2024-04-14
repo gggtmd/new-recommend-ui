@@ -18,7 +18,7 @@ const getUserInfo = async () => {
 const getUserRole = computed(() => {
   if(userInfoStore.userInfo.roleId === 1){
     return "学 生";
-  }else if(userInfoStore.userInfo.value.roleId === 2){
+  }else if(userInfoStore.userInfo.roleId === 2){
     return "教 师"
   }
 })

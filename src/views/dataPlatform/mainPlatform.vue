@@ -19,6 +19,9 @@
       </div>
       <div class="chart-main">
         <div class="chart-main-content">
+          <div v-if="$route.matched.length <= 1" class="pre-view">
+            请选择左右两侧卡片以查看更多信息
+          </div>
           <router-view :key="$route.fullPath"></router-view>
         </div>
       </div>
@@ -61,6 +64,7 @@ export default {
   },
   created() {
     this.getClassInfo();
+    console.log(this.$route)
   },
 }
 </script>
@@ -144,6 +148,19 @@ export default {
 }
 .chart-main-content:hover{
   box-shadow: 0px 2px 6px 1px rgba(0, 0, 0, 0.3);
+}
+.pre-view {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: #555;
+  font-weight: bold;
+  background-image: radial-gradient(farthest-corner at 40px 40px, rgba(255, 198, 198, 0.8), rgb(255, 255, 255, 0) 45%),
+  radial-gradient(farthest-corner at 100% 100%, rgba(245, 255, 177, 0.8), rgb(255, 255, 255, 0) 55%);
+  border-radius: 5px;
 }
 .chart-right{
   width: 25%;

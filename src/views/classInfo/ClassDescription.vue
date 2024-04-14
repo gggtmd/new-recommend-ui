@@ -66,7 +66,10 @@ function routeToDataPlatform() {
           <div class="sub-info">{{creator.name}}</div>
         </div>
       </div>
-      <div class="description">{{classData.description}}</div>
+      <div class="box">
+        <img class="image" :src="classData.classPicture" alt="">
+        <div class="description">{{classData.description}}</div>
+      </div>
     </div>
   </Transition>
 </template>
@@ -89,9 +92,17 @@ function routeToDataPlatform() {
   font-size: 1.3rem;
   font-weight: bold;
 }
+.box {
+  display: flex;
+}
+.image {
+  border-radius: 12px;
+  width: 180px;
+  margin-right: 20px;
+}
 .description {
   font-size: 1.1rem;
-  margin-bottom: 20px;
+  line-height: 1.7rem;
   color: #333D;
   box-sizing: border-box;
   padding: 12px 10px;

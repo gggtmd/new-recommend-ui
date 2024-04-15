@@ -1,6 +1,7 @@
 import request from "@/utils/request.js";
 import {useUserInfoStore} from "@/stores/userInfo.js";
-const userInfo = useUserInfoStore.userInfo
+const userInfoStore = useUserInfoStore()
+const userInfo = userInfoStore.userInfo
 
 /**
  * 浏览记录的新增/修改

@@ -1,6 +1,6 @@
 import request from "@/utils/request.js";
 import {useUserInfoStore} from "@/stores/userInfo.js";
-const userInfoStore = useUserInfoStore;
+const userInfo = useUserInfoStore.userInfo
 
 /**
  * 浏览记录的新增/修改
@@ -10,6 +10,6 @@ const userInfoStore = useUserInfoStore;
 export const browseRecordsSaveServer = (resourceId) => {
     return request.post("/browse-records/save", {
         resourceId,
-        userId: userInfoStore.userId
+        userId: userInfo.userId
     })
 }

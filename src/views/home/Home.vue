@@ -6,30 +6,37 @@ import {CloseBold} from '@element-plus/icons-vue'
 let routerList = ref([
   {
     label: '首页',
+    enLabel: 'HOME',
     name: 'home'
   },
   {
-    label: '精选习题',
-    name: 'test'
+    label: '风格问卷',
+    enLabel: 'STYLE',
+    name: 'personStyle'
   },
   {
     label: '教学课堂',
+    enLabel: 'TEACHING CLASS',
     name: 'class'
   },
   {
     label: '知识图谱',
+    enLabel: 'KNOWLEDGE GRAPH',
     name: 'graph'
   },
   {
+    label: '精选习题',
+    enLabel: 'SELECTED EXERCISES',
+    name: 'test'
+  },
+  {
     label: '知识问答',
+    enLabel: 'KNOWLEDGE QUESTIONS',
     name: 'answer'
   },
   {
-    label: '风格问卷',
-    name: 'personStyle'
-  },
-  {
     label: '我的',
+    enLabel: 'MY',
     name: 'my'
   },
 ])
@@ -53,32 +60,40 @@ watch(select, (newValue, oldValue) => {
 
 <template>
   <div class="split">
+    <div class="slogan">
+      <div>智辅汉学堂：面向留华学生汉语学习的多模态个性化智能导学系统</div>
+      <div>INTELLIGENT SINOLOGY HALL: A MULTI-MODAL PERSONALIZED INTELLIGENT LEARNING GUIDE SYSTEM FOR STUDENTS STUDYING CHINESE IN CHINA</div>
+    </div>
     <el-scrollbar>
       <div class="nav-wrapper" ref="navWrapperRef">
         <div
           v-for="item in routerList"
-          :key="item.name" class="nav-item-left"
+          :key="item.name"
+          class="nav-item-left"
           :class="{sel: select === item.name}"
           @click="select = item.name"
         >
-          {{item.label}}
+          <div>{{item.label}}</div>
+          <div>{{item.enLabel}}</div>
         </div>
       </div>
+      <Transition
+        name="fade"
+        @before-enter="onBeforeEnter"
+        @enter="onEnter"
+      >
+      </Transition>
       <router-view></router-view>
     </el-scrollbar>
   </div>
 </template>
 
 <style scoped>
-.split {
-  display: flex;
-}
 .el-scrollbar {
   width: 100%;
   height: 100vh;
 }
 .nav-wrapper{
-  font-size: 1.3rem;
   font-weight: bold;
   letter-spacing: 2px;
   position: sticky;
@@ -88,23 +103,39 @@ watch(select, (newValue, oldValue) => {
   width: 100%;
   height: 60px;
   box-sizing: border-box;
-  padding: 15px 150px;
-  box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.1);
-  background-color: white;
+  padding: 0 150px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  background-color: #003c70;
+}
+.slogan {
+  text-align: center;
+  padding: 20px 0;
+  font-weight: bold;
+  letter-spacing: 2px;
+  font-size: 0.9rem;
+  color: transparent;
+  background-color: #003c70;
+}
+.slogan div {
+  background-image: linear-gradient(to right, #ffb11f 40%, #c000c0);
+  background-clip: text;
+}
+.nav-item-left {
+  margin-right: 40px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: 0.4s;
+  text-align: center;
+  font-weight: bold;
+  letter-spacing: 2px;
+  font-size: 0.9rem;
+  color: white;
 }
 .sel {
   color: #409EFF;
-}
-.nav-wrapper::after {
-  content: '';
-  clear: both;
-  display: block;
-}
-.nav-item-left {
-  float: left;
-  margin-right: 30px;
-  cursor: pointer;
+  transform: scale(1.2);
+  margin-bottom: 5px;
 }
 </style>

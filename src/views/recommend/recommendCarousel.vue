@@ -42,10 +42,10 @@ const titleList = ref([
 ])
 
 const imageList = ref([
-    'https://pic1.zhimg.com/v2-463f671095a7591e30b727d295fe701b_1440w.jpg?source=172ae18b',
-    'https://img.tukuppt.com/bg_grid/00/16/03/pVVp5i8OsK.jpg!/fh/350',
-    'https://img.zcool.cn/community/01c498568c742832f8754c80d7423b.jpg@2o.jpg',
-    'https://tse2-mm.cn.bing.net/th/id/OIP-C.H-lFnACJO0M5ztUKyj3q0gHaE7?pid=ImgDet&w=474&h=315&rs=1'
+    'https://img.bagevent.com/resource/20171110/14470458140867.jpg',
+    'https://p4.itc.cn/images01/20210827/3f0d6156922444fab34a62f62486be41.jpeg',
+    'https://inews.gtimg.com/newsapp_bt/0/13265153426/1000',
+    'https://img1.baidu.com/it/u=480378236,2242494921&fm=253&fmt=auto&app=138&f=JPEG?w=750&h=500'
 ])
 </script>
 
@@ -89,7 +89,7 @@ const imageList = ref([
   bottom: 0;
   left: 0;
   background-color: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(20px);
   transform: scale(1);
   display: flex;
 }

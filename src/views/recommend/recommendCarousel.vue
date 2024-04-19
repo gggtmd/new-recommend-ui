@@ -44,7 +44,7 @@ const titleList = ref([
 const imageList = ref([
     'https://img.bagevent.com/resource/20171110/14470458140867.jpg',
     'https://p4.itc.cn/images01/20210827/3f0d6156922444fab34a62f62486be41.jpeg',
-    'https://inews.gtimg.com/newsapp_bt/0/13265153426/1000',
+    'https://cdn.huodongxing.com/file/20160104/110691024C40E7D13818AEE48EB8931A67/30422418722270144.jpg',
     'https://img1.baidu.com/it/u=480378236,2242494921&fm=253&fmt=auto&app=138&f=JPEG?w=750&h=500'
 ])
 </script>

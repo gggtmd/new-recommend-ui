@@ -1,3 +1,4 @@
+
 <template>
   <div class="container">
     <div class="graph" ref="knowledgeChartRef"></div>

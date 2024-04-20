@@ -3580,7 +3580,7 @@ export default {
           },
           {
             "id": "394",
-            "name": "《史记》",
+            "name": "《汉书》",
             "symbolSize": 20,
             "x": -80.6313396,
             "y": -313.8517,
@@ -4555,6 +4555,11 @@ export default {
             "value" : "属于"
           },
           {
+            "value" : "影响",
+            "source": "0",
+            "target": "40"
+          },
+          {
             "source": "1",
             "target": "0",
             "value" : "组成",
@@ -5406,11 +5411,7 @@ export default {
             "source": "40",
             "target": "36"
           },
-          {
-            "value" : "影响",
-            "source": "0",
-            "target": "40"
-          },
+          
           {
             "value" : "包含",
             "source": "37",
@@ -5666,11 +5667,6 @@ export default {
             "value" : "基本规则",
             "source": "58",
             "target": "184"
-          },
-          {
-            "value" : "属于",
-            "source": "59",
-            "target": "54"
           },
           {
             "value" : "属于",

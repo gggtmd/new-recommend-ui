@@ -61,7 +61,8 @@ watch(select, (newValue, oldValue) => {
 <template>
   <div class="split">
     <div class="slogan">
-      <div style="font-size: 32px;">智辅汉学堂：面向留华学生汉语学习的多模态个性化智能导学系统</div>
+      <div style="font-size: 32px;">汉智大学堂：面向留华学生汉语学习的多模态个性化智能导学系统</div>
+      
       <div>INTELLIGENT SINOLOGY HALL: A MULTI-MODAL PERSONALIZED INTELLIGENT LEARNING GUIDE SYSTEM FOR STUDENTS STUDYING CHINESE IN CHINA</div>
 
     </div>

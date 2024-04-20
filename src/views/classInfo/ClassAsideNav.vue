@@ -113,7 +113,7 @@ function handleClick(eventTarget, name) {
 
 <template>
   <div class="class-aside-nav">
-    <div class="title">智辅汉学堂</div>
+    <div class="title">汉智大学堂</div>
     <el-divider></el-divider>
     <div class="nav-wrapper">
       <div

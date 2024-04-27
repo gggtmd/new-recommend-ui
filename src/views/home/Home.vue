@@ -95,6 +95,8 @@ watch(select, (newValue, oldValue) => {
   height: 100vh;
   box-sizing: border-box;
   padding-top: 120px;
+  background-image: radial-gradient(farthest-corner at 40px 40px, rgb(255, 196, 196), rgb(255, 255, 255, 0) 45%),
+  radial-gradient(farthest-corner at 100% 100%, rgb(245, 255, 177), rgb(255, 255, 255, 0) 55%);
 }
 .nav-wrapper{
   font-weight: bold;

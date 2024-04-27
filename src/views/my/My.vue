@@ -123,8 +123,8 @@ const signOut = () => {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-image: radial-gradient(farthest-corner at 40px 40px, rgb(255, 196, 196), rgb(255, 255, 255, 0) 40%),
-  radial-gradient(farthest-corner at 100% 100%, rgb(245, 255, 177), rgb(255, 255, 255, 0) 60%);
+  //background-image: radial-gradient(farthest-corner at 40px 40px, rgb(255, 196, 196), rgb(255, 255, 255, 0) 40%),
+  //radial-gradient(farthest-corner at 100% 100%, rgb(245, 255, 177), rgb(255, 255, 255, 0) 60%);
 }
 .userInfo{
   padding: 30px;

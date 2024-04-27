@@ -55,6 +55,7 @@
         </div>
       </transition>
     </div>
+    <div class="stage-knowledge-graph-chart" ref="stageKnowledgeGraphChart"></div>
   </div>
 </template>
 
@@ -107,6 +108,7 @@ export default{
   mounted() {
     this.examChart = echarts.init(this.$refs.examScoreChart,null,{renderer: 'svg'})
     this.stageKnowledgeChart = echarts.init(this.$refs.stageKnowledgeChart,null,{renderer: 'svg'})
+    this.stageKnowledgeGraphChart = echarts.init(this.$refs.stageKnowledgeGraphChart,null,{renderer: 'svg'})
     this.initExamChart();
     this.initKnowledgeChart();
     const resizeObserver = new ResizeObserver(() => {
@@ -123,7 +125,9 @@ export default{
       this.knowledgeStart = 0;
       this.knowledgeEnd = this.maxLenght;
       this.activeStage = index;
+      console.log("aaa")
       this.drawKnowledgeChart();
+      this.drawKnowledgeGraphChart();
     },
     getStudentInfo(){
       learningQueryStudentLearningServer(this.$route.params.classId,this.$route.params.studentId)
@@ -154,8 +158,8 @@ export default{
               return '第' + item.stage + '阶段';
             })
             res.data[0].forEach((item,index) => {
-              this.xKnowledge[index] = new Array();
-              this.knowledgeData[index] = new Array();
+              this.xKnowledge[index] = [];
+              this.knowledgeData[index] = [];
             })
             this.getStudentKnowledge();
           })
@@ -325,6 +329,69 @@ export default{
         ],
       };
       this.stageKnowledgeChart.setOption(option);
+    },
+    async drawKnowledgeGraphChart() {
+      let option;
+      const {default:graph} = await import(`../../graphData/base_Chinese_${this.activeStage + 1}.js`);
+      graph.nodes.forEach(node => {
+        node.label = {
+          show: node.symbolSize > 15
+        };
+      });
+      option = {
+        title: {
+          text: '知识图谱',
+          subtext: 'Default layout',
+          top: 'bottom',
+          left: 'right'
+        },
+        tooltip: {},
+        legend: [
+          {
+            data: graph.categories.map(a => {
+              return a.name;
+            }),
+            top: "20px"
+          }
+        ],
+        animationDuration: 1500,
+        animationEasingUpdate: 'quinticInOut',
+        series: [
+          {
+            name: '对外汉语教育',
+            type: 'graph',
+            draggable: 'true',
+            layout: 'force',
+            force: {
+              repulsion: 700
+            },
+            data: graph.nodes,
+            links: graph.links,
+            categories: graph.categories,
+            roam: true,
+            label: {
+              position: 'right',
+              formatter: '{b}'
+            },
+            lineStyle: {
+              color: 'source',
+              curveness: 0
+            },
+            emphasis: {
+              focus: 'adjacency',
+              lineStyle: {
+                width: 10
+              }
+            }
+          }
+        ]
+      };
+      this.stageKnowledgeGraphChart.setOption(option);
+      window.onresize = () => {
+        this.stageKnowledgeGraphChart.showLoading()
+        this.stageKnowledgeGraphChart.resize()
+        this.stageKnowledgeGraphChart.hideLoading();
+      }
     },
     showPreKnowledge(){
       if(this.knowledgeEnd === this.xKnowledge[this.activeStage].length && this.xKnowledge[this.activeStage].length%this.maxLenght !== 0){
@@ -516,7 +583,7 @@ export default{
 }
 .button-wrapper{
   width: 100%;
-  height: 100px;
+  height: 60px;
 }
 .button-area{
   height: 60px;
@@ -556,5 +623,9 @@ export default{
 }
 .btn-leave-to {
   opacity: 0;
+}
+.stage-knowledge-graph-chart {
+  width: 100%;
+  height: calc(100% - 120px);
 }
 </style>

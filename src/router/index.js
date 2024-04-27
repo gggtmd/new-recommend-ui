@@ -58,6 +58,11 @@ const router = createRouter({
           component: () => import('@/views/answer/Answer2.vue')
         },
         {
+          path: '/hotAnswer',
+          name: 'hotAnswer',
+          component: () => import('@/views/answer/HotAnswer.vue')
+        },
+        {
           path: '/class',
           name: 'class',
           component: () => import('@/views/class/Class.vue')

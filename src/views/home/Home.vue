@@ -63,15 +63,15 @@ let routerList = ref([
     name: 'answer',
     subName: [
       {
-        label: '热门问答',
-        enLabel: 'HOT QUESTIONS',
-        name: 'answer',
-      },
-      {
         label: '实时问答',
         enLabel: 'REAL-TIME QUESTIONS',
         name: 'answer',
-      }
+      },
+      {
+        label: '热门问答',
+        enLabel: 'HOT QUESTIONS',
+        name: 'hotAnswer',
+      },
     ]
   },
   {
@@ -94,8 +94,16 @@ onMounted(() => {
 
 import {useRouter} from "vue-router";
 const router = useRouter()
+watch(selectIndex, (newValue, oldValue) => {
+  const routerObject = routerList.value.find(item => item.name === select.value)
+  if(!routerObject.subName || !routerObject.subName.length) {
+    router.push({name: routerObject.name})
+    return
+  }
+  router.push({name: routerObject.subName[selectIndex.value].name})
+})
 watch(select, (newValue, oldValue) => {
-  const routerObject = routerList.value.find(item => item.name === newValue)
+  const routerObject = routerList.value.find(item => item.name === select.value)
   if(!routerObject.subName || !routerObject.subName.length) {
     router.push({name: routerObject.name})
     return
@@ -143,7 +151,6 @@ watch(select, (newValue, oldValue) => {
     <div class="mask"></div>
   </div>
   <el-scrollbar>
-    <div style="height: 120px"></div>
     <router-view></router-view>
   </el-scrollbar>
 </template>
@@ -193,6 +200,7 @@ watch(select, (newValue, oldValue) => {
   width: 100%;
   height: 100vh;
   box-sizing: border-box;
+  padding-top: 120px;
   background-image: radial-gradient(farthest-corner at 40px 40px, rgb(255, 196, 196), rgb(255, 255, 255, 0) 45%),
   radial-gradient(farthest-corner at 100% 100%, rgb(245, 255, 177), rgb(255, 255, 255, 0) 55%);
 }

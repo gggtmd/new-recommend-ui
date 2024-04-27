@@ -26,12 +26,12 @@ let routerList = ref([
       {
         label: '智能诊断',
         enLabel: 'INTELLIGENT DIAGNOSIS',
-        name: 'class',
+        name: 'classWarningDiagnosis',
       },
       {
         label: '学情预警',
         enLabel: 'ACADEMIC WARNING',
-        name: 'class',
+        name: 'classWarningDiagnosis',
       }
     ]
   },
@@ -103,7 +103,18 @@ watch(selectIndex, (newValue, oldValue) => {
   router.push({name: routerObject.subName[selectIndex.value].name})
 })
 watch(select, (newValue, oldValue) => {
-  const routerObject = routerList.value.find(item => item.name === select.value)
+  const routerObject = routerList.value.find(item => {
+    if(item.name === newValue) {
+      return true;
+    }else if(item.subName) {
+      const subObject = item.subName.find(sub => {
+        return sub.name === newValue
+      })
+      if(subObject) {
+        return true
+      }
+    }
+  })
   if(!routerObject.subName || !routerObject.subName.length) {
     router.push({name: routerObject.name})
     return

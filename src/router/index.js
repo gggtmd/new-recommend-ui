@@ -68,6 +68,18 @@ const router = createRouter({
           component: () => import('@/views/class/Class.vue')
         },
         {
+          path: '/classWarningDiagnosis',
+          name: 'classWarningDiagnosis',
+          component: () => import('@/views/class/WarningDiagnosis.vue'),
+          children: [
+            {
+              path: '/classWarningDiagnosis/:classId/:studentId:/:studentName',
+              name: 'classWarningDiagnosisDetail',
+              component: () => import('@/views/class/classWarningDiagnosisDetail.vue')
+            }
+          ]
+        },
+        {
           path: '/graph',
           name: 'graph',
           component: () => import('@/views/graph/Graph.vue')

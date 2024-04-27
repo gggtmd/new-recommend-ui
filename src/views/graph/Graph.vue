@@ -7794,8 +7794,8 @@ export default {
 
         ]
       },
-      searchLeft: "1300px",
-      searchTop: "-200px",
+      searchLeft: "100px",
+      searchTop: "-100px",
       isInit: false
     };
   },
@@ -7947,7 +7947,7 @@ export default {
     },
     moveChange(e) {
       if(!this.isInit) return
-      this.searchLeft = e.clientX - 5 + "px"
+      this.searchLeft = e.clientX - 165 + "px"
       this.searchTop = e.clientY - 255 + "px"
     },
     stopMove() {

@@ -45,11 +45,23 @@ const selectAnswer = (item, index) => {
 
 const hotList = ref([
   {
-    title: 'title',
-    imageURL: 'aaaa',
-    videoURL: 'aaaaaaa',
+    title: '和羹之美，在于合异',
+    imageURL: 'https://big-event-kanwo.oss-cn-beijing.aliyuncs.com/%E5%92%8C%E7%BE%B9%E4%B9%8B%E7%BE%8E.png',
+    videoURL: 'https://big-event-kanwo.oss-cn-beijing.aliyuncs.com/%5B%E5%B9%B3%E2%80%9C%E8%AF%AD%E2%80%9D%E8%BF%91%E4%BA%BA%5D%E5%92%8C%E7%BE%B9%E4%B9%8B%E7%BE%8E%20%E5%9C%A8%E4%BA%8E%E5%90%88%E5%BC%82.mp4',
     answer: 'answer'
   },
+  {
+    title: '塞翁失马，焉知非福',
+    imageURL: 'https://big-event-kanwo.oss-cn-beijing.aliyuncs.com/%E5%A1%9E%E7%BF%81.png',
+    videoURL: 'https://big-event-kanwo.oss-cn-beijing.aliyuncs.com/%E7%BB%8F%E5%85%B8%E6%88%90%E8%AF%AD%E6%95%85%E4%BA%8B%EF%BC%9A%E5%A1%9E%E7%BF%81%E5%A4%B1%E9%A9%AC%E7%84%89%E7%9F%A5%E9%9D%9E%E7%A6%8F%EF%BC%8C%E8%BF%99%E4%B8%AA%E6%95%85%E4%BA%8B%E8%AF%B4%EF%BC%8C%E4%B8%8D%E8%83%BD%E5%BE%97%E6%84%8F%E5%A4%AA%E6%97%A9%2C%E4%BA%B2%E5%AD%90%2C%E6%97%A9%E6%95%99%2C%E5%A5%BD%E7%9C%8B%E8%A7%86%E9%A2%91.mp4',
+    answer: 'answer'
+  },
+  {
+    title: '咬定青山不放松',
+    imageURL: 'https://big-event-kanwo.oss-cn-beijing.aliyuncs.com/%E5%92%AC%E5%AE%9A%E9%9D%92%E5%B1%B1.png',
+    videoURL: 'https://big-event-kanwo.oss-cn-beijing.aliyuncs.com/%E5%92%AC%E5%AE%9A%E9%9D%92%E5%B1%B1%E4%B8%8D%E6%94%BE%E6%9D%BE%EF%BC%88%E9%83%91%E7%87%AE%E8%AF%8D%20%20%20%E5%88%98%E8%BF%9B%E6%88%90%E6%9B%B2%20%E9%99%88%E8%8B%8F%E5%A8%81%E6%BC%94%E5%94%B1%EF%BC%89.mp4',
+    answer: 'answer'
+  }
 ])
 const getHotAnswer = (item) => {
   isLoading.value = true
@@ -89,7 +101,12 @@ const getHotAnswer = (item) => {
     </div>
     <div class="aside">
       <div class="aside-title">热门回答</div>
-      <div class="aside-item" v-for="item in hotList" @click="getHotAnswer(item)">{{item.title}}</div>
+      <div class="aside-item-wrapper">
+        <div class="aside-item" v-for="(item, index) in hotList" @click="getHotAnswer(item)">
+          <div class="aside-item-title">{{item.title}}</div>
+          <div class="aside-item-border" v-show="index < hotList.length - 1"></div>
+        </div>
+      </div>
     </div>
     <el-scrollbar>
       <Transition name="fade">
@@ -155,21 +172,20 @@ const getHotAnswer = (item) => {
   top: 80px;
   right: 20px;
   width: 260px;
+}
+.aside-title {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #555;
+  cursor: default;
+  margin-bottom: 10px;
+  text-indent: 3px;
+}
+.aside-item-wrapper {
   border-radius: 6px;
   background-color: rgba(255, 255, 255, 0.8);
-  overflow: hidden;
   box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.2);
-}
-.aside-item,
-.aside-title{
-  width: 100%;
-  padding: 15px 10px;
-  box-sizing: border-box;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis;
-  cursor: pointer;
 }
 .aside-item:hover {
   background-color: rgba(0, 0, 0, 0.05);
@@ -177,12 +193,18 @@ const getHotAnswer = (item) => {
 .aside-item:last-child {
   border-bottom: none;
 }
-.aside-title {
-  font-size: 1.1rem;
-  font-weight: bold;
-  text-align: center;
-  color: #555;
-  cursor: default;
+.aside-item-title {
+  box-sizing: border-box;
+  padding: 15px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+  font-size: 14px;
+}
+.aside-item-border {
+  border-bottom: var(--el-border);
+  margin: 0 10px;
 }
 .answer-area {
   box-sizing: border-box;

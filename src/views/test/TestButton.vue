@@ -79,5 +79,6 @@ async function handleClick(button, index) {
   font-size: 1rem;
   font-weight: bold;
   letter-spacing: 2px;
+  margin-bottom: 10px;
 }
 </style>

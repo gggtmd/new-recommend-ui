@@ -110,7 +110,7 @@ const selectAnswer = (item, index) => {
 .header {
   position: absolute;
   top: 0;
-  z-index: 999;
+  z-index: 99;
   height: 60px;
   width: 100%;
   font-size: 2rem;
@@ -160,7 +160,7 @@ const selectAnswer = (item, index) => {
 .foo {
   position: absolute;
   bottom: 0;
-  z-index: 999;
+  z-index: 99;
   width: 100%;
   height: 95px;
   background-color: rgba(255, 255, 255, 0.7);

@@ -64,7 +64,6 @@ export default {
   },
   created() {
     this.getClassInfo();
-    console.log(this.$route)
   },
 }
 </script>
@@ -76,6 +75,8 @@ export default {
   height: 100vh;
   width: 100vw;
   background-color: #f2f2f7;
+  background-image: radial-gradient(farthest-corner at 40px 40px, rgba(255, 198, 198, 0.8), rgb(255, 255, 255, 0) 45%),
+  radial-gradient(farthest-corner at 100% 100%, rgba(245, 255, 177, 0.8), rgb(255, 255, 255, 0) 55%);
   position: absolute;
   left: 0;
   top: 0;
@@ -141,13 +142,13 @@ export default {
   background-color: #FFFFFF;
   width: 100%;
   height: 100%;
-  box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 6px 0px rgba(0, 0, 0, 0.2);
   transition: 0.4s;
   padding: 15px 15px 10px 15px;
   box-sizing: border-box;
 }
 .chart-main-content:hover{
-  box-shadow: 0px 2px 6px 1px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 2px 6px 1px rgba(0, 0, 0, 0.3);
 }
 .pre-view {
   width: 100%;
@@ -158,8 +159,6 @@ export default {
   font-size: 2rem;
   color: #555;
   font-weight: bold;
-  background-image: radial-gradient(farthest-corner at 40px 40px, rgba(255, 198, 198, 0.8), rgb(255, 255, 255, 0) 45%),
-  radial-gradient(farthest-corner at 100% 100%, rgba(245, 255, 177, 0.8), rgb(255, 255, 255, 0) 55%);
   border-radius: 5px;
 }
 .chart-right{

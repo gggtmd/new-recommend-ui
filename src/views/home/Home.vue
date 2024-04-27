@@ -59,49 +59,46 @@ watch(select, (newValue, oldValue) => {
 </script>
 
 <template>
-  <div class="split">
+  <div class="header">
     <div class="slogan">
-      <div style="font-size: 32px;">汉智大学堂：面向留华学生汉语学习的多模态个性化智能导学系统</div>
-      
+      <div>汉智大学堂：面向留华学生汉语学习的多模态个性化智能导学系统</div>
       <div>INTELLIGENT SINOLOGY HALL: A MULTI-MODAL PERSONALIZED INTELLIGENT LEARNING GUIDE SYSTEM FOR STUDENTS STUDYING CHINESE IN CHINA</div>
-
     </div>
-    <el-scrollbar>
-      <div class="nav-wrapper" ref="navWrapperRef">
-        <div
+    <div class="nav-wrapper" ref="navWrapperRef">
+      <div
           v-for="item in routerList"
           :key="item.name"
           class="nav-item-left"
           :class="{sel: select === item.name}"
           @click="select = item.name"
-        >
-          <div>{{item.label}}</div>
-          <div>{{item.enLabel}}</div>
-        </div>
-      </div>
-      <Transition
-        name="fade"
-        @before-enter="onBeforeEnter"
-        @enter="onEnter"
       >
-      </Transition>
-      <router-view></router-view>
-    </el-scrollbar>
+        <div>{{item.label}}</div>
+        <div>{{item.enLabel}}</div>
+      </div>
+    </div>
   </div>
+  <el-scrollbar>
+    <router-view></router-view>
+  </el-scrollbar>
 </template>
 
 <style scoped>
+.header {
+  position: fixed;
+  z-index: 99;
+  width: 100%;
+  height: 120px;
+  background-color: #003c70;
+}
 .el-scrollbar {
   width: 100%;
   height: 100vh;
+  box-sizing: border-box;
+  padding-top: 120px;
 }
 .nav-wrapper{
   font-weight: bold;
   letter-spacing: 2px;
-  position: sticky;
-  z-index: 99;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 60px;
   box-sizing: border-box;
@@ -109,7 +106,6 @@ watch(select, (newValue, oldValue) => {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #003c70;
 }
 .slogan {
   text-align: center;
@@ -118,7 +114,8 @@ watch(select, (newValue, oldValue) => {
   letter-spacing: 2px;
   font-size: 0.9rem;
   color: transparent;
-  background-color: #003c70;
+  height: 60px;
+  box-sizing: border-box;
 }
 .slogan div {
   background-image: linear-gradient(to right, #ffb11f 40%, #c000c0);

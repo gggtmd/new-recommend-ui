@@ -22,7 +22,7 @@ import TestButton from "@/views/test/TestButton.vue";
   box-sizing: border-box;
   padding: 20px 0;
   position: sticky;
-  top: calc(1.3rem + 30px);
+  top: 0;
   z-index: 999;
   min-height: 72px;
 }

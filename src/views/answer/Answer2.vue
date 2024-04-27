@@ -101,7 +101,7 @@ const selectAnswer = (item, index) => {
 <style scoped>
 .wrapper{
   width: 100%;
-  height: calc(100vh - 60px);
+  height: calc(100vh - 120px);
   overflow: hidden;
   position: relative;
   background-image: radial-gradient(farthest-corner at 40px 40px, rgb(255, 196, 196), rgb(255, 255, 255, 0) 45%),

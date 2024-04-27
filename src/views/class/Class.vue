@@ -78,7 +78,7 @@ function handleJoin() {
   padding: 20px 17%;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 10px;
+  gap: 20px;
   position: relative;
 }
 .class-wrapper-answer {
@@ -98,7 +98,7 @@ function handleJoin() {
 }
 .left-aside-wrapper {
   position: sticky;
-  top: 80px;
+  top: 20px;
 }
 .add-card {
   border-radius: 8px;

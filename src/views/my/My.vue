@@ -76,7 +76,15 @@ const signOut = () => {
   <div class="my">
     <div class="userInfo">
       <div class="info-header">
-        <el-button type="primary" size="small" @click="handleEdit">编 辑</el-button>
+        <div>用户个人信息</div>
+        <el-button
+          link
+          type="primary"
+          class="info-header-btn"
+          @click="handleEdit"
+        >
+          编 辑
+        </el-button>
       </div>
       <ul class="info-list">
         <li class="info-list-item">
@@ -133,8 +141,15 @@ const signOut = () => {
 }
 .info-header{
   display: flex;
-  justify-content: end;
-  padding: 10px;
+  justify-content: space-between;
+  padding: 0 10px;
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #555;
+}
+.info-header-btn {
+  font-weight: bold;
+  font-size: 1rem;
 }
 .info-list{
   list-style: none;

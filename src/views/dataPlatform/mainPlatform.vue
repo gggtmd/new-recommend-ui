@@ -8,7 +8,13 @@
           <classBaseInfo></classBaseInfo>
       </div>
       <div class="operate">
-        <button>导出</button>
+<!--        <button>导出</button>-->
+        <label class="select-class-label">
+          当前展示课堂:
+          <select v-model="selectedClass" class="select-item">
+            <option v-for="item in classList" :value="item">{{item.className}}</option>
+          </select>
+        </label>
       </div>
     </div>
     <div class="chart">
@@ -39,6 +45,7 @@ import studentWarningTable from '@/views/dataPlatform/studentDetail/studentWarni
 import studentEvaluationCard from '@/views/dataPlatform/studentEvaluation/studentEvaluationCard.vue'
 import knowledgeStageStyleCard from '@/views/dataPlatform/knowledgeStageStyle/knowledgeStageStyleCard.vue'
 import { classesGetByIdServer } from '@/api/classes.js'
+import {personClassServer} from "@/api/person.js";
 
 export default {
   name: "MainPlatform",
@@ -52,7 +59,17 @@ export default {
   data() {
     return {
       classInfo: {},
+      classList: [],
+      selectedClass: {},
+      selectWatch: null
     }
+  },
+  created() {
+    this.getClassInfo();
+    this.getAllClass();
+  },
+  beforeUnmount() {
+    this.selectWatch()
   },
   methods: {
     getClassInfo(){
@@ -60,10 +77,23 @@ export default {
       .then((res) => {
         this.classInfo = res.data
       })
+    },
+    async getAllClass() {
+      let res = await personClassServer()
+      this.classList = res.data
+      this.selectedClass = res.data.find(item => {
+        return item.classId.toString() === this.$route.params.classId
+      })
+      this.selectWatch = this.$watch('selectedClass', async (newValue) => {
+        await this.$router.replace({
+          name: 'dataPlatform',
+          params: {
+            classId: newValue.classId
+          }
+        })
+        window.location.reload()
+      })
     }
-  },
-  created() {
-    this.getClassInfo();
   },
 }
 </script>
@@ -121,6 +151,27 @@ export default {
 }
 .operate > button:active{
   background-color: #adadb0;
+}
+.select-class-label {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #555;
+}
+.select-item {
+  border: none;
+  outline: none;
+  background-color: rgba(255, 255, 255, 1);
+  height: 30px;
+  font-size: 1rem;
+  color: #555;
+  border-radius: 6px;
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
+  margin-left: 5px;
+  text-indent: 5px;
+  transition: 0.2s;
+}
+.select-item:hover {
+  filter: brightness(95%);
 }
 .chart{
   display: flex;

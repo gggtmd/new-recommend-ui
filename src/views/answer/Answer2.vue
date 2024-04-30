@@ -64,7 +64,7 @@ const selectAnswer = (item, index) => {
       </div>
     </Transition>
     <div class="header">
-      <div>知识问答</div>
+      <div>实时问答</div>
     </div>
     <el-scrollbar>
       <Transition name="fade">
@@ -128,7 +128,7 @@ const selectAnswer = (item, index) => {
 }
 .answer-area {
   box-sizing: border-box;
-  padding: 60px 250px 250px;
+  padding: 60px 350px 250px;
   height: 100%;
 }
 .title{

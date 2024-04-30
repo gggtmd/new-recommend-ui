@@ -97,10 +97,10 @@ const getHotAnswer = (item) => {
       </div>
     </Transition>
     <div class="header">
-      <div>知识问答</div>
+      <div>热门问答</div>
     </div>
     <div class="aside">
-      <div class="aside-title">热门回答</div>
+      <div class="aside-title">热门问题</div>
       <div class="aside-item-wrapper">
         <div class="aside-item" v-for="(item, index) in hotList" @click="getHotAnswer(item)">
           <div class="aside-item-title">{{item.title}}</div>
@@ -208,7 +208,7 @@ const getHotAnswer = (item) => {
 }
 .answer-area {
   box-sizing: border-box;
-  padding: 60px 300px 250px;
+  padding: 60px 350px 250px;
   height: 100%;
 }
 .title{

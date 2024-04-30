@@ -124,8 +124,10 @@ async function handleClick(item, index) {
   font-size: 1.2rem;
   font-weight: bold;
   color: #333;
-  transition: 0.15s;
+  transition: 0.1s;
   position: relative;
+  display: flex;
+  align-items: center;
 }
 .notice-item:last-child {
   border: none;
@@ -144,13 +146,14 @@ async function handleClick(item, index) {
   height: 100%;
   width: 80%;
   margin-left: 15px;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
+  //white-space: nowrap;
+  //text-overflow: ellipsis;
+  //overflow: hidden;
   display: inline-block;
   vertical-align: bottom;
   font-size: 1rem;
   font-weight: normal;
+  line-height: 1.5rem;
   color: #555;
 }
 .icon {

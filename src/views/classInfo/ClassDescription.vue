@@ -9,6 +9,7 @@ onMounted(() => {
 const classData = ref({})
 const creator = ref({})
 const isLoading = ref(true)
+const infoLoading = ref(true)
 
 //获取课堂详细信息
 import {classesGetByIdServer} from "@/api/classes.js";
@@ -20,7 +21,7 @@ async function getClassInfo() {
   let classCreatorInfo = await personGetByIdServer(classInfo.data.createUserId)
   classData.value = classInfo.data
   creator.value = classCreatorInfo.data
-  // isLoading.value = false
+  infoLoading.value = false
 }
 
 // 跳转至中控平台
@@ -64,67 +65,81 @@ const showKnowledge = computed(() => (item) => {
   item.knowledge && item.knowledge.forEach(item => {
     str += item.knowledgeName + "、"
   })
-  return str
+  return str.substring(0, str.length - 1)
 })
+
+// 阶段列表项单击事件
+import {classKnowledgeClassStageStatusServer} from "@/api/classKnowledge.js";
+import {ElMessageBox} from "element-plus";
+async function handleClick(item, index) {
+  if (item.statue === "0") {
+    try {
+      await ElMessageBox.confirm('确认开启这个阶段吗吗?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+      })
+      let res = await classKnowledgeClassStageStatusServer(route.params.classId, item.stage, 1)
+      if(res.code === 200) {
+        noticeList.value[index].statue = "1"
+      }
+    } catch (error) {
+      console.log("操作取消")
+    }
+  }
+}
 </script>
 
 <template>
-<!--  <Transition name="fade">-->
-    <div class="class-description">
-      <Transition name="fade">
-        <template>
-          <div class="header">
-            <div class="title">{{classData.className}}</div>
-            <el-button type="primary" @click="routeToDataPlatform">课堂分析</el-button>
+  <div class="header">
+    <div class="title">{{classData.className}}</div>
+    <el-button type="primary" @click="routeToDataPlatform">课堂分析</el-button>
+  </div>
+  <el-divider></el-divider>
+  <div class="mask" v-loading="isLoading" v-if="isLoading"></div>
+  <div class="mask" v-if="!noticeList.length&&!isLoading">暂无数据</div>
+  <Transition name="fade">
+    <div class="class-description" v-show="!isLoading">
+      <div class="info">
+        <div class="info-item">
+          <div class="sub-title">课堂ID:</div>
+          <div class="sub-info">{{classData.classId}}</div>
+        </div>
+        <div class="info-item">
+          <div class="sub-title">课堂学分:</div>
+          <div class="sub-info">{{classData.classCredit}}</div>
+        </div>
+        <div class="info-item">
+          <div class="sub-title">课堂学时:</div>
+          <div class="sub-info">{{classData.classHours}}</div>
+        </div>
+        <div class="info-item">
+          <div class="sub-title">创建时间:</div>
+          <div class="sub-info">{{new Date(classData.createdTime).toLocaleDateString()}}</div>
+        </div>
+        <div class="info-item">
+          <div class="sub-title">课堂教师:</div>
+          <div class="sub-info">{{creator.name}}</div>
+        </div>
+      </div>
+      <div class="box">
+        <img class="image" :src="classData.classPicture" alt="">
+        <div class="description">{{classData.description}}</div>
+      </div>
+      <ul class="notice-wrapper">
+        <li class="notice-item" v-for="(item, index) in noticeList">
+          <div class="stage">第{{item.stage}}阶段</div>
+          <div class="knowledge">{{showKnowledge(item)}}</div>
+          <div
+            class="icon"
+            :class="{unableIcon:item.statue === '1'}"
+            @click="handleClick(item, index)"
+          >
+            {{item.statue === "0"?"未开始":"已开始"}}
           </div>
-          <el-divider></el-divider>
-          <div class="info">
-            <div class="info-item">
-              <div class="sub-title">课堂ID:</div>
-              <div class="sub-info">{{classData.classId}}</div>
-            </div>
-            <div class="info-item">
-              <div class="sub-title">课堂学分:</div>
-              <div class="sub-info">{{classData.classCredit}}</div>
-            </div>
-            <div class="info-item">
-              <div class="sub-title">课堂学时:</div>
-              <div class="sub-info">{{classData.classHours}}</div>
-            </div>
-            <div class="info-item">
-              <div class="sub-title">创建时间:</div>
-              <div class="sub-info">{{new Date(classData.createdTime).toLocaleDateString()}}</div>
-            </div>
-            <div class="info-item">
-              <div class="sub-title">课堂教师:</div>
-              <div class="sub-info">{{creator.name}}</div>
-            </div>
-          </div>
-          <div class="box">
-            <img class="image" :src="classData.classPicture" alt="">
-            <div class="description">{{classData.description}}</div>
-          </div>
-        </template>
-      </Transition>
-      <div class="mask" v-loading="isLoading" v-if="isLoading"></div>
-      <div class="mask" v-if="!noticeList.length&&!isLoading">暂无数据</div>
-      <Transition name="fade">
-        <ul class="notice-wrapper" v-show="!isLoading">
-          <li class="notice-item" v-for="(item, index) in noticeList">
-            <div class="stage">第{{item.stage}}阶段</div>
-            <div class="knowledge">{{showKnowledge(item)}}</div>
-            <div
-                class="icon"
-                :class="{unableIcon:item.statue === '1'}"
-                @click="handleClick(item, index)"
-            >
-              {{item.statue === "0"?"未开始":"已开始"}}
-            </div>
-          </li>
-        </ul>
-      </Transition>
+        </li>
+      </ul>
     </div>
-<!--  </Transition>-->
+  </Transition>
 </template>
 
 <style scoped>
@@ -213,8 +228,10 @@ const showKnowledge = computed(() => (item) => {
   font-size: 1.2rem;
   font-weight: bold;
   color: #333;
-  transition: 0.15s;
+  transition: 0.1s;
   position: relative;
+  display: flex;
+  align-items: center;
 }
 .notice-item:last-child {
   border: none;
@@ -224,7 +241,6 @@ const showKnowledge = computed(() => (item) => {
   z-index: 999;
 }
 .stage {
-  height: 100%;
   margin-left: 15px;
   white-space: nowrap;
   display: inline-block;
@@ -233,13 +249,14 @@ const showKnowledge = computed(() => (item) => {
   height: 100%;
   width: 80%;
   margin-left: 15px;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
+  //white-space: nowrap;
+  //text-overflow: ellipsis;
+  //overflow: hidden;
   display: inline-block;
   vertical-align: bottom;
   font-size: 1rem;
   font-weight: normal;
+  line-height: 1.5rem;
   color: #555;
 }
 .icon {

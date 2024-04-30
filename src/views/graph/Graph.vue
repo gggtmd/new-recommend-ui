@@ -1,9 +1,11 @@
-
 <template>
   <div class="container">
     <div class="graph" ref="knowledgeChartRef"></div>
     <div class="search" ref="searchRef">
       <div class="drag-operate" @mousedown="moveSearch"></div>
+      <div class="close-search" @click="hideSearch">
+        <el-icon><Close /></el-icon>
+      </div>
       <el-input
         placeholder="输入查询"
         @keyup.enter.native="relationSearch(input)"
@@ -19,13 +21,21 @@
         </div>
       </div>
     </div>
+    <div class="open-search" @click="showSearch">
+      <el-icon><ArrowRightBold /></el-icon>
+    </div>
   </div>
 </template>
 
 <script>
 import * as echarts from "echarts";
 import Fuse from "fuse.js"
+import {ArrowRightBold, Close} from '@element-plus/icons-vue'
 export default {
+  components: {
+    ArrowRightBold,
+    Close
+  },
   data() {
     return {
       input: '',
@@ -7794,8 +7804,11 @@ export default {
 
         ]
       },
-      searchLeft: "100px",
+      searchLeft: "-350px",
       searchTop: "-100px",
+      searchTransition: '0s',
+      searchOpacity: '0',
+      openOpacity: '1',
       isInit: false
     };
   },
@@ -7894,7 +7907,7 @@ export default {
             draggable: 'true',
             layout: 'force',
             force: {
-              repulsion: 300
+              repulsion: 600
             },
             data: graph.nodes,
             links: graph.links,
@@ -7954,6 +7967,29 @@ export default {
       this.isInit = false
       document.removeEventListener('mousemove', this.moveChange)
       document.removeEventListener('mouseup', this.stopMove)
+    },
+    showSearch() {
+      this.searchTransition = '0.3s'
+      this.$nextTick(() => {
+        this.searchLeft = '50px'
+        this.searchOpacity = '1'
+        this.openOpacity = '0.5'
+      })
+      setTimeout(() => {
+        this.searchTransition = '0s'
+      }, 300)
+    },
+    hideSearch() {
+      this.searchTransition = '0.3s'
+      this.$nextTick(() => {
+        this.searchLeft = '-350px'
+        this.searchTop = '-100px'
+        this.openOpacity = '1'
+        this.searchOpacity = '0.5'
+      })
+      setTimeout(() => {
+        this.searchTransition = '0s'
+      }, 300)
     }
   },
 };
@@ -7977,12 +8013,14 @@ export default {
   height: 500px;
   border-radius: 5px;
   overflow: hidden;
-  background: #ecebeb;
+  background-color: rgba(230, 230, 230, 0.7);
+  backdrop-filter: blur(5px);
   transform: translateY(50%);
   box-sizing: border-box;
   padding: 5px;
   box-shadow: 1px 1px 10px -1px rgba(0, 0, 0, .2);
-  transition: 0.5s, left 0s, top 0s;
+  transition: 0.5s, left v-bind(searchTransition), top v-bind(searchTransition);
+  opacity: v-bind(searchOpacity);
 }
 .search:hover{
   box-shadow: 1px 1px 15px 1px rgba(0, 0, 0, .4);
@@ -7994,10 +8032,27 @@ export default {
   background-color: #4293fd;
   border-radius: 999px;
 }
+.close-search {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 25px;
+  height: 19px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #555;
+  transition: 0.2s;
+}
+.close-search:hover {
+  background-color: #4293fde0;
+  color: whitesmoke;
+}
 .search-answer{
   width: 100%;
   height: calc(100% - 55px);
-  background: #ffffff;
+  background: rgba(255, 255, 255, 0.7);
   margin-top: 8px;
   box-sizing: border-box;
   padding: 10px;
@@ -8014,5 +8069,28 @@ export default {
 .search-answer-item{
   margin-bottom: 12px;
   color: rgba(0, 0, 0, 0.7);
+}
+.open-search {
+  position: absolute;
+  z-index: 200;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 60px;
+  background-color: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  border-radius: 0 8px 8px 0;
+  box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: 0.1s;
+  opacity: v-bind(openOpacity);
+}
+.open-search:hover {
+  filter: brightness(90%);
 }
 </style>

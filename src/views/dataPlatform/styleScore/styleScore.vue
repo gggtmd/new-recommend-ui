@@ -257,7 +257,6 @@ function linkToStyleScoreDetail() {
       time: Date.now(),
     }
   })
-  console.log(exams[0])
   $bus.emit("changeStyleScoreDetail", exams[0])
 }
 

@@ -98,6 +98,9 @@ let routerList = ref([
     label: '精选习题',
     enLabel: 'Selected Exercises',
     name: 'testList',
+    params: {
+      bankId: '0'
+    },
     subName: [
       {
         label: '推荐习题',
@@ -176,11 +179,13 @@ const matchRouter = () => {
   })
 }
 
+// 监听路由变化，跳转
 import {useRouter} from "vue-router";
 const router = useRouter()
 let isRouter = false
 watch(() => selected.value, (newValue, oldValue) => {
-  if (isRouter) {
+  console.log(newValue)
+  if (isRouter || newValue.mainIndex < 0 && newValue.nextIndex < 0) {
     return
   }
   isRouter = true
@@ -204,6 +209,17 @@ watch(() => selected.value, (newValue, oldValue) => {
 const scrollRef = ref(null)
 const scrollTo = (top) => {
   scrollRef.value.setScrollTop(top)
+}
+
+// 跳转至我的界面
+const routerMy = () => {
+  selected.value = {
+    mainIndex: -1,
+    nextIndex: -1
+  }
+  router.push({
+    name: 'my'
+  })
 }
 </script>
 
@@ -244,7 +260,7 @@ const scrollTo = (top) => {
           <el-icon class="nav-icon"><Search /></el-icon>
           <el-icon class="nav-icon"><CirclePlus /></el-icon>
           <el-icon class="nav-icon"><Bell /></el-icon>
-          <div class="nav-icon-name">你好，{{userInfo.userName}}</div>
+          <div class="nav-icon-name" @click="routerMy">你好，{{userInfo.userName}}</div>
         </div>
       </div>
     </div>
@@ -338,12 +354,12 @@ const scrollTo = (top) => {
   white-space: nowrap;
   transition: 0.3s;
   font-weight: bold;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
   font-size: 1rem;
   color: white;
   text-align: left;
   box-sizing: border-box;
-  margin-right: 40px;
+  margin-right: 30px;
 }
 .sel {
   color: #409EFF;
@@ -353,7 +369,7 @@ const scrollTo = (top) => {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 .main-english {
   font-size: 0.7rem;
@@ -379,6 +395,7 @@ const scrollTo = (top) => {
   display: flex;
   align-items: center;
   color: white;
+  margin-left: 20px;
 }
 .nav-icon {
   font-size: 1.5rem;
@@ -390,13 +407,17 @@ const scrollTo = (top) => {
   color: #409EFF;
 }
 .nav-icon-name {
+  padding: 5px 10px;
+  border-radius: 5px;
   line-height: 1.5rem;
   font-weight: normal;
   color: #409EFF;
   cursor: pointer;
-  transition: 0.1s;
+  transition: 0.2s;
 }
 .nav-icon-name:hover {
-  filter: brightness(70%);
+  //filter: brightness(70%);
+  color: #b4d6ff;
+  background-color: rgba(0, 0, 0, 0.15);
 }
 </style>

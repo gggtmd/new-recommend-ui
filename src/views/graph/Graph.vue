@@ -4,7 +4,7 @@
     <div class="search" ref="searchRef">
       <div class="drag-operate" @mousedown="moveSearch"></div>
       <div class="close-search" @click="hideSearch">
-        <el-icon><Close /></el-icon>
+        <el-icon><CloseBold /></el-icon>
       </div>
       <el-input
         placeholder="输入查询"
@@ -24,17 +24,25 @@
     <div class="open-search" @click="showSearch">
       <el-icon><ArrowRightBold /></el-icon>
     </div>
+    <label class="select-class-label">
+      知识点所属课堂:
+      <select v-model="selectedClass" class="select-item">
+        <option value="">全部知识点</option>
+        <option v-for="item in classList" :value="item">{{item.className}}</option>
+      </select>
+    </label>
   </div>
 </template>
 
 <script>
 import * as echarts from "echarts";
 import Fuse from "fuse.js"
-import {ArrowRightBold, Close} from '@element-plus/icons-vue'
+import {ArrowRightBold, CloseBold} from '@element-plus/icons-vue'
+import {personClassServer} from "@/api/person.js";
 export default {
   components: {
     ArrowRightBold,
-    Close
+    CloseBold
   },
   data() {
     return {
@@ -7805,17 +7813,37 @@ export default {
         ]
       },
       searchLeft: "-350px",
-      searchTop: "-100px",
+      searchTop: "-140px",
       searchTransition: '0s',
       searchOpacity: '0',
       openOpacity: '1',
-      isInit: false
+      isInit: false,
+      classList: [],
+      selectedClass: "",
+      selectWatch: null
     };
   },
   mounted() {
-    this.loadGraph()
+    this.getGraphData();
+    this.getAllClass();
   },
   methods: {
+    async getAllClass() {
+      let res = await personClassServer()
+      this.classList = res.data
+      this.selectedClass = res.data.find(item => {
+        return item.classId.toString() === this.$route.query.classId
+      }) || ""
+      this.selectWatch = this.$watch('selectedClass', async (newValue) => {
+        await this.$router.replace({
+          name: 'graph',
+          query: {
+            classId: newValue.classId
+          }
+        })
+        this.getGraphData()
+      })
+    },
     relationSearch(question){
       this.answerNodes = [];
       this.input = '';
@@ -7871,6 +7899,9 @@ export default {
     },
     searchFormedAnswer(item,index){
       return index+1 + ". " + item.parentName+ " " + item.relation+ " " + item.childrenName;
+    },
+    getGraphData() {
+      this.loadGraph()
     },
     loadGraph() {
       let myChart = echarts.init(this.$refs.knowledgeChartRef);
@@ -7936,13 +7967,6 @@ export default {
           this.relationSearch(params.data.name);
         }
       })
-      // myChart.on('mouseup',(params) => {
-      //   let option = myChart.getOption();
-      //   option.series[0].data[params.dataIndex].x=params.event.offsetX;
-      //   option.series[0].data[params.dataIndex].y=params.event.offsetY;
-      //   option.series[0].data[params.dataIndex].fixed=true;
-      //   myChart.setOption(option);
-      // });
       window.onresize = () => {
         myChart.showLoading()
         myChart.resize()
@@ -7953,7 +7977,7 @@ export default {
       this.isInit = true
       const clientRect = this.$refs.searchRef.getBoundingClientRect()
       this.searchLeft = clientRect.x + "px"
-      this.searchTop = clientRect.y - 250 + "px"
+      this.searchTop = clientRect.y - 370 + "px"
       document.addEventListener("mousemove", this.moveChange)
       document.addEventListener("mouseup", this.stopMove)
       event.preventDefault()
@@ -7961,7 +7985,7 @@ export default {
     moveChange(e) {
       if(!this.isInit) return
       this.searchLeft = e.clientX - 165 + "px"
-      this.searchTop = e.clientY - 255 + "px"
+      this.searchTop = e.clientY - 375 + "px"
     },
     stopMove() {
       this.isInit = false
@@ -7972,8 +7996,9 @@ export default {
       this.searchTransition = '0.3s'
       this.$nextTick(() => {
         this.searchLeft = '50px'
+        this.searchTop = '-140px'
         this.searchOpacity = '1'
-        this.openOpacity = '0.5'
+        this.openOpacity = '0'
       })
       setTimeout(() => {
         this.searchTransition = '0s'
@@ -7983,9 +8008,9 @@ export default {
       this.searchTransition = '0.3s'
       this.$nextTick(() => {
         this.searchLeft = '-350px'
-        this.searchTop = '-100px'
+        this.searchTop = '-140px'
         this.openOpacity = '1'
-        this.searchOpacity = '0.5'
+        this.searchOpacity = '0.65'
       })
       setTimeout(() => {
         this.searchTransition = '0s'
@@ -7999,6 +8024,7 @@ export default {
 .container{
   width: 100%;
   height: calc(100vh - 120px);
+  position: relative;
 }
 .graph {
   width: 100%;
@@ -8013,7 +8039,7 @@ export default {
   height: 500px;
   border-radius: 5px;
   overflow: hidden;
-  background-color: rgba(230, 230, 230, 0.7);
+  background-color: rgba(210, 210, 210, 0.6);
   backdrop-filter: blur(5px);
   transform: translateY(50%);
   box-sizing: border-box;
@@ -8023,7 +8049,7 @@ export default {
   opacity: v-bind(searchOpacity);
 }
 .search:hover{
-  box-shadow: 1px 1px 15px 1px rgba(0, 0, 0, .4);
+  box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.4);
 }
 .drag-operate {
   height: 5px;
@@ -8052,7 +8078,7 @@ export default {
 .search-answer{
   width: 100%;
   height: calc(100% - 55px);
-  background: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.8);
   margin-top: 8px;
   box-sizing: border-box;
   padding: 10px;
@@ -8068,29 +8094,54 @@ export default {
 }
 .search-answer-item{
   margin-bottom: 12px;
-  color: rgba(0, 0, 0, 0.7);
+  //color: rgba(0, 0, 0, 0.85);
 }
 .open-search {
   position: absolute;
   z-index: 200;
-  top: 50%;
+  top: 40%;
   left: 0;
   transform: translateY(-50%);
-  width: 40px;
-  height: 60px;
-  background-color: rgba(255, 255, 255, 0.4);
-  backdrop-filter: blur(5px);
+  width: 55px;
+  height: 90px;
+  background-color: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(10px);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 1.2rem;
   border-radius: 0 8px 8px 0;
-  box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   transition: 0.1s;
   opacity: v-bind(openOpacity);
 }
 .open-search:hover {
   filter: brightness(90%);
+}
+.select-class-label {
+  position: absolute;
+  z-index: 200;
+  top: 20px;
+  right: 20px;
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #333;
+}
+.select-item {
+  border: none;
+  outline: none;
+  background-color: rgba(255, 255, 255, 1);
+  height: 30px;
+  font-size: 1rem;
+  color: #555;
+  border-radius: 6px;
+  box-shadow: 0 0 6px 2px rgba(0, 0, 0, 0.15);
+  margin-left: 5px;
+  text-indent: 5px;
+  transition: 0.2s;
+}
+.select-item:hover {
+  filter: brightness(85%);
 }
 </style>

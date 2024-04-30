@@ -12,13 +12,16 @@
         v-model="input"></el-input
       >
       <div class="search-answer">
-        <div
-          v-for="(item,index) in answerNodes"
-          :key="'answer_' + index"
-          class="search-answer-item"
-        >
-          {{ searchFormedAnswer(item,index) }}
-        </div>
+        <div v-if="!answerNodes || !answerNodes.length" class="pre-search-answer">搜索结果将展示在这里</div>
+        <template v-else>
+          <div
+            v-for="(item,index) in answerNodes"
+            :key="'answer_' + index"
+            class="search-answer-item"
+          >
+            {{ searchFormedAnswer(item,index) }}
+          </div>
+        </template>
       </div>
     </div>
     <div class="open-search" @click="showSearch">
@@ -7892,9 +7895,9 @@ export default {
         })
       })
       this.answerNodes = this.answerNodes.filter((item, index, self) =>
-              index === self.findIndex((t) => (
-                  t.childrenName === item.childrenName && t.parentName === item.parentName && t.relation === item.relation
-              ))
+        index === self.findIndex((t) => (
+          t.childrenName === item.childrenName && t.parentName === item.parentName && t.relation === item.relation
+        ))
       );
     },
     searchFormedAnswer(item,index){
@@ -8096,15 +8099,21 @@ export default {
   margin-bottom: 12px;
   //color: rgba(0, 0, 0, 0.85);
 }
+.pre-search-answer {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #555;
+  text-align: center;
+}
 .open-search {
   position: absolute;
   z-index: 200;
   top: 40%;
   left: 0;
   transform: translateY(-50%);
-  width: 55px;
-  height: 90px;
-  background-color: rgba(255, 255, 255, 0.6);
+  width: 50px;
+  height: 80px;
+  background-color: rgba(255, 255, 255, 0.4);
   backdrop-filter: blur(10px);
   display: flex;
   align-items: center;
@@ -8138,8 +8147,8 @@ export default {
   border-radius: 6px;
   box-shadow: 0 0 6px 2px rgba(0, 0, 0, 0.15);
   margin-left: 5px;
-  text-indent: 5px;
   transition: 0.2s;
+  padding: 0 5px;
 }
 .select-item:hover {
   filter: brightness(85%);

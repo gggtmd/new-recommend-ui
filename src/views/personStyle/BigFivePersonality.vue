@@ -72,12 +72,12 @@ const routerTo = () => {
 <template>
   <AnswerDetail ref="answerDetailRef" class="answer-detail" :data="problemList" @handleSelect="handleSelect"></AnswerDetail>
   <div class="title">
-    学习风格量表
+    大五人格
     <el-button
-      link
-      type="primary"
-      class="title-back"
-      @click="routerTo"
+        link
+        type="primary"
+        class="title-back"
+        @click="routerTo"
     >
       <el-icon><ArrowLeftBold /></el-icon>
       返回

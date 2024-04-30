@@ -15,6 +15,11 @@ const router = createRouter({
       component: () => import('@/views/personStyle/PersonStyle.vue')
     },
     {
+      path: '/BigFivePersonality',
+      name: 'BigFivePersonality',
+      component: () => import('@/views/personStyle/BigFivePersonality.vue')
+    },
+    {
       path: '/',
       name: 'index',
       component: () => import('@/views/home/Home.vue'),
@@ -190,6 +195,11 @@ const router = createRouter({
         },
       ]
     },
+    {
+      path: '/transferStation',
+      name: 'transferStation',
+      component: () => import('@/views/transferStation/TransferStation.vue')
+    }
   ]
 })
 

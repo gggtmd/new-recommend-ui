@@ -1,8 +1,13 @@
 <script setup>
-import {ref,onMounted} from "vue";
+import {ref, onMounted, inject, onBeforeUnmount, watch} from "vue";
 import {personStylePaperResourceRecommendServer} from "@/api/personStylePaper.js";
 import SourceCard from "@/views/recommend/SourceCard.vue";
 import ScaleModal from "@/components/ScaleModal.vue";
+
+onMounted(() => {
+  getRecommendResource()
+  getLessonList()
+})
 
 //推荐资源列表,初始化8个提供骨架占位
 const recommendList = ref(new Array(10).fill({}))
@@ -23,11 +28,6 @@ async function getLessonList() {
   pageNum.value++
   lessonList.value.push(...res.data.records)
 }
-//挂在后获取资源
-onMounted(() => {
-  getRecommendResource()
-  getLessonList()
-})
 //将Body交给IntersectionObserver,监听交叉
 const body = document.querySelector("body")
 
@@ -58,6 +58,19 @@ function hideModal() {
     name: "home"
   })
 }
+
+import {useRoute} from 'vue-router'
+const recommendTitleRef = ref(null)
+const outerTitleRef = ref(null)
+const $bus = inject("$bus")
+const route = useRoute()
+watch(() => route.query.resourceType, (newValue) => {
+  if(newValue === 'recommend') {
+    $bus.emit("scrollTo", recommendTitleRef.value.offsetTop - 160)
+  } else if(newValue === 'link') {
+    $bus.emit("scrollTo", outerTitleRef.value.offsetTop - 160)
+  }
+})
 </script>
 
 <template>
@@ -66,7 +79,7 @@ function hideModal() {
   </ScaleModal>
   <div class="recommend">
     <recommend-carousel class="carousel"></recommend-carousel>
-    <div class="title">推荐资源</div>
+    <div class="title" ref="recommendTitleRef">推荐资源</div>
     <div class="recommend-wrapper">
       <SourceCard
         v-for="item in recommendList"
@@ -79,7 +92,7 @@ function hideModal() {
         <template #info>{{item.resourceLink}}</template>
       </SourceCard>
     </div>
-    <div class="title">外部资源</div>
+    <div class="title" ref="outerTitleRef">外部资源</div>
     <div class="lesson-wrapper">
       <SourceCard
         v-for="item in lessonList"

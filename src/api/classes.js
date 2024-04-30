@@ -13,7 +13,12 @@ export const classesGetByIdServer = (classId) => {
     })
 }
 
-
+/**
+ * 新增课堂
+ * @param classes
+ * @param image
+ * @returns {*}
+ */
 export const classesSaveServer = (classes, image) => {
     return request({
         transformRequest: [function(data, headers) {

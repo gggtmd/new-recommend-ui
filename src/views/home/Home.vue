@@ -1,5 +1,5 @@
 <script setup>
-import {computed, onMounted, ref, watch} from "vue";
+import {computed, inject, onBeforeUnmount, onMounted, ref, watch} from "vue";
 import {Search, CirclePlus, Bell} from '@element-plus/icons-vue'
 
 import {useUserInfoStore} from "@/stores/userInfo.js";
@@ -46,7 +46,7 @@ let routerList = ref([
       {
         label: '大五人格',
         enLabel: 'Big-Five Personality',
-        name: 'personStyle',
+        name: 'BigFivePersonality',
       }
     ]
   },
@@ -68,7 +68,7 @@ let routerList = ref([
       {
         label: '学情预警',
         enLabel: 'Academic Warning',
-        name: 'classWarningDiagnosis',
+        name: 'transferStation',
       }
     ]
   },
@@ -142,8 +142,14 @@ let routerList = ref([
 ])
 
 const navWrapperRef = ref()
+const $bus = inject("$bus")
 onMounted(() => {
   matchRouter()
+  $bus.on('scrollTo', scrollTo)
+})
+
+onBeforeUnmount(() => {
+  $bus.off('scrollTo', scrollTo)
 })
 
 // 获取路由匹配routerList
@@ -193,6 +199,12 @@ watch(() => selected.value, (newValue, oldValue) => {
     isRouter = false
   }, 500)
 })
+
+// 滚动el-scroll
+const scrollRef = ref(null)
+const scrollTo = (top) => {
+  scrollRef.value.setScrollTop(top)
+}
 </script>
 
 <template>
@@ -238,7 +250,7 @@ watch(() => selected.value, (newValue, oldValue) => {
     </div>
     <div class="mask"></div>
   </div>
-  <el-scrollbar>
+  <el-scrollbar ref="scrollRef" wrap-style="scroll-behavior: smooth;">
     <router-view></router-view>
   </el-scrollbar>
 </template>
@@ -281,7 +293,7 @@ watch(() => selected.value, (newValue, oldValue) => {
     backdrop-filter: blur(0px);
   }
   to {
-    backdrop-filter: blur(15px);
+    backdrop-filter: blur(8px);
   }
 }
 .el-scrollbar {

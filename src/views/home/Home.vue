@@ -1,125 +1,197 @@
 <script setup>
-import {inject, onBeforeMount, onMounted, ref, watch} from "vue";
+import {computed, onMounted, ref, watch} from "vue";
+import {Search, CirclePlus, Bell} from '@element-plus/icons-vue'
+
+import {useUserInfoStore} from "@/stores/userInfo.js";
+const userInfoStore = useUserInfoStore()
+const userInfo = computed(() => {
+  return userInfoStore.userInfo
+})
 
 //点击导航链接触发
 let routerList = ref([
   {
     label: '首页',
-    enLabel: 'HOME',
-    name: 'home'
+    enLabel: 'Home',
+    name: 'home',
+    subName: [
+      {
+        label: '推荐资源',
+        enLabel: 'Recommend',
+        name: 'home',
+        query: {
+          resourceType: 'recommend'
+        }
+      },
+      {
+        label: '外部资源',
+        enLabel: 'Link',
+        name: 'home',
+        query: {
+          resourceType: 'link'
+        }
+      }
+    ]
   },
   {
-    label: '风格问卷',
-    enLabel: 'STYLE',
-    name: 'personStyle'
+    label: '问卷量表',
+    enLabel: 'Questionnaire',
+    name: 'personStyle',
+    subName: [
+      {
+        label: '学习风格',
+        enLabel: 'Learning Style',
+        name: 'personStyle',
+      },
+      {
+        label: '大五人格',
+        enLabel: 'Big-Five Personality',
+        name: 'personStyle',
+      }
+    ]
   },
   {
     label: '教学课堂',
-    enLabel: 'TEACHING CLASS',
+    enLabel: 'Teaching Class',
     name: 'class',
     subName: [
       {
         label: '课堂管理',
-        enLabel: 'CLASS MANAGE',
+        enLabel: 'Class Management',
         name: 'class',
       },
       {
         label: '智能诊断',
-        enLabel: 'INTELLIGENT DIAGNOSIS',
+        enLabel: 'Intelligent Diagnosis',
         name: 'classWarningDiagnosis',
       },
       {
         label: '学情预警',
-        enLabel: 'ACADEMIC WARNING',
+        enLabel: 'Academic Warning',
         name: 'classWarningDiagnosis',
+      }
+    ]
+  },
+  {
+    label: '汉字学习',
+    enLabel: 'Characters Learning',
+    name: '',
+    subName: [
+      {
+        label: '字音学习',
+        enLabel: 'Pronunciation Learning',
+        name: '',
+      },
+      {
+        label: '字形学习',
+        enLabel: 'Glyph Learning',
+        name: '',
       }
     ]
   },
   {
     label: '知识图谱',
-    enLabel: 'KNOWLEDGE GRAPH',
+    enLabel: 'Knowledge Graph',
     name: 'graph'
   },
   {
     label: '精选习题',
-    enLabel: 'SELECTED EXERCISES',
-    name: 'test',
+    enLabel: 'Selected Exercises',
+    name: 'testList',
     subName: [
       {
         label: '推荐习题',
-        enLabel: 'RECOMMEND EXERCISES',
-        name: 'test',
+        enLabel: 'Recommended Exercises',
+        name: 'testList',
+        params: {
+          bankId: '0'
+        }
       },
       {
         label: '海量题库',
-        enLabel: 'MORE EXERCISES',
-        name: 'test',
+        enLabel: 'More Exercises',
+        name: 'testList',
+        params: {
+          bankId: '1'
+        }
       }
     ]
   },
   {
     label: '知识问答',
-    enLabel: 'KNOWLEDGE QUESTION',
+    enLabel: 'Knowledge Question',
     name: 'answer',
     subName: [
       {
         label: '实时问答',
-        enLabel: 'REAL-TIME QUESTIONS',
+        enLabel: 'Real-Time Questions',
         name: 'answer',
       },
       {
         label: '热门问答',
-        enLabel: 'HOT QUESTIONS',
+        enLabel: 'Popular Questions',
         name: 'hotAnswer',
       },
     ]
   },
-  {
-    label: '我的',
-    enLabel: 'MY',
-    name: 'my',
-  },
+  // {
+  //   label: '我的',
+  //   enLabel: 'My',
+  //   name: 'my',
+  // },
 ])
 
-const select = ref("")
-const selectIndex = ref(0)
+const navWrapperRef = ref()
+onMounted(() => {
+  matchRouter()
+})
 
+// 获取路由匹配routerList
 import {useRoute} from "vue-router";
 const route = useRoute()
-const navWrapperRef = ref()
-const $bus = inject("$bus")
-onMounted(() => {
-  select.value = route.matched[1].name
+const selected = ref({
+  mainIndex: 0,
+  nextIndex: 0,
 })
+const matchRouter = () => {
+  const routerName = route.matched[1].name
+  routerList.value.find((routerItem, mainIndex) => {
+    selected.value.mainIndex = mainIndex
+    if(routerName === routerItem.name) {
+      selected.value.nextIndex = 0
+      return true
+    } else if(routerItem.subName && Array.isArray(routerItem.subName)){
+      const matchRouterItem = routerItem.subName.find((item, nextIndex) => {
+        selected.value.nextIndex = nextIndex
+        return routerName === item.name
+      })
+      return !!matchRouterItem
+    }
+  })
+}
 
 import {useRouter} from "vue-router";
 const router = useRouter()
-watch(selectIndex, (newValue, oldValue) => {
-  const routerObject = routerList.value.find(item => item.name === select.value)
-  if(!routerObject.subName || !routerObject.subName.length) {
-    router.push({name: routerObject.name})
+let isRouter = false
+watch(() => selected.value, (newValue, oldValue) => {
+  if (isRouter) {
     return
   }
-  router.push({name: routerObject.subName[selectIndex.value].name})
-})
-watch(select, (newValue, oldValue) => {
-  const routerObject = routerList.value.find(item => {
-    if(item.name === newValue) {
-      return true;
-    }else if(item.subName) {
-      const subObject = item.subName.find(sub => {
-        return sub.name === newValue
-      })
-      if(subObject) {
-        return true
-      }
-    }
+  isRouter = true
+  let matchRouter
+  if(newValue.nextIndex < 0) {
+    matchRouter = routerList.value[selected.value.mainIndex]
+  } else {
+    matchRouter = routerList.value[selected.value.mainIndex].subName && routerList.value[selected.value.mainIndex].subName[selected.value.nextIndex] || routerList.value[selected.value.mainIndex]
+  }
+  router.push({
+    name: matchRouter.name,
+    params: matchRouter.params ? matchRouter.params : {},
+    query: matchRouter.query ? matchRouter.query : {}
   })
-  if(!routerObject.subName || !routerObject.subName.length) {
-    router.push({name: routerObject.name})
-    return
-  }
-  router.push({name: routerObject.subName[selectIndex.value].name})
+  setTimeout(() => {
+    isRouter = false
+  }, 500)
 })
 </script>
 
@@ -127,35 +199,40 @@ watch(select, (newValue, oldValue) => {
   <div class="header">
     <div class="header-main">
       <div class="slogan">
-        <div>汉智大学堂：面向留华学生汉语学习的多模态个性化智能导学系统</div>
+        <div class="slogan-main">汉智大学堂：面向留华学生汉语学习的多模态个性化智能导学系统</div>
         <div>INTELLIGENT SINOLOGY HALL: A MULTI-MODAL PERSONALIZED INTELLIGENT LEARNING GUIDE SYSTEM FOR STUDENTS STUDYING CHINESE IN CHINA</div>
       </div>
       <div class="nav-wrapper" ref="navWrapperRef">
         <div
-          v-for="item in routerList"
+          v-for="(item, mainIndex) in routerList"
           :key="item.name"
           class="nav-item-left"
-          :class="{sel: select === item.name}"
-          @click="select = item.name; selectIndex = 0"
+          @click="selected = {
+            mainIndex,
+            nextIndex: -1,
+          }"
         >
-          <div class="nav-item-main">{{item.label}}</div>
-          <div class="nav-item-main">{{item.enLabel}}</div>
-        </div>
-      </div>
-      <div class="nav-sub-wrapper">
-        <div
-          v-for="item in routerList"
-          :key="item.name"
-          class="nav-item-left"
-        >
+          <div class="nav-item-title" :class="{sel: selected.mainIndex === mainIndex}">
+            <div class="nav-item-main">{{item.label}}</div>
+            <div class="nav-item-main main-english">{{item.enLabel}}</div>
+          </div>
           <div
-            v-for="(sub, index) in item.subName"
+            v-for="(sub, nextIndex) in item.subName"
             class="nav-item-sub"
-            @click="select = item.name;selectIndex = index"
+            @click="selected = {
+              mainIndex,
+              nextIndex: nextIndex
+            }"
           >
             <div>{{sub.label}}</div>
-            <div>{{sub.enLabel}}</div>
+            <div class="nav-item-sub-en">{{sub.enLabel}}</div>
           </div>
+        </div>
+        <div class="nav-icon-wrapper">
+          <el-icon class="nav-icon"><Search /></el-icon>
+          <el-icon class="nav-icon"><CirclePlus /></el-icon>
+          <el-icon class="nav-icon"><Bell /></el-icon>
+          <div class="nav-icon-name">你好，{{userInfo.userName}}</div>
         </div>
       </div>
     </div>
@@ -183,7 +260,7 @@ watch(select, (newValue, oldValue) => {
   overflow: hidden;
 }
 .header-main:hover {
-  height: 250px;
+  height: 280px;
 }
 .mask {
   position: absolute;
@@ -204,7 +281,7 @@ watch(select, (newValue, oldValue) => {
     backdrop-filter: blur(0px);
   }
   to {
-    backdrop-filter: blur(5px);
+    backdrop-filter: blur(15px);
   }
 }
 .el-scrollbar {
@@ -220,10 +297,16 @@ watch(select, (newValue, oldValue) => {
   padding: 20px 0;
   font-weight: bold;
   letter-spacing: 2px;
-  font-size: 0.9rem;
+  font-size: 0.7rem;
   color: transparent;
   height: 60px;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.slogan-main {
+  font-size: 1.3rem;
 }
 .slogan div {
   background-image: linear-gradient(to right, #ffb11f 40%, #c000c0);
@@ -235,10 +318,8 @@ watch(select, (newValue, oldValue) => {
   width: 100%;
   height: 60px;
   box-sizing: border-box;
-  padding: 0 100px;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  justify-content: center;
 }
 .nav-item-left {
   cursor: pointer;
@@ -246,29 +327,31 @@ watch(select, (newValue, oldValue) => {
   transition: 0.3s;
   font-weight: bold;
   letter-spacing: 2px;
-  font-size: 0.8rem;
+  font-size: 1rem;
   color: white;
   text-align: left;
-  flex-basis: 0;
-  flex-grow: 1;
-  flex-shrink: 1;
   box-sizing: border-box;
+  margin-right: 40px;
 }
 .sel {
   color: #409EFF;
 }
-.nav-sub-wrapper {
-  width: 100%;
-  box-sizing: border-box;
-  padding: 0 100px;
+.nav-item-title {
+  height: 60px;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+.main-english {
+  font-size: 0.7rem;
+  margin-top: 2px;
 }
 .nav-item-sub {
-  font-size: 0.7rem;
+  font-size: 0.8rem;
+  line-height: 1rem;
   font-weight: normal;
   margin-bottom: 10px;
-  text-align: left;
   flex-basis: 6rem;
   flex-grow: 1;
   box-sizing: border-box;
@@ -276,5 +359,32 @@ watch(select, (newValue, oldValue) => {
 }
 .nav-item-sub:hover {
   color: #409EFF;
+}
+.nav-item-sub-en {
+  font-size: 0.7rem;
+}
+.nav-icon-wrapper {
+  display: flex;
+  align-items: center;
+  color: white;
+}
+.nav-icon {
+  font-size: 1.5rem;
+  transition: 0.1s;
+  cursor: pointer;
+  margin-right: 20px;
+}
+.nav-icon:hover {
+  color: #409EFF;
+}
+.nav-icon-name {
+  line-height: 1.5rem;
+  font-weight: normal;
+  color: #409EFF;
+  cursor: pointer;
+  transition: 0.1s;
+}
+.nav-icon-name:hover {
+  filter: brightness(70%);
 }
 </style>

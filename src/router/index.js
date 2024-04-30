@@ -1,8 +1,8 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import {createRouter, createWebHashHistory} from 'vue-router'
 import RecommendDetail from "@/views/recommend/RecommendDetail.vue";
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHashHistory(),
   routes: [
     {
       path: '/login',
@@ -36,7 +36,6 @@ const router = createRouter({
           path: '/test',
           name: 'test',
           component: () => import('@/views/test/Test.vue'),
-          redirect: '/test/0',
           children: [
             {
               path: '/test/:bankId',

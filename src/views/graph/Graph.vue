@@ -29,9 +29,15 @@
     </div>
     <label class="select-class-label">
       知识点分类:
-      <select v-model="selectedClass" class="select-item">
+      <select v-model="selectedClass" class="select-wrapper">
         <option value="">全部知识点</option>
-        <option v-for="item in classList" :value="item">{{item.className}}</option>
+        <option
+          v-for="item in classList"
+          :value="item"
+          class="option-item"
+        >
+          {{item.className}}
+        </option>
       </select>
     </label>
   </div>
@@ -7812,7 +7818,6 @@ export default {
           {
             "name": "句"
           },
-
         ]
       },
       searchLeft: "-350px",
@@ -7908,6 +7913,14 @@ export default {
     },
     loadGraph() {
       let myChart = echarts.init(this.$refs.knowledgeChartRef);
+      myChart.showLoading({
+        text: "加载中...",
+        fontSize: "16",
+        maskColor: "white"
+      })
+      setTimeout(() => {
+        myChart.hideLoading()
+      }, 2000)
       let option;
       const graph = this.test;
       graph.nodes.forEach(node => {
@@ -7918,9 +7931,8 @@ export default {
       option = {
         title: {
           text: '知识图谱',
-          subtext: 'Default layout',
-          top: 'bottom',
-          left: 'right'
+          bottom: '15px',
+          right: '20px'
         },
         tooltip: {},
         legend: [
@@ -7953,13 +7965,13 @@ export default {
             },
             lineStyle: {
               color: 'source',
-              curveness: 0
+              curveness: 0.1
             },
             emphasis: {
-              focus: 'adjacency',
+              // focus: 'adjacency',
               lineStyle: {
                 width: 10
-              }
+              },
             }
           }
         ]
@@ -8080,7 +8092,7 @@ export default {
 }
 .el-input:deep(.el-input__wrapper)  {
   border-radius: 99px;
-  background-color: rgba(90, 90, 90, 0.2);
+  background-color: rgba(90, 90, 90, 0.15);
 }
 .el-input:deep(.el-input__inner)  {
   font-size: 0.9rem;
@@ -8090,7 +8102,7 @@ export default {
 .search-answer{
   width: 100%;
   height: calc(100% - 55px);
-  background-color: rgba(90, 90, 90, 0.2);
+  background-color: rgba(90, 90, 90, 0.15);
   margin-top: 8px;
   box-sizing: border-box;
   padding: 10px;
@@ -8150,7 +8162,7 @@ export default {
   font-weight: bold;
   color: #333;
 }
-.select-item {
+.select-wrapper {
   border: none;
   outline: none;
   background-color: rgba(255, 255, 255, 0.6);
@@ -8164,7 +8176,7 @@ export default {
   transition: 0.2s;
   padding: 0 5px;
 }
-.select-item:hover {
+.select-wrapper:hover {
   filter: brightness(85%);
 }
 </style>

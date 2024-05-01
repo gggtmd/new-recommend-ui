@@ -1,7 +1,7 @@
 <script setup>
 import {InfoFilled, ArrowLeftBold} from "@element-plus/icons-vue";
 import {ref, onMounted} from "vue";
-import {studyStylePaperListServer} from "@/api/studyStylePaper.js";
+import {bigFivePaperListServer} from "@/api/bigFivePaper.js";
 import AnswerDetail from "@/components/AnswerDetail.vue";
 
 const isInit = ref(false)
@@ -12,7 +12,7 @@ onMounted(() => {
 // 获取风格问卷题目
 const problemList = ref([])
 async function getStudyStylePaper() {
-  let res = await studyStylePaperListServer()
+  let res = await bigFivePaperListServer()
   problemList.value = res.data
   isInit.value = true
 }
@@ -42,17 +42,15 @@ function problemListValidate() {
 }
 
 //提交风格测试
-import {personStylePaperSaveServer} from "@/api/personStylePaper.js";
+import {bigFivePaperSaveServer} from "@/api/bigFivePaper.js";
 import {ElMessage} from "element-plus";
 import {useRouter} from "vue-router";
-
-
 const router = useRouter()
 const isLoading = ref(false)
 async function savePersonStylePaper() {
   if (!problemListValidate()) {
     isLoading.value = true
-    let res = await personStylePaperSaveServer(JSON.stringify(problemList.value))
+    let res = await bigFivePaperSaveServer(JSON.stringify(problemList.value))
     isLoading.value = false
     if(res.code === 200) {
       await router.push('/')
@@ -74,10 +72,10 @@ const routerTo = () => {
   <div class="title">
     大五人格
     <el-button
-        link
-        type="primary"
-        class="title-back"
-        @click="routerTo"
+      link
+      type="primary"
+      class="title-back"
+      @click="routerTo"
     >
       <el-icon><ArrowLeftBold /></el-icon>
       返回
@@ -90,6 +88,8 @@ const routerTo = () => {
         <el-radio-group class="el-radio-group" v-model=item.studentAnswer @change="handleChange(index)">
           <el-radio-button value="item.option1">{{ item.option1 }}</el-radio-button>
           <el-radio-button value="item.option2">{{ item.option2 }}</el-radio-button>
+          <el-radio-button value="item.option2">{{ item.option3 }}</el-radio-button>
+          <el-radio-button value="item.option2">{{ item.option4 }}</el-radio-button>
         </el-radio-group>
       </div>
       <div class="footer" v-show="isInit">
@@ -106,7 +106,7 @@ const routerTo = () => {
 
 <style scoped>
 .answer-detail {
-  width: 13%;
+  width: 15%;
   position: absolute;
   top: 80px;
   left: 20px;

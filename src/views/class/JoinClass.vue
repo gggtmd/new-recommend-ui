@@ -53,6 +53,7 @@ defineExpose({
     width="450px"
     :destroy-on-close="true"
     :modal-append-to-body="false"
+    style="border-radius: 15px"
   >
     <el-form :model="classes" :rules="rules" ref="classesRef" label-width="60px">
       <el-form-item label="课堂名:" prop="classId">

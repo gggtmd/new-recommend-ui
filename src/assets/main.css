@@ -35,8 +35,8 @@ body {
 }
 
 .el-overlay {
-  /*background: rgba(230, 230, 230, 0.3);*/
-  /*backdrop-filter: blur(3px);*/
+  background-color: rgba(0, 0, 0, 0.25) !important;
+  backdrop-filter: blur(4px);
 }
 
 a {

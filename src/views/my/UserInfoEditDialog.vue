@@ -5,7 +5,9 @@
       v-model="dialogFormVisible"
       width="500px"
       :destroy-on-close="true"
-      @closed="resetForm('userInfoForm')">
+      @closed="resetForm('userInfoForm')"
+      style="border-radius: 15px"
+  >
     <el-form :model="userInfoForm" :rules="rules" ref="userInfoForm" label-width="80px">
       <el-form-item label="用户名:" prop="userName">
         <el-input v-model="userInfoForm.userName"></el-input>

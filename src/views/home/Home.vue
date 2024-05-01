@@ -184,7 +184,6 @@ import {useRouter} from "vue-router";
 const router = useRouter()
 let isRouter = false
 watch(() => selected.value, (newValue, oldValue) => {
-  console.log(newValue)
   if (isRouter || newValue.mainIndex < 0 && newValue.nextIndex < 0) {
     return
   }
@@ -274,7 +273,7 @@ const routerMy = () => {
 <style scoped>
 .header {
   position: fixed;
-  z-index: 2500;
+  z-index: 2003;
   width: 100%;
 }
 .header-main {

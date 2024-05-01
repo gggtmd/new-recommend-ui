@@ -109,7 +109,6 @@ defineExpose({
             range-separator="至"
             start-placeholder="开始时间"
             end-placeholder="结束时间"
-            style="width: 100%;"
           >
           </el-date-picker>
         </el-form-item>
@@ -135,9 +134,9 @@ defineExpose({
 
 <style scoped>
 .class-exam-add:deep(.new-dialog) {
-  border-radius: 10px;
+  border-radius: 15px;
 }
-.el-form-item {
+/*.el-form-item {
   height: 40px;
 }
 .class-exam-add:deep(.el-form-item__label) {
@@ -154,7 +153,7 @@ el-form-item:deep(.el-select){
 }
 el-form-item:deep(.el-select__wrapper){
   height: 100%;
-}
+}*/
 .dialog-footer {
   display: flex;
   justify-content: flex-end;

@@ -119,6 +119,7 @@ export default {
     width="500px"
     :destroy-on-close="true"
     :modal-append-to-body="false"
+    style="border-radius: 15px"
   >
     <el-form :model="classes" :rules="rules" ref="classes" label-width="80px">
       <el-form-item label="课堂名:" prop="className">

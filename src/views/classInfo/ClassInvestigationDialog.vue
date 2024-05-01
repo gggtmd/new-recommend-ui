@@ -73,6 +73,7 @@ defineExpose({
       v-model="dialogFormVisible"
       width="500px"
       :destroy-on-close="true"
+      style="border-radius: 15px"
   >
     <el-form :model="investigationForm" :rules="rules" ref="investigationFormRef" label-width="60px">
       <el-form-item label="评分:" prop="stageRating">

@@ -28,7 +28,7 @@
       <el-icon><ArrowRightBold /></el-icon>
     </div>
     <label class="select-class-label">
-      知识点所属课堂:
+      知识点分类:
       <select v-model="selectedClass" class="select-item">
         <option value="">全部知识点</option>
         <option v-for="item in classList" :value="item">{{item.className}}</option>
@@ -7988,7 +7988,7 @@ export default {
     moveChange(e) {
       if(!this.isInit) return
       this.searchLeft = e.clientX - 165 + "px"
-      this.searchTop = e.clientY - 375 + "px"
+      this.searchTop = e.clientY - 380 + "px"
     },
     stopMove() {
       this.isInit = false
@@ -8040,10 +8040,10 @@ export default {
   top: v-bind(searchTop);
   width: 350px;
   height: 500px;
-  border-radius: 5px;
+  border-radius: 15px;
   overflow: hidden;
-  background-color: rgba(210, 210, 210, 0.6);
-  backdrop-filter: blur(5px);
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(15px);
   transform: translateY(50%);
   box-sizing: border-box;
   padding: 5px;
@@ -8056,7 +8056,7 @@ export default {
 }
 .drag-operate {
   height: 5px;
-  margin: 0 30% 10px;
+  margin: 2px 30% 8px;
   cursor: pointer;
   background-color: #4293fd;
   border-radius: 999px;
@@ -8065,7 +8065,7 @@ export default {
   position: absolute;
   right: 0;
   top: 0;
-  width: 25px;
+  width: 30px;
   height: 19px;
   cursor: pointer;
   display: flex;
@@ -8078,15 +8078,24 @@ export default {
   background-color: #4293fde0;
   color: whitesmoke;
 }
+.el-input:deep(.el-input__wrapper)  {
+  border-radius: 99px;
+  background-color: rgba(90, 90, 90, 0.2);
+}
+.el-input:deep(.el-input__inner)  {
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #333;
+}
 .search-answer{
   width: 100%;
   height: calc(100% - 55px);
-  background: rgba(255, 255, 255, 0.8);
+  background-color: rgba(90, 90, 90, 0.2);
   margin-top: 8px;
   box-sizing: border-box;
   padding: 10px;
   overflow-y: scroll;
-  border-radius: 3px;
+  border-radius: 12px;
   /* 隐藏IE, Edge和Firefox的滚动条 */
   -ms-overflow-style: none; /* IE和Edge */
   scrollbar-width: none; /* Firefox */
@@ -8097,13 +8106,17 @@ export default {
 }
 .search-answer-item{
   margin-bottom: 12px;
-  //color: rgba(0, 0, 0, 0.85);
 }
 .pre-search-answer {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: bold;
   color: #555;
   text-align: center;
+  white-space: nowrap;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 .open-search {
   position: absolute;
@@ -8140,10 +8153,11 @@ export default {
 .select-item {
   border: none;
   outline: none;
-  background-color: rgba(255, 255, 255, 1);
-  height: 30px;
-  font-size: 1rem;
-  color: #555;
+  background-color: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(15px);
+  height: 40px;
+  font-size: 1.15rem;
+  color: #333;
   border-radius: 6px;
   box-shadow: 0 0 6px 2px rgba(0, 0, 0, 0.15);
   margin-left: 5px;

@@ -3,6 +3,9 @@
     <div class="graph" ref="knowledgeChartRef"></div>
     <div class="search" ref="searchRef">
       <div class="drag-operate" @mousedown="moveSearch"></div>
+      <div class="close-search" @click="hideSearch">
+        <el-icon><CloseBold /></el-icon>
+      </div>
       <el-input
           placeholder="输入查询"
           @keyup.enter.native="relationSearch(input)"
@@ -18,14 +21,18 @@
         </div>
       </div>
     </div>
+    <div class="open-search" @click="showSearch">
+      <el-icon><ArrowLeftBold /></el-icon>
+    </div>
   </div>
-
 </template>
 
 <script>
 import * as echarts from "echarts";
 import Fuse from "fuse.js"
+import {ArrowLeftBold, CloseBold} from "@element-plus/icons-vue";
 export default {
+  components: {CloseBold, ArrowLeftBold},
   data() {
     return {
       input: '',
@@ -7790,8 +7797,11 @@ export default {
 
         ]
       },
-      searchLeft: "1300px",
+      searchRight: "-350px",
       searchTop: "-200px",
+      searchTransition: '0s',
+      searchOpacity: '0',
+      openOpacity: '1',
       isInit: false
     };
   },
@@ -7951,7 +7961,7 @@ export default {
     moveSearch(event) {
       this.isInit = true
       const clientRect = this.$refs.searchRef.getBoundingClientRect()
-      this.searchLeft = clientRect.x + "px"
+      this.searchRight = window.document.body.offsetWidth - clientRect.right + "px"
       this.searchTop = clientRect.y - 250 + "px"
       document.addEventListener("mousemove", this.moveChange)
       document.addEventListener("mouseup", this.stopMove)
@@ -7959,13 +7969,35 @@ export default {
     },
     moveChange(e) {
       if(!this.isInit) return
-      this.searchLeft = e.clientX - 5 + "px"
-      this.searchTop = e.clientY - 255 + "px"
+      this.searchRight = window.document.body.offsetWidth - e.clientX - 175 + "px"
+      this.searchTop = e.clientY - 257 + "px"
     },
     stopMove() {
       this.isInit = false
       document.removeEventListener('mousemove', this.moveChange)
       document.removeEventListener('mouseup', this.stopMove)
+    },
+    showSearch() {
+      this.searchTransition = '0.3s'
+      this.$nextTick(() => {
+        this.searchRight = '50px'
+        this.searchTop = '-200px'
+        this.openOpacity = '0'
+      })
+      setTimeout(() => {
+        this.searchTransition = '0s'
+      }, 300)
+    },
+    hideSearch() {
+      this.searchTransition = '0.3s'
+      this.$nextTick(() => {
+        this.searchRight = '-350px'
+        this.searchTop = '-200px'
+        this.openOpacity = '1'
+      })
+      setTimeout(() => {
+        this.searchTransition = '0s'
+      }, 300)
     }
   },
 };
@@ -7983,25 +8015,52 @@ export default {
 .search{
   position: absolute;
   z-index: 200;
-  left: v-bind(searchLeft);
+  right: v-bind(searchRight);
   top: v-bind(searchTop);
   width: 350px;
   height: 500px;
-  border-radius: 5px;
+  border-radius: 15px;
   overflow: hidden;
-  background: #ecebeb;
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(15px);
   transform: translateY(50%);
   box-sizing: border-box;
   padding: 5px;
   box-shadow: 1px 1px 10px -1px rgba(0, 0, 0, .2);
-  transition: 0.5s, left 0s, top 0s;
+  transition: 0.5s, right v-bind(searchTransition), top v-bind(searchTransition);
 }
 .search:hover{
   box-shadow: 1px 1px 15px 1px rgba(0, 0, 0, .4);
 }
+.close-search {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 30px;
+  height: 19px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #555;
+  transition: 0.2s;
+}
+.close-search:hover {
+  background-color: #4293fde0;
+  color: whitesmoke;
+}
+.el-input:deep(.el-input__wrapper)  {
+  border-radius: 99px;
+  background-color: rgba(70, 70, 70, 0.2);
+}
+.el-input:deep(.el-input__inner)  {
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #333;
+}
 .drag-operate {
   height: 5px;
-  margin: 0 30% 10px;
+  margin: 2px 30% 8px;
   cursor: pointer;
   background-color: #4293fd;
   border-radius: 999px;
@@ -8009,12 +8068,12 @@ export default {
 .search-answer{
   width: 100%;
   height: calc(100% - 55px);
-  background: #ffffff;
+  background-color: rgba(70, 70, 70, 0.2);
   margin-top: 8px;
   box-sizing: border-box;
   padding: 10px;
   overflow-y: scroll;
-  border-radius: 3px;
+  border-radius: 12px;
   /* 隐藏IE, Edge和Firefox的滚动条 */
   -ms-overflow-style: none; /* IE和Edge */
   scrollbar-width: none; /* Firefox */
@@ -8025,6 +8084,29 @@ export default {
 }
 .search-answer-item{
   margin-bottom: 12px;
-  color: rgba(0, 0, 0, 0.7);
+  //color: rgba(0, 0, 0, 0.9);
+}
+.open-search {
+  position: absolute;
+  z-index: 200;
+  top: 40%;
+  right: 0;
+  transform: translateY(-50%);
+  width: 50px;
+  height: 80px;
+  background-color: rgba(130, 130, 130, 0.4);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  border-radius: 8px 0 0 8px;
+  box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: 0.1s;
+  opacity: v-bind(openOpacity);
+}
+.open-search:hover {
+  filter: brightness(90%);
 }
 </style>

@@ -47,10 +47,12 @@ const selectAnswer = (item, index) => {
     <Transition name="fade">
       <div class="answer-area pre-answer" v-if="!answer&&!isLoading">
         <div class="init-answer">
-          <div class="init-title">你可以提出问题了解汉语文化:</div>
+          <div class="init-title">为留华学生量身定制的“实时问答”功能:</div>
           <div class="init-content">
-            该是一个AI问答系统，你可以提出问题了解汉语文化，例如：和羹之美，在于合异，塞翁失马，焉知非福，咬定青山不放松。
-            你还可以了解其它知识。
+            <p>留学之旅不仅仅是学术的提升，更是对中华文化深厚底蕴的探索。为了帮助来自世界各地的留华学生更好地融入中国，理解并欣赏这片古老土地上的文化传统与现代发展，我们专门推出了“实时文化问答”功能。</p>
+            <p>这项功能旨在为留华学生提供一个方便快捷的平台，无论是在学术研究中遇到的文化难题，还是日常生活中对中国习俗、历史故事、艺术作品、文学作品或流行趋势产生的好奇，都可以通过我们的实时问答系统得到解答。</p>
+            <p>您只需输入他们感兴趣的中华文化相关问题，系统便会实时响应，提供详尽准确的信息和解答。这不仅是一个简单的问答过程，而是一个深入的学习体验，让留华学生能够即时连接到丰富的中华文化知识库，从学术角度到生活实践，从古典艺术到现代流行，无缝对接各类文化话题。</p>
+            <p>我们的实时问答系统将成为留华学生的信源和伙伴，助力他们在求学之路上更加自如地与中国社会和文化融合，扩展视野，丰富在中国的留学生活体验。欢迎每一位对中华文化抱有热情的留华学生，利用这个功能，一起沉浸在千年文化的长河中，共同感受其带来的知识愉悦和心灵震撼。</p>
           </div>
           <div class="init-button">
             <div class="search-select-item" v-for="(item, index) in selectList" :key="item" @click="selectAnswer(item, index)"><el-button>{{item}}</el-button></div>
@@ -68,7 +70,7 @@ const selectAnswer = (item, index) => {
     </div>
     <el-scrollbar>
       <Transition name="fade">
-        <div class="answer-area" v-show="!isLoading&&answer">
+        <div class="answer-area show-answer" v-show="!isLoading&&answer">
           <h1 class="title">{{title}}</h1>
           <div class="source-wrapper">
             <img class="source" :src="sourceList[sourceIndex].imageURL" alt=""></img>
@@ -127,9 +129,13 @@ const selectAnswer = (item, index) => {
   padding: 0 15px;
 }
 .answer-area {
-  box-sizing: border-box;
-  padding: 60px 350px 250px;
-  height: 100%;
+  //box-sizing: border-box;
+  ////padding: 60px 350px 250px;
+  //height: 100%;
+}
+.show-answer {
+  width: 1080px;
+  margin: 80px auto 250px;
 }
 .title{
   font-size: 2rem;
@@ -271,23 +277,25 @@ const selectAnswer = (item, index) => {
   align-items: center;
 }
 .init-answer {
-  width: 600px;
-  height: 300px;
+  width: 800px;
+  //height: 300px;
   border-radius: 15px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
-  padding: 15px;
+  padding: 15px 15px 10px 15px;
   background-color: rgba(255, 255, 255, 0.7);
 }
 .init-title {
   height: 25px;
   line-height: 25px;
   font-size: 25px;
+  font-weight: bold;
+  color: #444;
   margin-bottom: 15px;
 }
 .init-content {
-  height: 195px;
-  color: #555;
+  color: #333;
+  margin-bottom: 15px;
 }
 .init-button {
   display: flex;

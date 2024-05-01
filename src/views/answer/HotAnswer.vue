@@ -80,10 +80,12 @@ const getHotAnswer = (item) => {
     <Transition name="fade">
       <div class="answer-area pre-answer" v-if="!answer&&!isLoading">
         <div class="init-answer">
-          <div class="init-title">你可以提出问题了解汉语文化:123456</div>
+          <div class="init-title">为留华学生打造的“热门文化问答”功能:</div>
           <div class="init-content">
-            该是一个AI问答系统，你可以提出问题了解汉语文化，例如：和羹之美，在于合异，塞翁失马，焉知非福，咬定青山不放松。
-            你还可以了解其它知识。
+            <p>在留学中国的旅程中，对中华文化的探索和理解是一条充满挑战与乐趣的道路。为了帮助来自世界各地的留华学生更好地了解中国，我们精心准备了“热门文化问答”功能，这不仅是一个问题解答平台，更是一个文化交流和学习的窗口。</p>
+            <p>这项功能精心筛选并记录了留华学生群体中经常询问的中华文化问题，涵盖了历史、哲学、艺术、语言、习俗等多个领域。通过智能数据分析，我们将这些问题整理成热门问答列表，便于留学生们快速访问和探索这些广受关注的文化主题</p>
+            <p>用户可以轻松点击感兴趣的热门问题，系统会立即提供详尽的解答及相关文化背景信息。这种互动式的学习方式旨在促进留学生之间以及留学生与中国文化的深度对话，助力他们在日常生活和学术研讨中更自信地交流和分享。</p>
+            <p>“热门文化问答”功能不仅节约了留学生寻找信息的时间，还提供了一个已由先行者探索过的知识地图，让新生们能迅速融入中华文化的学习环境。它是一个实用的知识库，更是一座沟通中外文化的桥梁，为留华学生开启一段丰富多彩的文化探索之旅。</p>
           </div>
           <div class="init-button">
             <div class="search-select-item" v-for="(item, index) in selectList" :key="item" @click="selectAnswer(item, index)"><el-button>{{item}}</el-button></div>
@@ -110,7 +112,7 @@ const getHotAnswer = (item) => {
     </div>
     <el-scrollbar>
       <Transition name="fade">
-        <div class="answer-area" v-show="!isLoading&&answer">
+        <div class="answer-area show-answer" v-show="!isLoading&&answer">
           <h1 class="title">{{title}}</h1>
           <div class="source-wrapper">
             <img class="source" :src="imageURL || sourceList[sourceIndex].imageURL" alt="">
@@ -170,7 +172,7 @@ const getHotAnswer = (item) => {
   position: absolute;
   z-index: 1;
   top: 80px;
-  right: 20px;
+  left: 20px;
   width: 260px;
 }
 .aside-title {
@@ -207,9 +209,13 @@ const getHotAnswer = (item) => {
   margin: 0 10px;
 }
 .answer-area {
-  box-sizing: border-box;
-  padding: 60px 350px 250px;
-  height: 100%;
+  //box-sizing: border-box;
+  //padding: 60px 350px 250px;
+  //height: 100%;
+}
+.show-answer {
+  width: calc(100vw - 620px);
+  margin: 80px auto 250px;
 }
 .title{
   font-size: 2rem;
@@ -351,23 +357,24 @@ const getHotAnswer = (item) => {
   align-items: center;
 }
 .init-answer {
-  width: 600px;
-  height: 300px;
+  width: 800px;
   border-radius: 15px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
-  padding: 15px;
+  padding: 15px 15px 10px 15px;
   background-color: rgba(255, 255, 255, 0.7);
 }
 .init-title {
   height: 25px;
   line-height: 25px;
   font-size: 25px;
+  font-weight: bold;
+  color: #444;
   margin-bottom: 15px;
 }
 .init-content {
-  height: 195px;
-  color: #555;
+  color: #333;
+  margin-bottom: 15px;
 }
 .init-button {
   display: flex;

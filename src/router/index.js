@@ -112,6 +112,11 @@ const router = createRouter({
           component: () => import('@/views/classInfo/ClassNotice.vue')
         },
         {
+          path: '/classinfo/:classId/classResource',
+          name: 'classResource',
+          component: () => import('@/views/classInfo/ClassResource.vue')
+        },
+        {
           path: '/classinfo/:classId/classStage',
           name: 'classStage',
           component: () => import('@/views/classInfo/ClassStage.vue')

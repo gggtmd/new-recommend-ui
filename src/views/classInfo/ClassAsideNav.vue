@@ -29,7 +29,7 @@ const navList = shallowRef([
   },
   {
     label: "教学资源",
-    name: "classNotice",
+    name: "classResource",
     role: 1,
     icon: Files
   },

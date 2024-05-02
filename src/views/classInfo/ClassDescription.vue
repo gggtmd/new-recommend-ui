@@ -92,7 +92,7 @@ async function handleClick(item, index) {
 <template>
   <div class="header">
     <div class="title">{{classData.className}}</div>
-    <el-button type="primary" @click="routeToDataPlatform">课堂分析</el-button>
+<!--    <el-button type="primary" @click="routeToDataPlatform">课堂分析</el-button>-->
   </div>
   <el-divider></el-divider>
   <div class="mask" v-loading="isLoading" v-if="isLoading"></div>

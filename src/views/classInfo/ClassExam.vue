@@ -169,7 +169,8 @@ async function handleDelete(item, index) {
   font-weight: bold;
 }
 .add-btn {
-  letter-spacing: 5px;
+  letter-spacing: 2px;
+  text-indent: 2px;
 }
 .mask {
   text-align: center;

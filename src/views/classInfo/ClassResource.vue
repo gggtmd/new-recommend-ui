@@ -1,26 +1,22 @@
 <script setup>
-import {classKnowledgeQueryClassStageServer} from "@/api/classKnowledge.js";
 import {onMounted, ref} from "vue";
 import {Download} from "@element-plus/icons-vue";
 
 
 onMounted(() => {
-  getStage()
+  getResource()
 })
 
-const noticeList = ref([])
+const resourceList = ref([])
 
 //获取课堂所有阶段
+import {classResourceQueryClassAnnouncementsServer} from "@/api/classResource.js";
 import {useRoute} from "vue-router";
 const route = useRoute()
 const isLoading = ref(true)
-async function getStage() {
-  let res = await classKnowledgeQueryClassStageServer(route.params.classId)
-  noticeList.value.push(...res.data[0].filter((item) => {
-    if(item.statue === "1") {
-      return true
-    }
-  }))
+async function getResource() {
+  let res = await classResourceQueryClassAnnouncementsServer(route.params.classId)
+  resourceList.value = res.data
   setTimeout(() => {
     isLoading.value = false
   }, 500)
@@ -32,15 +28,15 @@ async function getStage() {
     <div class="title">教学资源</div>
     <el-divider></el-divider>
     <ul class="notice-wrapper" v-loading="isLoading">
-      <li class="mask" v-if="!noticeList.length&&!isLoading">暂无数据</li>
-      <li class="notice-item" v-for="item in noticeList" v-show="!isLoading">
+      <li class="mask" v-if="!resourceList.length&&!isLoading">暂无数据</li>
+      <li class="notice-item" v-for="item in resourceList" v-show="!isLoading">
         <div class="notice-item-header">
-          <div class="notice-item-title">第{{item.stage}}阶段</div>
+          <div class="notice-item-title">{{item.materialName}}</div>
           <div class="notice-item-info">
-            <div class="info-item">创建人</div>
-            <div class="info-item">大小：3.8MB</div>
-            <div class="info-item">下载数：12</div>
-            <div class="info-item">发布时间：2024-04-23 09:35</div>
+            <div class="info-item">创建人{{item.publisher}}</div>
+            <div class="info-item">大小：{{item.materialSize}}</div>
+            <div class="info-item">下载数：{{item.downloadNumber}}</div>
+            <div class="info-item">发布时间：{{item.startTime}}</div>
           </div>
         </div>
         <div class="notice-item-icon">

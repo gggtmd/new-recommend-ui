@@ -41,7 +41,7 @@ export const classesSaveServer = (classes, image) => {
  */
 export const classesGetClassKnowledgeGraphServer = (classId, stage = "") => {
     const params = new URLSearchParams()
-    params.append("classId", classId)
+    classId && params.append("classId", classId)
     params.append("stage", stage)
     return request.post("/classes/getClassKnowledgeGraph", params)
 }

@@ -14,9 +14,9 @@ import TestButton from "@/views/test/TestButton.vue";
 
 <style scoped>
 .container {
-  width: 100%;
-  box-sizing: border-box;
-  padding: 0 135px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 50px;
 }
 .btn-wrapper {
   box-sizing: border-box;

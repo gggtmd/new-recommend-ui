@@ -112,7 +112,9 @@ watch(() => route.query.resourceType, (newValue) => {
 <style scoped>
 .recommend {
   box-sizing: border-box;
-  padding: 20px 150px;
+  padding: 0 50px;
+  max-width: 1400px;
+  margin: 20px auto 200px;
 }
 .carousel {
   margin-bottom: 30px;

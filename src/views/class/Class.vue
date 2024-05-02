@@ -4,31 +4,9 @@ import AddClass from "@/views/class/AddClass.vue"
 import JoinClass from "@/views/class/JoinClass.vue";
 import {inject, onBeforeMount, onBeforeUnmount, onMounted, ref} from "vue";
 
-const $bus = inject("$bus")
 onMounted(() => {
   getClassList()
-  $bus.on("closeAnswer", closeAnswer)
-  $bus.on("openAnswer", openAnswer)
 })
-
-onBeforeUnmount(() => {
-  $bus.off("closeAnswer", closeAnswer)
-  $bus.off("openAnswer", openAnswer)
-})
-
-const classWrapperRef = ref(null)
-const leftAsideRef = ref(null)
-// Answer关闭触发
-function closeAnswer() {
-  classWrapperRef.value.classList.remove("class-wrapper-answer")
-  leftAsideRef.value.classList.remove("left-aside-answer")
-}
-
-// Answer开启触发
-function openAnswer() {
-  classWrapperRef.value.classList.add("class-wrapper-answer")
-  leftAsideRef.value.classList.add("left-aside-answer")
-}
 
 const classList = ref([])
 //获取学生或教师加入的课堂
@@ -73,9 +51,8 @@ function handleJoin() {
 
 <style scoped>
 .class-wrapper {
-  width: 100%;
-  box-sizing: border-box;
-  padding: 20px 17%;
+  max-width: 1200px;
+  padding: 20px 50px 200px 250px;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 20px;
@@ -88,7 +65,7 @@ function handleJoin() {
   position: absolute;
   top: 0;
   left: 0;
-  width: 17%;
+  width: 260px;
   box-sizing: border-box;
   padding: 20px;
   height: 100%;
@@ -121,21 +98,5 @@ function handleJoin() {
   margin-top: 20px;
   letter-spacing: 3px;
   text-indent: 3px;
-}
-
-@media screen and (max-width: 1350px){
-  .class-wrapper {
-    padding: 20px 60px 20px 22%;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  }
-  .class-wrapper-answer {
-    padding: 20px 20px 20px 28% ;
-  }
-  .left-aside {
-    width: 22%;
-  }
-  .left-aside-answer {
-    width: 28%;
-  }
 }
 </style>

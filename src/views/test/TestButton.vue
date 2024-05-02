@@ -78,7 +78,7 @@ async function handleClick(button, index) {
 .el-button {
   font-size: 1rem;
   font-weight: bold;
-  letter-spacing: 2px;
+  //letter-spacing: 2px;
   margin-bottom: 10px;
 }
 </style>

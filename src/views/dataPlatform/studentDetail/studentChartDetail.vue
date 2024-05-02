@@ -67,6 +67,7 @@ import { learningQueryStudentLearningServer } from '@/api/learning.js'
 import { personKnowledgeQueryStudentKnowledgeComprehensionServer } from '@/api/personKnowledge.js'
 import {classKnowledgeQueryClassStageServer} from "@/api/classKnowledge.js";
 import { studentPaperClassStudentPaperQueryServer } from '@/api/studentPaper.js'
+import {classesGetClassKnowledgeGraphServer} from '@/api/classes.js'
 
 const tagColor = {
   '0': '#FFF',
@@ -346,7 +347,8 @@ export default{
     },
     async drawKnowledgeGraphChart() {
       let option;
-      const {default:graph} = await import(`../../../graphData/base_Chinese_${this.activeStage + 1}.js`);
+      let res = await classesGetClassKnowledgeGraphServer(this.$route.params.classId, this.activeStage)
+      const graph = res.data
       graph.nodes.forEach(node => {
         node.label = {
           show: node.symbolSize > 15

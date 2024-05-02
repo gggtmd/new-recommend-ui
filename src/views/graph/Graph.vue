@@ -48,6 +48,7 @@ import * as echarts from "echarts";
 import Fuse from "fuse.js"
 import {ArrowRightBold, CloseBold} from '@element-plus/icons-vue'
 import {personClassServer} from "@/api/person.js";
+import {classesGetClassKnowledgeGraphServer} from '@/api/classes.js'
 export default {
   components: {
     ArrowRightBold,
@@ -7832,8 +7833,8 @@ export default {
     };
   },
   mounted() {
-    this.getGraphData();
     this.getAllClass();
+    this.getGraphData(this.$route.query.classId);
   },
   methods: {
     async getAllClass() {
@@ -7849,7 +7850,7 @@ export default {
             classId: newValue.classId
           }
         })
-        this.getGraphData()
+        await this.getGraphData(newValue.classId)
       })
     },
     relationSearch(question){
@@ -7908,7 +7909,9 @@ export default {
     searchFormedAnswer(item,index){
       return index+1 + ". " + item.parentName+ " " + item.relation+ " " + item.childrenName;
     },
-    getGraphData() {
+    async getGraphData(classId) {
+      let res = await classesGetClassKnowledgeGraphServer(classId)
+      this.test = res.data
       this.loadGraph()
     },
     loadGraph() {
@@ -7920,7 +7923,7 @@ export default {
       })
       setTimeout(() => {
         myChart.hideLoading()
-      }, 2000)
+      }, 1000)
       let option;
       const graph = this.test;
       graph.nodes.forEach(node => {
@@ -8054,7 +8057,7 @@ export default {
   height: 500px;
   border-radius: 15px;
   overflow: hidden;
-  background: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.4);
   backdrop-filter: blur(15px);
   transform: translateY(50%);
   box-sizing: border-box;
@@ -8092,7 +8095,7 @@ export default {
 }
 .el-input:deep(.el-input__wrapper)  {
   border-radius: 99px;
-  background-color: rgba(90, 90, 90, 0.15);
+  background-color: rgba(90, 90, 90, 0.12);
 }
 .el-input:deep(.el-input__inner)  {
   font-size: 0.9rem;
@@ -8102,7 +8105,7 @@ export default {
 .search-answer{
   width: 100%;
   height: calc(100% - 55px);
-  background-color: rgba(90, 90, 90, 0.15);
+  background-color: rgba(90, 90, 90, 0.12);
   margin-top: 8px;
   box-sizing: border-box;
   padding: 10px;

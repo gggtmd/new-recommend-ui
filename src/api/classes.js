@@ -32,3 +32,16 @@ export const classesSaveServer = (classes, image) => {
         params: classes
     })
 }
+
+/**
+ * 获取课堂知识图谱（可按阶段分）
+ * @param classId
+ * @param stage
+ * @returns {Promise<axios.AxiosResponse<any>>}
+ */
+export const classesGetClassKnowledgeGraphServer = (classId, stage = "") => {
+    const params = new URLSearchParams()
+    params.append("classId", classId)
+    params.append("stage", stage)
+    return request.post("/classes/getClassKnowledgeGraph", params)
+}

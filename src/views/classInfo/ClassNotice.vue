@@ -1,24 +1,21 @@
 <script setup>
-import {classKnowledgeQueryClassStageServer} from "@/api/classKnowledge.js";
 import {onMounted, ref} from "vue";
+import {Clock} from "@element-plus/icons-vue";
 
 onMounted(() => {
-  getStage()
+  // getStage()
+  getNotice()
 })
 
-const noticeList = ref([])
-
-//获取课堂所有阶段
+// 获取课堂通知
 import {useRoute} from "vue-router";
 const route = useRoute()
 const isLoading = ref(true)
-async function getStage() {
-  let res = await classKnowledgeQueryClassStageServer(route.params.classId)
-  noticeList.value.push(...res.data[0].filter((item) => {
-    if(item.statue === "1") {
-      return true
-    }
-  }))
+import {announcementQueryClassAnnouncementsServer} from "@/api/announcement.js";
+const noticeList = ref([])
+const getNotice = async () => {
+  let res = await announcementQueryClassAnnouncementsServer(route.params.classId)
+  noticeList.value = res.data
   setTimeout(() => {
     isLoading.value = false
   }, 500)
@@ -32,17 +29,12 @@ async function getStage() {
     <ul class="notice-wrapper" v-loading="isLoading">
       <li class="mask" v-if="!noticeList.length&&!isLoading">暂无数据</li>
       <li class="notice-item" v-for="item in noticeList" v-show="!isLoading">
-        <div class="notice-item-title">第{{item.stage}}阶段</div>
+        <div class="notice-item-header">
+          <div class="notice-item-title">{{item.title}}</div>
+          <div class="notice-item-time"><el-icon class="time-icon"><Clock /></el-icon>{{item.createdTime}}</div>
+        </div>
         <div class="notice-item-info">
-          请大家按以下顺序在学院的实验教学平台上提交的实验报告,切记,如果提交顺序不正确将无法获得实验评分。
-          第4周:实验1概念数据模型及E-R图设计
-          第6周:实验2应用SQL Server进行数据定义和管理
-          第7周:实验3数据库单表查询
-          第8周:实验4使用T-SQL编写程序
-          第9周:实验6数据库综合查询
-          第11周:实验5数据的完整性管理
-          第14周: 实验7触发器的使用
-          第15周:实验9存储过程的使用
+          {{item.announcementContent}}
         </div>
       </li>
     </ul>
@@ -89,11 +81,24 @@ async function getStage() {
 .notice-item:hover {
   background-color: #409EFF1B;
 }
+.notice-item-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
 .notice-item-title {
   font-size: 1.2rem;
   font-weight: bold;
   color: #333;
-  margin-bottom: 10px;
+}
+.notice-item-time {
+  display: flex;
+  align-items: center;
+  color: #777;
+}
+.time-icon {
+  margin-right: 3px;
 }
 .notice-item-info {
   color: #333;

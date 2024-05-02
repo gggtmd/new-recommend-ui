@@ -101,9 +101,19 @@ const router = createRouter({
         {
           path: '/Glyph',
           name: 'glyph',
-          component: () => import('@/views/chineseLearning/glyph.vue')
+          component: () => import('@/views/chineseLearning/Glyph.vue')
         },
       ]
+    },
+    {
+      path: '/GlyphDetail',
+      name: 'GlyphDetail',
+      component: () => import('@/views/chineseLearning/GlyphDetail.vue')
+    },
+    {
+      path: '/PronunciationDetail',
+      name: 'PronunciationDetail',
+      component: () => import('@/views/chineseLearning/PronunciationDetail.vue')
     },
     {
       path: '/classinfo/:classId',

@@ -93,6 +93,16 @@ const router = createRouter({
           name: 'my',
           component: () => import('@/views/my/My.vue')
         },
+        {
+          path: '/Pronunciation',
+          name: 'pronunciation',
+          component: () => import('@/views/chineseLearning/Pronunciation.vue')
+        },
+        {
+          path: '/Glyph',
+          name: 'glyph',
+          component: () => import('@/views/chineseLearning/glyph.vue')
+        },
       ]
     },
     {

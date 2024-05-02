@@ -92,7 +92,7 @@ watch(() => route.query.resourceType, (newValue) => {
         <template #info>{{item.resourceLink}}</template>
       </SourceCard>
     </div>
-    <div class="title" ref="outerTitleRef">外部资源</div>
+    <div class="title" ref="outerTitleRef">热门资源</div>
     <div class="lesson-wrapper">
       <SourceCard
         v-for="item in lessonList"

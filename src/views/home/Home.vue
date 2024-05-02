@@ -17,15 +17,15 @@ let routerList = ref([
     subName: [
       {
         label: '推荐资源',
-        enLabel: 'Recommend',
+        enLabel: 'Recommended Resources',
         name: 'home',
         query: {
           resourceType: 'recommend'
         }
       },
       {
-        label: '外部资源',
-        enLabel: 'Link',
+        label: '热门资源',
+        enLabel: 'Popular Resources',
         name: 'home',
         query: {
           resourceType: 'link'
@@ -92,7 +92,19 @@ let routerList = ref([
   {
     label: '知识图谱',
     enLabel: 'Knowledge Graph',
-    name: 'graph'
+    name: 'graph',
+    subName: [
+      {
+        label: '体系图谱',
+        enLabel: 'System Graph',
+        name: 'graph',
+      },
+      {
+        label: '课堂图谱',
+        enLabel: 'Class Graph',
+        name: 'graph',
+      },
+    ]
   },
   {
     label: '精选习题',

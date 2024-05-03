@@ -1,8 +1,10 @@
 <script setup>
-import {ref, onMounted, inject, onBeforeUnmount, watch} from "vue";
+import {ref, onMounted, inject, watch} from "vue";
 import {personStylePaperResourceRecommendServer} from "@/api/personStylePaper.js";
 import SourceCard from "@/views/recommend/SourceCard.vue";
 import ScaleModal from "@/components/ScaleModal.vue";
+import {VideoPlay, Star} from "@element-plus/icons-vue";
+
 
 onMounted(() => {
   getRecommendResource()
@@ -89,7 +91,14 @@ watch(() => route.query.resourceType, (newValue) => {
         @click="showModal($event, item)"
       >
         <template #title>{{ item.resourceName }}</template>
-        <template #info>{{item.resourceLink}}</template>
+        <template #info>
+          <div class="info-wrapper">
+            <el-icon><VideoPlay /></el-icon>
+            <span>{{item.assess}}</span>
+            <el-icon><Star /></el-icon>
+            <span>{{item.assessNumber}}</span>
+          </div>
+        </template>
       </SourceCard>
     </div>
     <div class="title" ref="outerTitleRef">热门资源</div>
@@ -136,5 +145,17 @@ watch(() => route.query.resourceType, (newValue) => {
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 30px;
   margin-bottom: 40px;
+}
+.info-wrapper {
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  font-weight: bold;
+}
+.info-wrapper .el-icon {
+  margin-right: 3px;
+}
+.info-wrapper span {
+  margin-right: 10px;
 }
 </style>

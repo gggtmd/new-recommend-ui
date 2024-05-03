@@ -144,6 +144,7 @@ const submitBtnText = computed(() => {
 <style scoped>
 .answer-detail {
   width: 15%;
+  max-height: 500px;
   position: absolute;
   top: 80px;
   left: 20px;

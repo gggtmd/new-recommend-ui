@@ -81,7 +81,7 @@ watch(() => route.query.resourceType, (newValue) => {
   </ScaleModal>
   <div class="recommend">
     <recommend-carousel class="carousel"></recommend-carousel>
-    <div class="title" ref="recommendTitleRef">推荐资源</div>
+    <div class="title" ref="recommendTitleRef">推荐资源<span class="title-en">Recommend Resource</span></div>
     <div class="recommend-wrapper">
       <SourceCard
         v-for="item in recommendList"
@@ -101,7 +101,7 @@ watch(() => route.query.resourceType, (newValue) => {
         </template>
       </SourceCard>
     </div>
-    <div class="title" ref="outerTitleRef">热门资源</div>
+    <div class="title" ref="outerTitleRef">热门资源<span class="title-en">Popular Resource</span></div>
     <div class="lesson-wrapper">
       <SourceCard
         v-for="item in lessonList"
@@ -131,6 +131,7 @@ watch(() => route.query.resourceType, (newValue) => {
 .title{
   font-size: 1.5rem;
   font-weight: bold;
+  color: #111;
   width: 100%;
   letter-spacing: 5px;
   box-sizing: border-box;
@@ -138,6 +139,12 @@ watch(() => route.query.resourceType, (newValue) => {
   padding-bottom: 5px;
   margin-bottom: 30px;
   border-bottom: 1px solid #4293fd;
+}
+.title-en {
+  letter-spacing: 0;
+  font-size: 1.3rem;
+  padding: 0 10px;
+  color: #4293fd;
 }
 .recommend-wrapper,
 .lesson-wrapper{

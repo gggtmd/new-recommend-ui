@@ -17,7 +17,7 @@ let routerList = ref([
     subName: [
       {
         label: '推荐资源',
-        enLabel: 'Recommended Resources',
+        enLabel: 'Recommended',
         name: 'home',
         query: {
           resourceType: 'recommend'
@@ -25,7 +25,7 @@ let routerList = ref([
       },
       {
         label: '热门资源',
-        enLabel: 'Popular Resources',
+        enLabel: 'Popular',
         name: 'home',
         query: {
           resourceType: 'link'

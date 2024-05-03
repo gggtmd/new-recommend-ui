@@ -48,7 +48,7 @@ const computedInput = computed(() => {
 <template>
   <div class="glyph">
     <div class="header">
-      <h1>Chinese Characters with Pinyin {{computedInput}}</h1>
+      <h1>Glyph Learning {{computedInput}}</h1>
       <input
         class="input"
         placeholder="请输入关键字以搜索"

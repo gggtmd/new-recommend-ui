@@ -38,10 +38,12 @@ function handleJoin() {
       <div class="left-aside-wrapper">
         <div class="add-card" v-roleJudge="2">
           <div class="title">需要创建新的课堂？</div>
+          <div class="add-info">创建新的课堂，和学生们一起学习知识吧！</div>
           <el-button class="btn" type="primary" @click="handleClick">创建</el-button>
         </div>
         <div class="add-card">
           <div class="title">需要加入新的课堂？</div>
+          <div class="add-info">加入新的课堂，和老师学生一起学习知识吧！</div>
           <el-button class="btn" type="primary" @click="handleJoin">加入</el-button>
         </div>
       </div>
@@ -83,19 +85,27 @@ function handleJoin() {
   background-color: white;
   transition: 0.5s;
   box-sizing: border-box;
-  padding: 20px 12px 10px;
-  text-align: center;
-  font-size: 1.1rem;
-  font-weight: bold;
-  color: #555;
+  padding: 15px 8px 6px 8px;
   margin-bottom: 20px;
 }
 .add-card:hover {
   box-shadow: 0 0 8px 4px rgba(0, 0, 0, 0.1);
 }
+.title {
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+}
+.add-info {
+  padding: 0 10px;
+  color: #555;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
 .btn {
   width: 100%;
-  margin-top: 20px;
   letter-spacing: 3px;
   text-indent: 3px;
 }

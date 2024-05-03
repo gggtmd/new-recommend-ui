@@ -94,9 +94,9 @@ watch(() => route.query.resourceType, (newValue) => {
         <template #info>
           <div class="info-wrapper">
             <el-icon><VideoPlay /></el-icon>
-            <span>{{item.assess}}</span>
-            <el-icon><Star /></el-icon>
             <span>{{item.assessNumber}}</span>
+            <el-icon><Star /></el-icon>
+            <span>{{item.assess}}</span>
           </div>
         </template>
       </SourceCard>

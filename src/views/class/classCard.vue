@@ -66,7 +66,7 @@ function handleLeave() {
   height: 100%;
   left: 50%;
   top: 50%;
-  transform: translate(-50%,-50%);
+  transform: scale(1.05) translate(-50%,-50%);
   object-fit: cover;
   transition: 0.5s;
   position: absolute;
@@ -74,7 +74,7 @@ function handleLeave() {
   vertical-align: top;
 }
 .imageHover{
-  transform: scale(1.1) translate(-50%,-50%);
+  transform: scale(1) translate(-50%,-50%);
 }
 .class-card-info {
   width: 100%;
@@ -85,8 +85,8 @@ function handleLeave() {
   position: absolute;
   bottom: 0;
   z-index: 2;
-  backdrop-filter: blur(20px);
-  background-color: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(15px);
+  background-color: rgba(255, 255, 255, 0.6);
   overflow: hidden;
 }
 .infoHover{

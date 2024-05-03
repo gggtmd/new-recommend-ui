@@ -68,7 +68,7 @@ const computedInput = computed(() => {
 <template>
   <div class="pronunciation">
     <div class="header">
-      <h1>Chinese Pronunciation {{computedInput}}</h1>
+      <h1>Pronunciation Learning&nbsp;{{computedInput}}</h1>
       <input
         class="input"
         placeholder="请输入关键字以搜索"

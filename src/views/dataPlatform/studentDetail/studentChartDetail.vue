@@ -532,6 +532,7 @@ export default{
   font-weight: bold;
   box-sizing: border-box;
   padding-left: 5px;
+  padding-bottom: 10px;
   display: flex;
   align-items: center;
   justify-content: start;
@@ -586,6 +587,7 @@ export default{
   white-space: nowrap;
   font-size: 22px;
   border-radius: 50%;
+  margin-left: -5px;
 }
 .exam-score-chart{
   width: 100%;

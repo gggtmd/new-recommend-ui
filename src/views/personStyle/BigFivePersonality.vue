@@ -70,7 +70,7 @@ const routerTo = () => {
 <template>
   <AnswerDetail ref="answerDetailRef" class="answer-detail" :data="problemList" @handleSelect="handleSelect"></AnswerDetail>
   <div class="title">
-    大五人格
+    大五人格量表
     <el-button
       link
       type="primary"

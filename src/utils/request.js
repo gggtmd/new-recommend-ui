@@ -5,7 +5,7 @@ import router from "@/router/index.js"; //request.js文件在Vue实例之前执�
 
 const request = axios.create({
   baseURL: '/api',  //表示http://localhost:8080/api/user/login
-  timeout: 60000
+  timeout: 10000
 })
 
 //请求拦截器，请求头加入token

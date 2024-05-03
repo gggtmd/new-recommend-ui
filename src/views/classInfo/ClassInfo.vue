@@ -19,7 +19,7 @@ import ClassAsideNav from "@/views/classInfo/ClassAsideNav.vue";
   background: #777;
 }
 .aside-nav {
-  width: 15vw;
+  width: 220px;
   height: 100vh;
   position: absolute;
   left: 0;
@@ -28,21 +28,17 @@ import ClassAsideNav from "@/views/classInfo/ClassAsideNav.vue";
   min-width: 200px;
 }
 .container {
-  width: 100vw;
+  width: calc(100vw - 240px);
   height: 100vh;
   position: absolute;
   left: 0;
   top: 0;
   box-sizing: border-box;
-  padding: 0 15%;
+  margin: 0 auto 0 240px;
 }
 .main {
   box-sizing: border-box;
-  padding: 20px 20px 20px 60px;
-}
-@media screen and (max-width: 1200px){
-  .container {
-    padding: 0 40px 0 200px;
-  }
+  padding: 20px;
+  max-width: 1200px;
 }
 </style>

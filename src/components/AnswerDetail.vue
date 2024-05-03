@@ -37,17 +37,20 @@ defineExpose({
   overflow: hidden;
   filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.13));
   box-sizing: border-box;
-  //padding: 10px;
+  height: 100%;
 }
 .header {
   height: 40px;
   line-height: 40px;
   vertical-align: middle;
-  letter-spacing: 2px;
+  letter-spacing: 5px;
   position: relative;
   background: radial-gradient(circle at left bottom, transparent 8px,white 0) left bottom / 50% 100% no-repeat,
   radial-gradient(circle at right bottom, transparent 8px, white 0) right bottom / 50% 100% no-repeat;
-  text-indent: 15px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: center;
+  color: #333;
 }
 .header::before {
   content: '';
@@ -59,12 +62,18 @@ defineExpose({
   bottom: 0;
 }
 .content {
-  padding: 10px 15px;
   background: radial-gradient(circle at left top, transparent 8px,white 0) left top / 50% 100% no-repeat,
   radial-gradient(circle at right top, transparent 8px, white 0) right top / 50% 100% no-repeat;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
   gap: 10px;
+  height: calc(100% - 40px);
+  overflow: auto;
+  padding: 10px 15px 20px;
+  box-sizing: border-box;
+}
+.content::-webkit-scrollbar {
+  display: none;
 }
 .el-checkbox-group {
   display: flex;

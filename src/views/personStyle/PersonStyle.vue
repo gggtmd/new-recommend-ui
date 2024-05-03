@@ -93,10 +93,11 @@ const routerTo = () => {
         </el-radio-group>
       </div>
       <div class="footer" v-show="isInit">
+        <div class="footer-title">请填写完此问卷</div>
         <div class="el-icon-info">
-          <el-icon><InfoFilled /></el-icon>填写问卷以为您个性化推荐资源
+          填写问卷以为您个性化推荐资源
         </div>
-        <div>
+        <div class="footer-button">
           <el-button type="primary" @click="savePersonStylePaper" :loading = isLoading>提 交</el-button>
         </div>
       </div>
@@ -106,7 +107,8 @@ const routerTo = () => {
 
 <style scoped>
 .answer-detail {
-  width: 13%;
+  width: 240px;
+  height: calc(100vh - 120px);
   position: absolute;
   top: 80px;
   left: 20px;
@@ -141,9 +143,8 @@ const routerTo = () => {
   background-color: #fafafa;
 }
 .problem-wrapper {
-  margin: 76px auto 0;
-  max-width: 60%;
-  min-width: 600px;
+  margin: 76px auto 0 300px;
+  min-width: 800px;
 }
 .el-radio-group-wrapper{
   margin-top: 50px;
@@ -157,13 +158,28 @@ const routerTo = () => {
   margin-left: 1.2rem;
 }
 .footer{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 50px;
-  margin-bottom: 150px;
+  position: absolute;
+  top: 80px;
+  right: 20px;
+  background-color: white;
+  padding: 10px 12px 10px;
+  border-radius: 8px;
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
+  width: 240px;
+}
+.footer-title {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
 }
 .el-icon-info{
-  color: rgb(160, 157, 157);
+  display: flex;
+  align-items: center;
+  color: rgb(121, 118, 118);
+  margin-bottom: 20px;
+}
+.footer-button .el-button {
+  width: 100%;
 }
 </style>

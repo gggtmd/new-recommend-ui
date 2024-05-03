@@ -224,14 +224,15 @@ async function userRegister() {
   background-size: cover;
 }
 .main-title {
-  font-size: 8rem;
+  font-size: 6rem;
   font-weight: bold;
+  text-indent: 50px;
   letter-spacing: 50px;
   white-space: nowrap;
   //mix-blend-mode: overlay;
   color: rgba(0, 0, 0, 0.9);
   position: absolute;
-  bottom: 60%;
+  bottom: 65%;
   left: 50%;
   transform: translate(-50%, -60%);
 }

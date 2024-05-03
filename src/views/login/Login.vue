@@ -173,6 +173,7 @@ async function userRegister() {
 
 <template>
   <div class="bg-content">
+    <div class="main-title">汉智大学堂</div>
     <div class="wrapper" ref="wrapperRef">
       <el-form 
         ref="formRef"
@@ -222,6 +223,18 @@ async function userRegister() {
   background-image: url("https://img.zcool.cn/community/0163b55fa51ebf11013ee04de42e0a.jpg@1280w_1l_2o_100sh.jpg");
   background-size: cover;
 }
+.main-title {
+  font-size: 8rem;
+  font-weight: bold;
+  letter-spacing: 50px;
+  white-space: nowrap;
+  //mix-blend-mode: overlay;
+  color: rgba(0, 0, 0, 0.9);
+  position: absolute;
+  bottom: 60%;
+  left: 50%;
+  transform: translate(-50%, -60%);
+}
 .wrapper {
   position: absolute;
   left: 50%;
@@ -233,7 +246,7 @@ async function userRegister() {
   transition: 0.4s;
   height: v-bind(wrapperHeight);
   overflow: hidden;
-  backdrop-filter: blur(35px);
+  backdrop-filter: blur(15px);
   background-color: rgba(255, 255, 255, 0.3);
 }
 .el-form {

@@ -1,10 +1,16 @@
 <template>
-  <div class="nav">
+  <div class="nav" ref="navRef">
     <div class="nav-box" ref="navBox" :style="{
       '--itemWidth': `${itemWidth}px`,
       '--itemLeft': `${itemLeft}px`
       }">
-      <div class="nav-item" ref="navItem" v-for="(item,index) in sliderData" @click="changeActive(index, item)">{{ item }}</div>
+      <div
+        class="nav-item"
+        ref="navItem"
+        v-for="(item,index) in sliderData"
+        @click="changeActive(index, item)"
+        :class="{'selected-item': index === preIndex || index === preIndex - 1}"
+      >{{ item }}</div>
     </div>
   </div>
 </template>
@@ -47,8 +53,17 @@ export default {
       }
       this.$refs.navItem[index].style.color = '#000';
       this.$refs.navItem[index].style.fontSize = '17px';
-      this.itemLeft = this.$refs.navItem[index].getBoundingClientRect().x - this.$refs.navBox.getBoundingClientRect().x;
+      const navItemClient = this.$refs.navItem[index].getBoundingClientRect()
+      const navBoxClient = this.$refs.navBox.getBoundingClientRect()
+      this.itemLeft = navItemClient.x - navBoxClient.x;
       this.preIndex = index;
+      console.log(navItemClient, navBoxClient)
+      // if(navItemClient.right > navBoxClient.right) {
+        this.$refs.navRef.scrollTo({
+          left: navItemClient.width * (this.preIndex - 1),
+          behavior: 'smooth'
+        })
+      // }
       this.$emit('selectSlider', index ,item);
     },
   },
@@ -91,6 +106,7 @@ export default {
   justify-content: space-between;
   align-items: center;
   position: relative;
+  transition: 0.4s;
 }
 .nav-box::before{
   content: '';
@@ -117,5 +133,12 @@ export default {
   transition: 0.4s;
   transition-delay: 0.2s;
   cursor: pointer;
+    border-right: 1px solid var(--el-border-color-darker);
+}
+.nav-item:last-child{
+  border: none;
+}
+.selected-item {
+  border-color: transparent;
 }
 </style>

@@ -532,7 +532,7 @@ export default{
   font-weight: bold;
   box-sizing: border-box;
   padding-left: 5px;
-  padding-bottom: 10px;
+  padding-bottom: 5px;
   display: flex;
   align-items: center;
   justify-content: start;

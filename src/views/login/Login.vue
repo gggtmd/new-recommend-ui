@@ -220,7 +220,7 @@ async function userRegister() {
 .bg-content {
   width: 100vw;
   height: 100vh;
-  background-image: url("https://img.zcool.cn/community/0163b55fa51ebf11013ee04de42e0a.jpg@1280w_1l_2o_100sh.jpg");
+  background-image: url("https://img1.baidu.com/it/u=1769119866,58028687&fm=253&fmt=auto&app=138&f=PNG?w=860&h=370");
   background-size: cover;
 }
 .main-title {

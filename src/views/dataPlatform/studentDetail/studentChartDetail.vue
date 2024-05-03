@@ -347,7 +347,7 @@ export default{
     },
     async drawKnowledgeGraphChart() {
       let option;
-      let res = await classesGetClassKnowledgeGraphServer(this.$route.params.classId, this.activeStage)
+      let res = await classesGetClassKnowledgeGraphServer(this.$route.params.classId, this.activeStage + 1)
       const graph = res.data
       graph.nodes.forEach(node => {
         node.label = {

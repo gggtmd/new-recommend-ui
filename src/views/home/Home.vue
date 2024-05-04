@@ -175,16 +175,16 @@ const selected = ref({
   nextIndex: 0,
 })
 const matchRouter = () => {
-  const routerName = route.matched[1].name
+  const routerNameList = route.matched.map(item => item.name)
   routerList.value.find((routerItem, mainIndex) => {
     selected.value.mainIndex = mainIndex
-    if(routerName === routerItem.name) {
+    if(routerNameList.includes(routerItem.name)) {
       selected.value.nextIndex = 0
       return true
     } else if(routerItem.subName && Array.isArray(routerItem.subName)){
       const matchRouterItem = routerItem.subName.find((item, nextIndex) => {
         selected.value.nextIndex = nextIndex
-        return routerName === item.name
+        return routerNameList.includes(item.name)
       })
       return !!matchRouterItem
     }

@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="class-graph">
     <div class="graph" ref="knowledgeChartRef"></div>
     <div class="search" ref="searchRef">
       <div class="drag-operate" @mousedown="moveSearch"></div>
@@ -248,8 +248,8 @@ export default {
 </script>
 
 <style scoped>
-.container{
-  width: 100%;
+.class-graph{
+  //width: 100%;
   height: 100vh;
 }
 .graph {

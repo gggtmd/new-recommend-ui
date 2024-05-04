@@ -52,7 +52,7 @@ const hotList = ref([
     title: '和羹之美，在于合异',
     imageURL: 'https://big-event-kanwo.oss-cn-beijing.aliyuncs.com/%E5%92%8C%E7%BE%B9%E4%B9%8B%E7%BE%8E.png',
     videoURL: 'https://big-event-kanwo.oss-cn-beijing.aliyuncs.com/%5B%E5%B9%B3%E2%80%9C%E8%AF%AD%E2%80%9D%E8%BF%91%E4%BA%BA%5D%E5%92%8C%E7%BE%B9%E4%B9%8B%E7%BE%8E%20%E5%9C%A8%E4%BA%8E%E5%90%88%E5%BC%82.mp4',
-    answer: '"和羹之美，在于合异"这一句话出自《三国志·蜀书·刘巴传》中的注引《零陵先贤传》。这句话比喻像调和羹汤一样，把不同的味道融合在一起，才能制成美味佳肴。在哲学和社会思想层面，它强调不同意见、文化和个性的和谐统一对于实现共同目标的重要性。\n\n这个典故与现代英语中的俚语 "Unity in diversity" 或 "Strength in diversity" 相似。这些英语表达都强调在多样性中寻求统一，认识到不同背景和观点的个体可以共同创造出更大的价值。\n\n具体的使用场景如下。\n中文场景：\n在联合国大会上，一位发言人提到：“世界各国虽然文化、制度各异，但和羹之美，在于合异，我们应该尊重彼此差异，共同维护世界和平与发展。”\n英文场景：\nSpeaking at the United Nations General Assembly, a representative said, "While nations around the world may differ in culture and systems, it is the unity in diversity that brings strength. We should respect each other\'s differences and work together to maintain world peace and development."',
+    answer: '"和羹之美，在于合异"这一句话出自《三国志·魏书·夏侯玄传》。这句话比喻像调和羹汤一样，把不同的味道融合在一起，才能制成美味佳肴。在哲学和社会思想层面，它强调不同意见、文化和个性的和谐统一对于实现共同目标的重要性。\n\n这个典故与现代英语中的俚语 "Unity in diversity" 或 "Strength in diversity" 相似。这些英语表达都强调在多样性中寻求统一，认识到不同背景和观点的个体可以共同创造出更大的价值。\n\n具体的使用场景如下。\n中文场景：\n在联合国大会上，一位发言人提到：“世界各国虽然文化、制度各异，但和羹之美，在于合异，我们应该尊重彼此差异，共同维护世界和平与发展。”\n英文场景：\nSpeaking at the United Nations General Assembly, a representative said, "While nations around the world may differ in culture and systems, it is the unity in diversity that brings strength. We should respect each other\'s differences and work together to maintain world peace and development."',
     hot: 3450
   },
   {
@@ -66,7 +66,7 @@ const hotList = ref([
     title: '咬定青山不放松',
     imageURL: 'https://big-event-kanwo.oss-cn-beijing.aliyuncs.com/%E5%92%AC%E5%AE%9A%E9%9D%92%E5%B1%B1.png',
     videoURL: 'https://big-event-kanwo.oss-cn-beijing.aliyuncs.com/%E5%92%AC%E5%AE%9A%E9%9D%92%E5%B1%B1%E4%B8%8D%E6%94%BE%E6%9D%BE%EF%BC%88%E9%83%91%E7%87%AE%E8%AF%8D%20%20%20%E5%88%98%E8%BF%9B%E6%88%90%E6%9B%B2%20%E9%99%88%E8%8B%8F%E5%A8%81%E6%BC%94%E5%94%B1%EF%BC%89.mp4',
-    answer: '"咬定青山不放松"出自清代郑燮的《竹石》一诗。这首词写于1965年，表达了作者坚定不移的决心和顽强拼搏的精神。这句话比喻一个人一旦确定了目标，就会像牙齿咬住青山一样，毫不松口，坚持不懈地追求下去。\n\n这个典故与现代英语中的俚语 "Where there\'s a will, there\'s a way" (有志者事竟成) 相似。这句话强调了决心和意志力在克服困难和达成目标过程中的重要性。\n\n具体的使用场景如下。\n中文场景：\n面对艰难的科研任务，科学家坚定地说：“我们要有咬定青山不放松的劲头，直到攻克这个难题。”\n英文场景：\nFaced with the challenging task of scientific research, the scientist firmly said, "We must have the determination of biting down on the green hills without letting go until we overcome this question."',
+    answer: '"咬定青山不放松"出自清代郑燮的《竹石》一诗。这首词表达了作者坚定不移的决心和顽强拼搏的精神。这句话比喻一个人一旦确定了目标，就会像牙齿咬住青山一样，毫不松口，坚持不懈地追求下去。\n\n这个典故与现代英语中的俚语 "Where there\'s a will, there\'s a way" (有志者事竟成) 相似。这句话强调了决心和意志力在克服困难和达成目标过程中的重要性。\n\n具体的使用场景如下。\n中文场景：\n面对艰难的科研任务，科学家坚定地说：“我们要有咬定青山不放松的劲头，直到攻克这个难题。”\n英文场景：\nFaced with the challenging task of scientific research, the scientist firmly said, "We must have the determination of biting down on the green hills without letting go until we overcome this question."',
     hot: 1527
   },
   {

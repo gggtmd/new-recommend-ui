@@ -43,22 +43,24 @@ const isRate = ref(false)
 import {resourcesAssessResourcesServer} from "@/api/resource.js";
 import {ElMessage, ElMessageBox} from "element-plus";
 async function sendRate() {
-  try {
-    await ElMessageBox.confirm('提交评分?', null, {
-      confirmButtonText: '确定',
-      cancelButtonText: '取消',
-    })
+  // try {
+  //   await ElMessageBox.confirm('提交评分?', null, {
+  //     confirmButtonText: '确定',
+  //     cancelButtonText: '取消',
+  //   })
     let res = await resourcesAssessResourcesServer(route.params.resourceId, rate.value)
     if(res.code === 200) {
       isRate.value = true
     }
-  } catch (error) {
-    console.log("操作取消")
-  }
+  // } catch (error) {
+  //   console.log("操作取消")
+  // }
 }
 
 // 发送评论
 import {resourceCommentSaveServer} from "@/api/resourceComment.js";
+import {useUserInfoStore} from "@/stores/userInfo.js";
+const userInfoStore = useUserInfoStore()
 const input = ref("")
 const sendComment = async () => {
   if(!input.value) {
@@ -66,8 +68,12 @@ const sendComment = async () => {
   }
   let res = await resourceCommentSaveServer(route.params.resourceId, input.value)
   if(res.code === 200) {
+    commentList.value.unshift({
+      resourceCommentId: new Date().getTime(),
+      userName: userInfoStore.userInfo.userName,
+      content: input.value
+    })
     input.value = ""
-    ElMessage.success("发送生成")
   }
 }
 
@@ -98,10 +104,12 @@ function routerGo() {
           </div>
         </div>
         <ul class="comment-list">
-          <li class="comment-item" v-for="item in commentList">
-            <div class="comment-user">{{item.userName}}</div>
-            <div class="comment-content">{{item.content}}</div>
-          </li>
+          <TransitionGroup name="list">
+            <li class="comment-item" v-for="item in commentList" :key="item.resourceCommentId">
+              <div class="comment-user">{{item.userName}}</div>
+              <div class="comment-content">{{item.content}}</div>
+            </li>
+          </TransitionGroup>
         </ul>
         <div class="input-wrapper">
           <el-input v-model="input" placeholder="请输入问题" @keydown.enter="sendComment"></el-input>
@@ -189,7 +197,7 @@ function routerGo() {
 .comment-item {
   padding: 15px 10px;
   border-bottom: 1px solid var(--el-border-color);
-  transition: 0.15s;
+  transition: 0.3s;
 }
 .comment-item:hover {
   background-color: rgba(0, 0, 0, 0.05);

@@ -89,7 +89,7 @@ defineExpose({
   right: 0;
   top: 0;
   bottom: 0;
-  z-index: 9999;
+  z-index: 2004;
   transition: all 0.5s,width 0.5s cubic-bezier(.38,1.03,.53,1.02), height 0.5s cubic-bezier(.38,1.03,.53,1.02);
   background: rgba(0, 0, 0, 0.4);
 }

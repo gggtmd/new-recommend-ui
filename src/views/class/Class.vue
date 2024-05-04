@@ -83,13 +83,14 @@ function handleJoin() {
   border-radius: 8px;
   box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.1);
   background-color: white;
-  transition: 0.5s;
+  transition: 0.4s;
   box-sizing: border-box;
-  padding: 15px 8px 6px 8px;
+  padding: 15px 10px 8px 10px;
   margin-bottom: 20px;
 }
 .add-card:hover {
   box-shadow: 0 0 8px 4px rgba(0, 0, 0, 0.1);
+  background-color: #298459;
 }
 .title {
   text-align: center;
@@ -97,16 +98,22 @@ function handleJoin() {
   font-weight: bold;
   color: #333;
   margin-bottom: 10px;
+  transition: 0.15s;
 }
 .add-info {
   padding: 0 10px;
   color: #555;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
   font-size: 14px;
+  transition: 0.15s;
 }
 .btn {
   width: 100%;
   letter-spacing: 3px;
   text-indent: 3px;
+}
+.add-card:hover .title,
+.add-card:hover .add-info{
+  color: white;
 }
 </style>

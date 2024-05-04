@@ -103,6 +103,7 @@ export default {
     },
     handleChange(file){
       this.formData.append("file",file.raw);
+      this.classes.classPicture = file.name
     },
     dialogVisible(){
       this.dialogFormVisible = !this.dialogFormVisible;
@@ -114,60 +115,123 @@ export default {
 <template>
   <el-dialog
     class="dialog"
-    title="新增课程"
     v-model="dialogFormVisible"
     width="500px"
     :destroy-on-close="true"
     :modal-append-to-body="false"
-    style="border-radius: 15px"
+    style="border-radius: 20px; padding: 20px 25px 15px"
   >
-    <el-form :model="classes" :rules="rules" ref="classes" label-width="80px">
-      <el-form-item label="课堂名:" prop="className">
-        <el-input v-model="classes.className"></el-input>
+    <template #header>
+      <div class="title">新增课堂</div>
+    </template>
+    <el-form :model="classes" :rules="rules" ref="classes">
+      <el-form-item prop="className">
+        <el-input v-model="classes.className" placeholder="课堂名"></el-input>
       </el-form-item>
-      <el-form-item label="课堂学分:" prop="classCredit">
-        <el-input v-model="classes.classCredit"></el-input>
+      <el-form-item prop="classCredit">
+        <el-input v-model="classes.classCredit" placeholder="课堂学分"></el-input>
       </el-form-item>
-      <el-form-item label="课堂学时:" prop="classHours">
-        <el-input v-model="classes.classHours"></el-input>
+      <el-form-item prop="classHours">
+        <el-input v-model="classes.classHours" placeholder="课堂学时"></el-input>
       </el-form-item>
-      <el-form-item label="课堂类别:" prop="categoryId">
-        <el-select v-model="classes.categoryId" placeholder="请选择" style="width: 100%;">
+      <el-form-item prop="categoryId">
+        <el-select v-model="classes.categoryId" placeholder="课堂类别" style="width: 100%;">
           <el-option v-for="item in classCategoryOptions" :key="item.value" :label="item.label" :value="item.value">
           </el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="课堂图片:" prop="pictureFile">
+      <el-form-item prop="pictureFile" class="image-form-item">
+        <el-input class="image-input" v-model="classes.classPicture" placeholder="课堂图片" disabled>
+        </el-input>
         <el-upload
-            class="upload-demo"
-            action="#"
-            :on-change="handleChange"
-            :auto-upload="false"
-            :limit="1"
-            :file-list="pictureFile">
-          <el-button size="small" type="primary">选择图片</el-button>
+          class="upload"
+          action="#"
+          :on-change="handleChange"
+          :auto-upload="false"
+          :limit="1"
+          :file-list="pictureFile">
+          选择
         </el-upload>
       </el-form-item>
-      <el-form-item label="课堂简介:" prop="description">
+      <el-form-item prop="description">
         <el-input
-            v-model="classes.description"
-            type="textarea"
-            maxlength="500"
-            :show-word-limit="true"
-            rows="6"></el-input>
+          v-model="classes.description"
+          placeholder="课堂简介"
+          type="textarea"
+          maxlength="500"
+          :show-word-limit="true"
+          rows="3"></el-input>
       </el-form-item>
     </el-form>
-    <div slot="footer" class="dialog-footer">
+    <template #footer>
       <el-button @click="dialogVisible">取 消</el-button>
       <el-button type="primary" @click="submitForm('classes')" :loading = isLoading>添 加</el-button>
-    </div>
+    </template>
   </el-dialog>
 </template>
 
 <style scoped>
-.dialog-footer {
+.title {
+  font-size: 20px;
+  color: rgba(51, 51, 51, 1);
+  font-weight: bold;
+  letter-spacing: 3px;
+  margin-bottom: 10px;
+}
+.el-form-item {
+  height: 45px;
+  margin: 0 10px 20px;
+}
+.el-form-item:last-child {
+  height: auto;
+}
+.el-input,
+.el-select{
+  height: 100%;
+}
+.image-form-item {
+  position: relative;
+}
+.upload {
+  position: absolute;
+  top: 6px;
+  bottom: 6px;
+  right: 8px;
+  background-color: white;
+  padding: 8px 12px;
+  border-radius: 5px;
   display: flex;
-  justify-content: flex-end;
-  margin-top: 30px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--el-border-color);
+  color: #4293fd;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-indent: 1px;
+}
+::v-deep(.el-upload) {
+  height: 100%;
+  width: 100%;
+}
+.upload::v-deep(.el-upload-list) {
+  margin: 0;
+  display: none;
+}
+.el-input::v-deep(.el-input__wrapper),
+.el-select::v-deep(.el-select__wrapper),
+.el-input::v-deep(.el-input-group__append),
+.el-textarea::v-deep(.el-textarea__inner){
+  border-radius: 10px;
+  background-color: rgba(71, 71, 71, 0.1);
+  height: 100%;
+  box-sizing: border-box;
+  font-size: 1rem;
+}
+.el-textarea::v-deep(.el-textarea__inner) {
+  font-size: 0.9rem;
+  padding: 8px 12px;
+}
+.el-textarea::v-deep(.el-input__count) {
+  background-color: transparent;
 }
 </style>

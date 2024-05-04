@@ -48,29 +48,57 @@ defineExpose({
 <template>
   <el-dialog
     class="dialog"
-    title="新增课程"
     v-model="dialogFormVisible"
     width="450px"
     :destroy-on-close="true"
     :modal-append-to-body="false"
     style="border-radius: 15px"
   >
-    <el-form :model="classes" :rules="rules" ref="classesRef" label-width="60px">
-      <el-form-item label="课堂名:" prop="classId">
-        <el-input v-model="classes.classId"></el-input>
+    <template #header>
+      <div class="title">加入课堂</div>
+    </template>
+    <el-form :model="classes" :rules="rules" ref="classesRef">
+      <el-form-item prop="classId">
+        <el-input v-model="classes.classId" placeholder="课堂名称"></el-input>
       </el-form-item>
     </el-form>
-    <div slot="footer" class="dialog-footer">
-      <el-button @click="dialogVisible">取 消</el-button>
-      <el-button type="primary" @click="submitForm" :loading="isLoading">添 加</el-button>
-    </div>
+    <template #footer>
+      <div class="dialog-footer">
+        <el-button @click="dialogVisible">取 消</el-button>
+        <el-button type="primary" @click="submitForm" :loading="isLoading">添 加</el-button>
+      </div>
+    </template>
   </el-dialog>
 </template>
 
 <style scoped>
+.title {
+  font-size: 20px;
+  color: rgba(51, 51, 51, 1);
+  font-weight: bold;
+  letter-spacing: 3px;
+  margin-bottom: 10px;
+}
+.el-form-item {
+  height: 45px;
+  margin: 0 10px 20px;
+}
+.el-input{
+  height: 100%;
+}
+.el-input::v-deep(.el-input__wrapper){
+  border-radius: 10px;
+  background-color: rgba(71, 71, 71, 0.1);
+  height: 100%;
+  box-sizing: border-box;
+  font-size: 1rem;
+}
 .dialog-footer {
   display: flex;
   justify-content: flex-end;
-  margin-top: 30px;
+  padding-right: 10px;
+}
+.dialog::v-deep(.el-dialog__footer) {
+  padding: 0;
 }
 </style>

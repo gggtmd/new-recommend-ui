@@ -4,7 +4,7 @@ import { useTokenStore } from "@/stores/token";
 import router from "@/router/index.js"; //request.js文件在Vue实例之前执行,无法获取vue-router
 
 const request = axios.create({
-  baseURL: '/api',  //表示http://localhost:8080/api/user/login
+  baseURL: import.meta.env.PROD ? '' : '/proxy',  //表示http://localhost:8080/api/user/login
   timeout: 10000
 })
 

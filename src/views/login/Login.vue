@@ -15,11 +15,11 @@ onMounted(() => {
   toggleState()
 })
 //表格状态
-const subButton = ref("登录")
+const subButton = ref("Log in")
 const onSubmit = () => {
   formRef.value.validate(valid => {
     if(valid){
-      if(subButton.value === "登录"){
+      if(subButton.value === "Log in"){
         userLogin()
       }else {
         userRegister()
@@ -41,7 +41,7 @@ function toggleState() {
     },0)
   } else {
     //信息切换
-    subButton.value = (subButton.value === "登录"?"注册":"登录")
+    subButton.value = (subButton.value === "Log in"?"Register":"Log in")
     deg.value = (deg.value === "0"?"-180deg":"0")
     inputDisplay.value = (inputDisplay.value === "none"?"flex":"none")
     //高度切换
@@ -49,14 +49,14 @@ function toggleState() {
     wrapperHeight.value = cacheHeight.value
     cacheHeight.value = tempHeight
     // 重置表格
-    rules.value = (subButton.value === "登录"?rule1:rule2)
+    rules.value = (subButton.value === "Log in"?rule1:rule2)
     setTimeout(() => {
       formRef.value.resetFields()
     },0)
   }
 }
 const toggleLabel = computed(() => {
-  return subButton.value === "登录"?"注册":"登录"
+  return subButton.value === "Log in"?"Register":"Log in"
 })
 
 //表单验证规则
@@ -166,7 +166,9 @@ async function getRegisterCode() {
 }
 async function userRegister() {
   let res = await personRegisterServer(loginForm.value)
-  await userLogin();
+  if(res.code === 200) {
+    await userLogin();
+  }
 }
 
 </script>
@@ -201,6 +203,7 @@ async function userRegister() {
         </el-form-item>
         <el-form-item  prop="code" class="isRegister">
           <el-input
+            class="code-input"
             v-model="loginForm.code"
             placeholder="请输入验证码"
           >
@@ -241,14 +244,14 @@ async function userRegister() {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -60%);
-  padding: 30px;
-  border-radius: 8px;
+  padding: 20px 25px 35px;
+  border-radius: 20px;
   box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.1);
   transition: 0.4s;
   height: v-bind(wrapperHeight);
   overflow: hidden;
-  backdrop-filter: blur(15px);
-  background-color: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+  background-color: rgba(255, 255, 255, 0.4);
 }
 .el-form {
   min-width: 360px;
@@ -256,19 +259,41 @@ async function userRegister() {
 .title {
   width: 100%;
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
   font-size: 1.6rem;
-  letter-spacing: 15px;
+  letter-spacing: 2px;
+  text-indent: 2px;
   font-weight: bold;
 }
 .el-form-item {
-  margin-bottom: 30px;
-  height: 35px;
+  margin-bottom: 25px;
+  height: 45px;
 }
 .el-form-item:last-of-type {
   margin-bottom: 0;
 }
 .el-input {
+  height: 100%;
+}
+.el-input::v-deep(.el-input__wrapper),
+.el-select::v-deep(.el-select__wrapper),
+.el-input::v-deep(.el-input-group__append){
+  border-radius: 10px;
+  background-color: rgba(71, 71, 71, 0.1);
+  height: 100%;
+  box-sizing: border-box;
+}
+.code-input::v-deep(.el-input__wrapper) {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.el-input::v-deep(.el-input-group__append) {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  background-color: rgba(255, 255, 255, 0.8);
+  color: #333;
+}
+.el-select {
   height: 100%;
 }
 .isRegister {
@@ -281,8 +306,8 @@ async function userRegister() {
   bottom: 15px;
 }
 .el-button {
-  letter-spacing: 3px;
   font-weight: bold;
+  border-radius: 8px;
 }
 .toggleBtn {
   float: right;

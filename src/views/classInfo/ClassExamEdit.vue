@@ -116,12 +116,15 @@ defineExpose({
 
 <template>
   <div class="class-exam-edit">
-    <el-dialog title="编 辑" v-model="dialogFormVisible" width="500px" :destroy-on-close="true">
-      <el-form :model="props.examInfo" :rules="rules" ref="examInfoRef" label-width="80px" @closed="resetForm('examInfoRef')">
-        <el-form-item label="考试名:" prop="examTitle">
-          <el-input v-model="props.examInfo.examTitle"></el-input>
+    <el-dialog v-model="dialogFormVisible" width="500px" :destroy-on-close="true">
+      <template #header>
+        <div class="title">新增考试</div>
+      </template>
+      <el-form :model="props.examInfo" :rules="rules" ref="examInfoRef" @closed="resetForm('examInfoRef')">
+        <el-form-item prop="examTitle">
+          <el-input v-model="props.examInfo.examTitle" placeholder="考试名称"></el-input>
         </el-form-item>
-        <el-form-item label="考试时间:" prop="timeRange">
+        <el-form-item prop="timeRange">
           <el-date-picker
             v-model="props.examInfo.timeRange"
             type="datetimerange"
@@ -133,7 +136,7 @@ defineExpose({
           >
           </el-date-picker>
         </el-form-item>
-        <el-form-item label="选择试卷:">
+        <el-form-item>
           <el-select v-model="props.examInfo.paperId" filterable placeholder="请选择试卷">
             <el-option
               v-for="item in options"
@@ -144,7 +147,7 @@ defineExpose({
             </el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="选择阶段:">
+        <el-form-item>
           <el-select v-model="props.examInfo.stage" filterable placeholder="请选择阶段">
             <el-option
                 v-for="item in stageOption"
@@ -165,28 +168,38 @@ defineExpose({
 
 <style scoped>
 .class-exam-edit:deep(.el-dialog) {
-  border-radius: 10px;
-  padding: 20px 30px 20px 20px;
-}
-.el-form-item{
-  height: 35px;
-  align-items: center;
-  margin-bottom: 20px;
-}
-.el-form-item:last-child {
-  margin-bottom: 30px;
+  border-radius: 20px;
+  padding: 20px 25px;
 }
 .dialog-footer {
   display: flex;
   justify-content: flex-end;
+  margin: 0 10px;
 }
-.el-form-item:deep(.el-form-item__content) {
-  height: 100%;
+.title {
+  font-size: 20px;
+  color: rgba(51, 51, 51, 1);
+  font-weight: bold;
+  letter-spacing: 3px;
+  margin-bottom: 10px;
+}
+.el-form-item {
+  height: 45px;
+  margin: 0 10px 20px;
 }
 .el-input,
-.el-form-item:deep(.el-date-editor),
-.el-form-item:deep(.el-select),
-.el-form-item:deep(.el-select__wrapper){
+.el-select,
+::v-deep(.el-date-editor){
   height: 100%;
+}
+.el-input::v-deep(.el-input__wrapper),
+.el-select::v-deep(.el-select__wrapper),
+.el-input::v-deep(.el-input-group__append),
+::v-deep(.el-date-editor){
+  border-radius: 10px;
+  background-color: rgba(71, 71, 71, 0.1);
+  height: 100%;
+  box-sizing: border-box;
+  font-size: 1rem;
 }
 </style>

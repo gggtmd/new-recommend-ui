@@ -55,18 +55,20 @@ defineExpose({
 
 <template>
     <el-dialog
-      title="新增试卷"
       v-model="dialogFormVisible"
-      width="500px"
+      width="450px"
       :destroy-on-close="true"
-      style="border-radius: 15px"
+      style="border-radius: 20px; padding: 20px"
     >
-      <el-form :model="paperForm" :rules="rules" ref="paperFormRef" label-width="60px">
-        <el-form-item label="试卷名:" prop="paperTitle">
-          <el-input v-model="paperForm.paperTitle"></el-input>
+      <template #header>
+        <div class="title">新增试卷</div>
+      </template>
+      <el-form :model="paperForm" :rules="rules" ref="paperFormRef">
+        <el-form-item prop="paperTitle">
+          <el-input v-model="paperForm.paperTitle" placeholder="试卷名称"></el-input>
         </el-form-item>
       </el-form>
-      <div slot="footer" class="dialog-footer">
+      <div class="dialog-footer">
         <el-button @click="dialogVisible">取 消</el-button>
         <el-button type="primary" @click="submitForm" :loading = isLoading>添 加</el-button>
       </div>
@@ -74,17 +76,30 @@ defineExpose({
 </template>
 
 <style scoped>
+.title {
+  font-size: 20px;
+  color: rgba(51, 51, 51, 1);
+  font-weight: bold;
+  letter-spacing: 3px;
+  margin-bottom: 10px;
+}
 .el-form-item {
-  margin-bottom: 25px;
-  margin-top: 10px;
-  height: 35px;
-  align-items: center;
+  height: 45px;
+  margin: 0 10px 25px;
 }
 .el-input {
-  height: 35px;
+  height: 100%;
+}
+.el-input::v-deep(.el-input__wrapper) {
+  border-radius: 10px;
+  background-color: rgba(71, 71, 71, 0.1);
+  height: 100%;
+  box-sizing: border-box;
+  font-size: 0.9rem;
 }
 .dialog-footer {
   display: flex;
   justify-content: flex-end;
+  margin: 0 10px;
 }
 </style>

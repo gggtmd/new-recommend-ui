@@ -69,18 +69,20 @@ defineExpose({
 
 <template>
   <el-dialog
-      title="新增试卷"
       v-model="dialogFormVisible"
-      width="500px"
+      width="450px"
       :destroy-on-close="true"
-      style="border-radius: 15px"
+      style="border-radius: 20px;padding: 20px"
   >
-    <el-form :model="investigationForm" :rules="rules" ref="investigationFormRef" label-width="60px">
-      <el-form-item label="评分:" prop="stageRating">
+    <template #header>
+      <div class="title">阶段评价</div>
+    </template>
+    <el-form :model="investigationForm" :rules="rules" ref="investigationFormRef">
+      <el-form-item prop="stageRating">
         <el-input v-model.number="investigationForm.stageRating" type="number" max="5" min="0" step="0.1" placeholder="评分为0~5"></el-input>
       </el-form-item>
-      <el-form-item label="评价:" prop="stageComment">
-        <el-input v-model="investigationForm.stageComment" placeholder="输入阶段评价"></el-input>
+      <el-form-item prop="stageComment">
+        <el-input v-model="investigationForm.stageComment" placeholder="在本次阶段结束时有什么想和教师说的"></el-input>
       </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
@@ -91,17 +93,30 @@ defineExpose({
 </template>
 
 <style scoped>
+.title {
+  font-size: 20px;
+  color: rgba(51, 51, 51, 1);
+  font-weight: bold;
+  letter-spacing: 3px;
+  margin-bottom: 10px;
+}
 .el-form-item {
-  margin-bottom: 25px;
-  margin-top: 10px;
-  height: 35px;
-  align-items: center;
+  height: 45px;
+  margin: 0 10px 25px;
 }
 .el-input {
-  height: 35px;
+  height: 100%;
+}
+.el-input::v-deep(.el-input__wrapper) {
+  border-radius: 10px;
+  background-color: rgba(71, 71, 71, 0.1);
+  height: 100%;
+  box-sizing: border-box;
+  font-size: 0.9rem;
 }
 .dialog-footer {
   display: flex;
   justify-content: flex-end;
+  margin: 0 10px;
 }
 </style>

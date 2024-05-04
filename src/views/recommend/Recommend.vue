@@ -81,7 +81,7 @@ watch(() => route.query.resourceType, (newValue) => {
   </ScaleModal>
   <div class="recommend">
     <recommend-carousel class="carousel"></recommend-carousel>
-    <div class="title" ref="recommendTitleRef">推荐资源<span class="title-en">Recommend Resource</span></div>
+    <div class="title" ref="recommendTitleRef">推荐资源<span class="title-en">Recommended Resource</span></div>
     <div class="recommend-wrapper">
       <SourceCard
         v-for="item in recommendList"

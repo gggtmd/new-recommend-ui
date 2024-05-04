@@ -20,5 +20,8 @@ export default defineConfig({
         rewrite: path => path.replace(/^\/proxy/, '')  //将/api
       }
     }
+  },
+  esbuild: {
+    drop: ['console']
   }
 })

@@ -48,7 +48,7 @@ const computedGlyphChinese = computed(() => {
             <h4 class="header-item">radicalsChinese：<span>{{glyphData.radicalsChinese}}</span></h4>
           </div>
           <div class="info-meaning">
-            <h4>中文词意：</h4>
+            <h4>中文字意：</h4>
             <p>{{glyphData.understandingChinese}}</p>
           </div>
           <div class="info-meaning">

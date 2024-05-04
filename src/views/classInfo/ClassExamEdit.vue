@@ -118,7 +118,7 @@ defineExpose({
   <div class="class-exam-edit">
     <el-dialog v-model="dialogFormVisible" width="500px" :destroy-on-close="true">
       <template #header>
-        <div class="title">新增考试</div>
+        <div class="title">编辑考试</div>
       </template>
       <el-form :model="props.examInfo" :rules="rules" ref="examInfoRef" @closed="resetForm('examInfoRef')">
         <el-form-item prop="examTitle">

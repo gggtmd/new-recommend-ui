@@ -3,6 +3,7 @@ import {ref, onMounted, inject, watch} from "vue";
 import {personStylePaperResourceRecommendServer} from "@/api/personStylePaper.js";
 import SourceCard from "@/views/recommend/SourceCard.vue";
 import ScaleModal from "@/components/ScaleModal.vue";
+import Footer from "@/views/my/FooterLink.vue";
 import {VideoPlay, Star} from "@element-plus/icons-vue";
 
 
@@ -12,7 +13,7 @@ onMounted(() => {
 })
 
 //推荐资源列表,初始化8个提供骨架占位
-const recommendList = ref(new Array(10).fill({}))
+const recommendList = ref(new Array(8).fill({}))
 //获取推荐资源
 async function getRecommendResource() {
   let res = await personStylePaperResourceRecommendServer()
@@ -120,10 +121,11 @@ watch(() => route.query.resourceType, (newValue) => {
 
 <style scoped>
 .recommend {
+  position: relative;
   box-sizing: border-box;
-  padding: 0 50px;
+  padding: 0 50px 100px;
   max-width: 1400px;
-  margin: 20px auto 200px;
+  margin: 20px auto 0;
 }
 .carousel {
   margin-bottom: 30px;

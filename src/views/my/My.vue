@@ -79,14 +79,24 @@ const signOut = () => {
       <div class="userInfo">
         <div class="info-header">
           <div>用户个人信息</div>
-          <el-button
-              link
-              type="primary"
-              class="info-header-btn"
-              @click="handleEdit"
-          >
-            编 辑
-          </el-button>
+          <div>
+            <el-button
+                link
+                type="primary"
+                class="info-header-btn"
+                @click="handleEdit"
+            >
+              编 辑
+            </el-button>
+            <el-button
+                link
+                type="danger"
+                class="info-header-btn"
+                @click="signOut"
+            >
+              退 出
+            </el-button>
+          </div>
         </div>
         <ul class="info-list">
           <li class="info-list-item">
@@ -119,13 +129,6 @@ const signOut = () => {
           </li>
         </ul>
       </div>
-      <el-button
-        class="sing-out-btn"
-        type="danger"
-        @click="signOut"
-      >
-        退出登录
-      </el-button>
     </div>
     <footer-link class="footer"></footer-link>
   </div>
@@ -165,16 +168,18 @@ const signOut = () => {
 .info-list{
   list-style: none;
   background-color: rgba(255, 255, 255, 0.8);
-  padding: 30px;
+  padding: 10px 0 10px 30px;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, .1);
 }
 .info-list-item{
-  margin-bottom: 30px;
+  padding: 20px 0;
   display: flex;
+  border-bottom: 1px solid var(--el-border-color);
 }
 .info-list-item:last-child{
   margin-bottom: 0;
+  border-bottom: none;
 }
 .list-item-label{
   min-width: 80px;

@@ -67,6 +67,11 @@ const linkList = ref([
           <a class="link-a" :href="link.url" target="_blank">{{link.name}}</a>
         </li>
       </ul>
+      <div class="about-us">
+        <p>开发团队：本系统由湖南师范大学信息科学与工程学院金晟、崔志坚、张文军三人共同开发。</p>
+        <p>指导老师：湖南师范大学信息科学与工程学院马华教授、蔡美玲教授</p>
+        <p>平台支撑：该系统从设计到实现过程中，得到了湖南师范大学的国家“世界一流”建设学科“外国语言文学”的大力支持。</p>
+      </div>
     </div>
   </div>
 </template>
@@ -83,6 +88,8 @@ const linkList = ref([
   justify-content: space-between;
 }
 .link-wrapper {
+  flex-shrink: 0;
+  margin-right: 50px;
   list-style: none;
   padding: 0;
 }
@@ -98,5 +105,12 @@ const linkList = ref([
 }
 .link-a:hover {
   color: #4293fd;
+}
+.about-us {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #4293fd;
+  font-size: 0.9rem;
 }
 </style>

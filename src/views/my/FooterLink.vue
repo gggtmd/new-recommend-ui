@@ -62,11 +62,17 @@ const linkList = ref([
 <template>
   <div class="footer-link">
     <div class="about-wrapper">
+      <div class="about-wrapper-display">
+        <p>相关网站：</p>
+      </div>
       <ul v-for="list in linkList" class="link-wrapper">
         <li class="link-item" v-for="link in list">
           <a class="link-a" :href="link.url" target="_blank">{{link.name}}</a>
         </li>
       </ul>
+      <div class="about-us-display">
+        <p>关于我们：</p>
+      </div>
       <div class="about-us">
         <p>开发团队：本系统由湖南师范大学信息科学与工程学院金晟、崔志坚、张文军三人共同开发。</p>
         <p>指导老师：湖南师范大学信息科学与工程学院马华教授、蔡美玲教授</p>
@@ -80,6 +86,11 @@ const linkList = ref([
 .footer-link {
   box-sizing: border-box;
   padding: 20px 20px 60px;
+}
+.about-wrapper-display{
+  margin-right: 2%;
+  color: white;
+  white-space:nowrap;
 }
 .about-wrapper {
   margin: 0 auto;
@@ -105,6 +116,12 @@ const linkList = ref([
 }
 .link-a:hover {
   color: #4293fd;
+}
+.about-us-display {
+  white-space:nowrap;
+  margin-right: 10px;
+  color: #4293fd;
+  font-size: 0.9rem;
 }
 .about-us {
   display: flex;

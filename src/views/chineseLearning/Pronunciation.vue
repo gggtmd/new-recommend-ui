@@ -1,6 +1,7 @@
 <script setup>
 import {VideoPlay} from "@element-plus/icons-vue";
 import {computed, onMounted, ref} from "vue";
+import FooterLink from "@/views/my/FooterLink.vue";
 
 onMounted(() => {
   getPronunciationList()
@@ -94,6 +95,8 @@ const computedInput = computed(() => {
       </div>
     </div>
   </div>
+    <footer-link class="footer"></footer-link>
+
 </template>
 
 <style scoped>
@@ -192,5 +195,10 @@ const computedInput = computed(() => {
 .item-image:active {
   color: #4293fd80;
   transform: scale(1.1);
+}
+.footer {
+  background-color: #003c70;
+  width: 100%;
+  margin-top: -200px;
 }
 </style>

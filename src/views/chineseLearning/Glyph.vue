@@ -1,5 +1,7 @@
 <script setup>
 import {computed, onMounted, ref} from "vue";
+import FooterLink from "@/views/my/FooterLink.vue";
+
 onMounted(() => {
   searchGlyph()
 })
@@ -72,6 +74,8 @@ const computedInput = computed(() => {
       </div>
     </div>
   </div>
+      <footer-link class="footer"></footer-link>
+
 </template>
 
 <style scoped>
@@ -135,5 +139,9 @@ const computedInput = computed(() => {
   font-weight: bold;
   font-size: 1.1rem;
   margin-left: 5px;
+}
+.footer {
+  background-color: #003c70;
+  width: 100%;
 }
 </style>

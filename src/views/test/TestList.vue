@@ -112,6 +112,8 @@ const handleClickMask = () => {
       </el-table>
     </div>
   </Transition>
+      <footer-link class="footer"></footer-link>
+
   <InfiniteScrollObserver :root-selector="body" root-margin="0px 0px 500px 0px" @handleIntersect="getQuestionList"></InfiniteScrollObserver>
 </template>
 
@@ -142,5 +144,10 @@ const handleClickMask = () => {
   box-sizing: border-box;
   border-radius: 10px;
   overflow: hidden;
+}
+.footer {
+  background-color: #003c70;
+  width: 100%;
+  margin-top: -100px;
 }
 </style>

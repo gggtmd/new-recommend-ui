@@ -4,6 +4,7 @@ import {personStylePaperResourceRecommendServer} from "@/api/personStylePaper.js
 import SourceCard from "@/views/recommend/SourceCard.vue";
 import ScaleModal from "@/components/ScaleModal.vue";
 import Footer from "@/views/my/FooterLink.vue";
+import FooterLink from "@/views/my/FooterLink.vue";
 import {VideoPlay, Star} from "@element-plus/icons-vue";
 
 
@@ -22,14 +23,19 @@ async function getRecommendResource() {
 //外部课程资源
 const lessonList = ref([])
 //分页数据
-const pageNum = ref(1)
+// const pageNum = ref(1)
 //获取外部课程资源
 import {lessonPageServer} from "@/api/lesson.js";
+import {lessonServer} from "@/api/lesson.js";
+
 import InfiniteScrollObserver from "@/components/InfiniteScrollObserver.vue";
 async function getLessonList() {
-  let res = await lessonPageServer(pageNum.value)
-  pageNum.value++
-  lessonList.value.push(...res.data.records)
+  // let res = await lessonPageServer(pageNum.value)
+  // pageNum.value++
+  // lessonList.value.push(...res.data.records)
+  let res = await lessonServer()
+  lessonList.value = res
+  console.log(res)
 }
 //将Body交给IntersectionObserver,监听交叉
 const body = document.querySelector("body")
@@ -117,6 +123,8 @@ watch(() => route.query.resourceType, (newValue) => {
       <InfiniteScrollObserver :rootSelector="body" @handleIntersect="getLessonList"></InfiniteScrollObserver>
     </div>
   </div>
+  <footer-link class="footer"></footer-link>
+
 </template>
 
 <style scoped>
@@ -166,5 +174,10 @@ watch(() => route.query.resourceType, (newValue) => {
 }
 .info-wrapper span {
   margin-right: 10px;
+}
+.footer {
+  background-color: #003c70;
+  width: 100%;
+  margin-top: -150px;
 }
 </style>

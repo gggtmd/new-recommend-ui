@@ -3,6 +3,7 @@ import ClassCard from "@/views/class/classCard.vue"
 import AddClass from "@/views/class/AddClass.vue"
 import JoinClass from "@/views/class/JoinClass.vue";
 import {inject, onBeforeMount, onBeforeUnmount, onMounted, ref} from "vue";
+import FooterLink from "@/views/my/FooterLink.vue";
 
 onMounted(() => {
   getClassList()
@@ -49,6 +50,8 @@ function handleJoin() {
       </div>
     </div>
   </div>
+    <footer-link class="footer"></footer-link>
+
 </template>
 
 <style scoped>
@@ -115,5 +118,10 @@ function handleJoin() {
 .add-card:hover .title,
 .add-card:hover .add-info{
   color: white;
+}
+.footer {
+  background-color: #003c70;
+  width: 100%;
+  margin-top: -100px;
 }
 </style>

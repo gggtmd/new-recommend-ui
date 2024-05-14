@@ -12,3 +12,6 @@ export const lessonPageServer = (pageNum, pageSize = 8) => {
         pageSize,
     })
 }
+export const lessonServer = () => {
+    return request.get("/lesson/list")
+}

@@ -57,14 +57,11 @@ function handleJoin() {
 <style scoped>
 .class-wrapper {
   max-width: 1200px;
-  padding: 20px 50px 200px 250px;
+  padding: 20px 50px 80px 250px;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 20px;
   position: relative;
-}
-.class-wrapper-answer {
-  padding: 20px 20px 20px 22% ;
 }
 .left-aside {
   position: absolute;
@@ -74,9 +71,6 @@ function handleJoin() {
   box-sizing: border-box;
   padding: 20px;
   height: 100%;
-}
-.left-aside-answer {
-  width: 22%;
 }
 .left-aside-wrapper {
   position: sticky;
@@ -120,8 +114,6 @@ function handleJoin() {
   color: white;
 }
 .footer {
-  background-color: #003c70;
   width: 100%;
-  margin-top: -100px;
 }
 </style>

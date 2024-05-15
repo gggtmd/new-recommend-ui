@@ -124,14 +124,13 @@ watch(() => route.query.resourceType, (newValue) => {
     </div>
   </div>
   <footer-link class="footer"></footer-link>
-
 </template>
 
 <style scoped>
 .recommend {
   position: relative;
   box-sizing: border-box;
-  padding: 0 50px 100px;
+  padding: 0 50px 0;
   max-width: 1400px;
   margin: 20px auto 0;
 }
@@ -176,8 +175,6 @@ watch(() => route.query.resourceType, (newValue) => {
   margin-right: 10px;
 }
 .footer {
-  background-color: #003c70;
   width: 100%;
-  margin-top: -150px;
 }
 </style>

@@ -63,7 +63,7 @@ const linkList = ref([
   <div class="footer-link">
     <div class="about-wrapper">
       <div class="about-wrapper-display">
-        <p>相关网站：</p>
+        <p>友情链接：</p>
       </div>
       <ul v-for="list in linkList" class="link-wrapper">
         <li class="link-item" v-for="link in list">
@@ -74,9 +74,10 @@ const linkList = ref([
         <p>关于我们：</p>
       </div>
       <div class="about-us">
-        <p>开发团队：本系统由湖南师范大学信息科学与工程学院金晟、崔志坚、张文军三人共同开发。</p>
-        <p>指导老师：湖南师范大学信息科学与工程学院马华教授、蔡美玲教授</p>
-        <p>平台支撑：该系统从设计到实现过程中，得到了湖南师范大学的国家“世界一流”建设学科“外国语言文学”的大力支持。</p>
+        <p>本系统由湖南师范大学信息科学与工程学院金晟、崔志坚、张文军三人合作开发，指导教师为湖南师范大学信息科学与工程学院马华教授和蔡美玲副教授。近年来马华教授曾主持国家自科基金面上项目、湖南省自科基金面上项目等科研课题近10项，以第一作者在TPDS、TSC、TLT等国际顶级和权威的SCI、SSCI期刊发表论文10余篇。主持和参与大型横向课题多项，获得国家发明专利授权7项。
+<br><br>
+本系统获得了湖南师范大学的国家“世界一流”建设学科“外国语言文学”的支持，该学科不懈推广中华文化的卓越成就，在培养具有国际视野的国际化人才、服务于国家的安全战略、外交政策、一带一路倡议以及地区经济和社会进步等方面具有独特优势。本项目也得到了“人工智能与精准国际传播”湖南省哲学社会科学重点实验室、湖南师范大学“人工智能与精准国际传播”研究院、信息科学与工程学院的大力支持。
+        </p>
       </div>
     </div>
   </div>
@@ -85,16 +86,17 @@ const linkList = ref([
 <style scoped>
 .footer-link {
   box-sizing: border-box;
-  padding: 20px 20px 60px;
+  padding: 20px 20px 10px;
 }
 .about-wrapper-display{
   margin-right: 2%;
   color: white;
   white-space:nowrap;
+  font-size: 1rem;
 }
 .about-wrapper {
   margin: 0 auto;
-  max-width: 1200px;
+  max-width: 1400px;
   display: flex;
   justify-content: space-between;
 }
@@ -120,14 +122,14 @@ const linkList = ref([
 .about-us-display {
   white-space:nowrap;
   margin-right: 10px;
-  color: #4293fd;
-  font-size: 0.9rem;
+  color: white;
+  font-size: 1rem;
 }
 .about-us {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  color: #4293fd;
+  color: white;
   font-size: 0.9rem;
 }
 </style>

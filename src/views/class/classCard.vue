@@ -81,13 +81,14 @@ function handleLeave() {
   height: 30%;
   box-sizing: border-box;
   padding: 15px;
-  transition: 0.5s;
+  transition: 0.4s;
   position: absolute;
   bottom: 0;
   z-index: 2;
   backdrop-filter: blur(15px);
   background-color: rgba(255, 255, 255, 0.6);
   overflow: hidden;
+  border-top: 1px solid var(--el-border-color);
 }
 .infoHover{
   height: 50%;
@@ -106,7 +107,7 @@ function handleLeave() {
 .titleHover{
   height: 30%;
   font-size: 1.5rem;
-  margin-bottom: 5px;
+  font-weight: bold;
 }
 .idInfo{
   transition: 0.5s;
@@ -123,6 +124,7 @@ function handleLeave() {
   -webkit-line-clamp: 4;
   text-overflow: ellipsis;
   height: 70%;
+  color: #333;
 }
 .descriptionHover{
   display: -webkit-box;

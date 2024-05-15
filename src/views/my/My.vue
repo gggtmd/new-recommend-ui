@@ -168,37 +168,39 @@ const signOut = () => {
 .info-list{
   list-style: none;
   background-color: rgba(255, 255, 255, 0.8);
-  padding: 10px 0 10px 30px;
+  padding: 0 0 0 30px;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, .1);
 }
 .info-list-item{
-  padding: 20px 0;
+  padding: 10px 0;
   display: flex;
   border-bottom: 1px solid var(--el-border-color);
 }
 .info-list-item:last-child{
   margin-bottom: 0;
+  padding-right: 10px;
   border-bottom: none;
 }
 .list-item-label{
-  min-width: 80px;
-  margin-right: 30px;
+  min-width: 70px;
+  margin-right: 20px;
   display: flex;
   justify-content: end;
-  font-size: 1.2rem;
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #333;
   line-height: 30px;
 }
 .list-item-content{
-  font-size: 1rem;
-  font-weight: 300;
+  font-size: 0.9rem;
+  color: #555;
   line-height: 30px;
 }
 .sing-out-btn {
   margin-bottom: 40px;
 }
 .footer {
-  background-color: #003c70;
   width: 100%;
 }
 </style>

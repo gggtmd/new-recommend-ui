@@ -23,17 +23,16 @@ async function getRecommendResource() {
 //外部课程资源
 const lessonList = ref([])
 //分页数据
-// const pageNum = ref(1)
+const pageNum = ref(1)
 //获取外部课程资源
 import {lessonPageServer} from "@/api/lesson.js";
-import {lessonServer} from "@/api/lesson.js";
-
+import {lessonListServer} from "@/api/lesson.js";
 import InfiniteScrollObserver from "@/components/InfiniteScrollObserver.vue";
 async function getLessonList() {
   // let res = await lessonPageServer(pageNum.value)
   // pageNum.value++
   // lessonList.value.push(...res.data.records)
-  let res = await lessonServer()
+  let res = await lessonListServer()
   lessonList.value = res
   console.log(res)
 }

@@ -12,6 +12,11 @@ export const lessonPageServer = (pageNum, pageSize = 8) => {
         pageSize,
     })
 }
-export const lessonServer = () => {
+
+/**
+ * 课程列表查询
+ * @returns {Promise<axios.AxiosResponse<any>>}
+ */
+export const lessonListServer = () => {
     return request.get("/lesson/list")
 }

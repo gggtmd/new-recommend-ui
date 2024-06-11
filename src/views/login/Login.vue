@@ -227,7 +227,7 @@ async function userRegister() {
   background-size: cover;
 }
 .main-title {
-  font-size: 6rem;
+  font-size: 4rem;
   font-weight: bold;
   text-indent: 50px;
   letter-spacing: 50px;
@@ -235,7 +235,7 @@ async function userRegister() {
   //mix-blend-mode: overlay;
   color: rgba(0, 0, 0, 0.9);
   position: absolute;
-  bottom: 65%;
+  bottom: 75%;
   left: 50%;
   transform: translate(-50%, -60%);
 }

@@ -239,7 +239,7 @@ const routerMy = () => {
     <div class="header-main">
       <div class="slogan">
         <div class="slogan-main">留华学生汉语智能导学系统</div>
-        <div>CHINESE iNTELLIGENT TUTORING SYSTEM FOR STUDENTS STUDYING IN CHINA</div>
+        <div>Chinese Intelligent Guide System For Foreign Students Study In China</div>
       </div>
       <div class="nav-wrapper" ref="navWrapperRef">
         <div

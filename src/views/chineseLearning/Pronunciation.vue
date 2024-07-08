@@ -93,10 +93,21 @@ const computedInput = computed(() => {
           @click="getAudio(item.chinese)"
         ><VideoPlay /></el-icon>
       </div>
+      <div
+          v-if="(!pronunciationList || !pronunciationList.length) && input"
+          class="pronunciation-item"
+      >
+        <div class="detail">
+          <a class="pronunciation-item-a">How to say<span class="pronunciation-item-info-cn">{{input}}</span>in Chinese</a>
+        </div>
+        <el-icon
+            class="item-image"
+            @click="getAudio(input)"
+        ><VideoPlay /></el-icon>
+      </div>
     </div>
   </div>
-    <footer-link class="footer"></footer-link>
-
+  <footer-link class="footer"></footer-link>
 </template>
 
 <style scoped>
@@ -135,7 +146,7 @@ const computedInput = computed(() => {
   background-color: rgba(255, 255, 255, 0.9);
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
-  padding: 25px 30px 100px;
+  padding: 25px 30px 30px;
   border-radius: 10px;
   margin-bottom: 300px;
 }

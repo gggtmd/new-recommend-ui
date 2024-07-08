@@ -87,7 +87,10 @@ watch(() => route.query.resourceType, (newValue) => {
   </ScaleModal>
   <div class="recommend">
     <recommend-carousel class="carousel"></recommend-carousel>
-    <div class="title" ref="recommendTitleRef">推荐资源<span class="title-en">Recommended Resource</span></div>
+    <div class="title" ref="recommendTitleRef">
+      推荐资源<span class="title-en">Recommended Resource</span>
+      <div class="title-info">根据您的学习风格和认知水平，智能推荐最适合您的学习资源</div>
+    </div>
     <div class="recommend-wrapper">
       <SourceCard
         v-for="item in recommendList"
@@ -154,6 +157,11 @@ watch(() => route.query.resourceType, (newValue) => {
   padding: 0 10px;
   color: #4293fd;
 }
+.title-info {
+  font-size: 14px;
+  color: #555;
+}
+
 .recommend-wrapper,
 .lesson-wrapper{
   display: grid;

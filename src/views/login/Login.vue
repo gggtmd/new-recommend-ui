@@ -175,7 +175,7 @@ async function userRegister() {
 
 <template>
   <div class="bg-content">
-    <div class="main-title">留华学生汉语智能导学系统</div>
+    <div class="main-title">汉智大学堂</div>
     <div class="wrapper" ref="wrapperRef">
       <el-form 
         ref="formRef"

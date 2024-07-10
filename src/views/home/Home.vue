@@ -239,7 +239,7 @@ const routerMy = () => {
     <div class="header-main">
       <div class="slogan">
         <div class="slogan-main">汉智大学堂:面向留华学生汉语学习的多模态个性化智能导学系统</div>
-        <div>INTELLIGENT SINOLOGY HAL: A MULTI-MODAL PERSONALIZED INTELLIGENT LEARNING GUIDE SVSTEM FOR STUDENTS STUDYING CHINESE IN CHINA</div>
+        <div>An intelligent Chinese learning platform: A multi-modal personalized intelligent tutoring system for international students to learn Chinese</div>
       </div>
       <div class="nav-wrapper" ref="navWrapperRef">
         <div

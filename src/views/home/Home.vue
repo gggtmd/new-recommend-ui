@@ -74,7 +74,7 @@ let routerList = ref([
   },
   {
     label: '汉字学习',
-    enLabel: 'Characters Learning',
+    enLabel: 'Hanzi Learning',
     name: 'pronunciation',
     subName: [
       {
